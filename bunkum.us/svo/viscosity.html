@@ -1,0 +1,237 @@
+<html>
+<head>
+<script type="text/javascript" src="/svo/analytics.js"></script>
+<title>Kinematic Viscosity of Vegetable Oils at Different 
+Temperatures -- SVO: Powering Your Vehicle with Straight Vegetable 
+Oil</title>
+<link rel="stylesheet" href="svo.css">
+<meta name="Description" content="Data on the kinematic viscosity of 
+different vegetable oils reported in the literature and presented in table 
+and graph formats">
+ <!--Load the AJAX API-->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1', {'packages':['table']});
+      
+      // Set a callback to run when the API is loaded.
+      google.setOnLoadCallback(drawViscosityTable);
+      
+      // Callback that creates and populates a data table, 
+      // instantiates the table, passes in the data and
+      // draws it.
+      function drawViscosityTable() 
+        {
+         var query = new google.visualization.Query(
+         'http://spreadsheets.google.com/pub?key=r1rXnD75zsPlvQOcS0j6Kgg');
+  
+         // Send the query with a callback function.
+         query.send(handleQueryResponseVisc);
+        }
+
+      function handleQueryResponseVisc(response) 
+        {
+         if (response.isError()) 
+           {
+            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+            return;
+           }
+
+         var data = response.getDataTable();
+         viscosityTable = new google.visualization.Table(document.getElementById('viscosity_table'));
+         viscosityTable.draw(data, {width: '33em', height: '25em', allowHtml : true});
+        }
+
+
+function drawViscChart() {
+  var query = new google.visualization.Query(
+      'http://spreadsheets.google.com/tq?key=r1rXnD75zsPlvQOcS0j6Kgg&range=A1:M15&gid=3');
+  
+ 
+  
+}
+
+
+
+
+    </script>
+</head>
+<body>
+<small><a href = "index.html">SVO -- Resources, updates, corrections, 
+errata</a> > Kinematic Viscosity of Vegetable 
+Oils at Different Temperatures</small>
+<p>The sources for the data below are given in the far right hand 
+column of the table, and the full citations are at the bottom of the 
+page.</p>
+<table width="75%">
+  <thead>
+    <tr>
+      <th>
+	Kinematic Viscosity of Vegetable Oils at Different Temperatures
+      </th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>
+	<p>
+	  The equations for the curves in the graph are either taken
+	  from the literature or are the result of fitting the
+	  MacCoull-Walther equation to reported values. This
+	  equation is described
+	  in <a href="http://www.astm.org/Standards/D341.htm">ASTM
+	  D-341</a>.
+	</p>
+	<ol style="list-style-type:upper-alpha">
+	  <li>
+	    Ryan, T.W., L.G. Dodge, and T.J. Callahan. 1984. The
+	    effects of vegetable oil properties on injection and
+	    combustion in two different diesel engines. <i>Journal of
+	    the American Oil Chemists' Society</i> 61, no. 10 (October
+	    5): 1610-1619.
+	    <a href="http://dx.doi.org/10.1007/BF02541645">
+	      doi:10.1007/BF02541645
+	    </a>
+	  </li>
+	  <li> 
+	    Acaroglu, M., H. Oguz, and H. Ogut. 2001a. An
+	    investigation of the use of rapeseed oil in agricultural
+	    tractors as engine oil. <i>Energy Sources</i> 23, no. 9:
+	    823-830. 
+	    <a href="http://dx.doi.org/10.1080/009083101316931898">
+	      doi:10.1080/009083101316931898
+	    </a>
+	  </li>
+	  <li>
+	    Lang, W., S. Sokhansanj, and
+	    F. W. Sosulski. 1992. Modelling the Temperature
+	    Dependence of Kinematic Viscosity for Refined Canola
+	    Oil. <i>Journal of the American Oil Chemist's Society</i> 69,
+	    no. 10: 1054.
+	  </li>
+	  <li>
+	    de Almeida, Silvio C. A. De, Carlos Rodrigues Belchior,
+	    Marcos V. G. Nascimento, Leonardo dos S. R. Vieira, and
+	    Guilherme Fleury. 2002a. "Performance of a diesel generator
+	    fuelled with palm oil." <i>Fuel</i> 81, no. 16: 2097-2102.
+	    <a href="http://dx.doi.org/10.1016/S0016-2361(02)00155-2">
+	      doi:10.1016/S0016-2361(02)00155-2
+	    </a>
+	  </li>
+	  <li>
+	    Pugazhvadivu, M., and
+	    K. Jeyachandran. 2005. Investigations on the performance
+	    and exhaust emissions of a diesel engine using preheated
+	    waste frying oil as fuel. <i>Renewable Energy</i> 30, no. 14:
+	    2189-2202.
+	    <a href="http://dx.doi.org/10.1016/j.renene.2005.02.001">
+	      doi:10.1016/j.renene.2005.02.001
+	    </a>
+	  </li>
+	  <li>
+	    Karaosmanoglu, F., M. Tuter, E. Gollu, S. Yanmaz, and
+	    E. Altintig. 1999. Fuel Properties of Cottonseed
+	    Oil. <i>Energy Sources, Part A: Recovery, Utilization, and
+	    Environmental Effects</i> 21, no. 9 (September): 821-828.
+	    <a href="http://dx.doi.org/10.1080/00908319950014371">
+	      doi:10.1080/00908319950014371
+	    </a>
+	  </li>
+	  <li>
+	    Altin, R., S. Cetinkaya, and H. S. Yucesu. 2001. The
+	    potential of using vegetable oil fuels as fuel for diesel
+	    engines. <i>Energy Conversion and Management</i> 42, no. 5
+	    (March): 529-538.
+	    <a href="http://dx.doi.org/10.1016/S0196-8904(00)00080-7">
+	      doi:10.1016/S0196-8904(00)00080-7
+	    </a>
+	  </li>
+	  <li>
+	    Labeckas, G., and S. Slavinskas.  2006. Performance of
+	    direct-injection off-road diesel engine on rapeseed
+	    oil. <i>Renewable Energy</i> 31, no. 6: 849-863.
+	    <a href="http://dx.doi.org/10.1016/j.renene.2005.05.009">
+	      doi:10.1016/j.renene.2005.05.009
+	    </a>
+	  </li>
+	  <li>
+	    Pugazhvadivu, M., and K. Jeyachandran. 2004. Effect of
+	    fuel injection pressure and preheating on the performance
+	    and emissions of a vegetable oil fuelled diesel
+	    engine. <i>Proceedings of the Fall Technical Conference of
+	    the ASME International Combustion Engine Division</i>, Oct
+	    24-27 2004: 479-486.
+	  </li>
+	  <li>
+	    Noureddini, H., B. Teoh, and L. Davis Clements. 1992.
+            Viscosities of vegetable oils and fatty acids. <i>Journal
+            of the American Oil Chemists' Society</i> 69, no. 12
+            (December 1): 1189-1191.  <a href =
+            "http://dx.doi.org/10.1007/BF02637678">doi:10.1007/BF02637678</a>.
+            (Reports dynamic viscosity values; kinematic viscosity
+            calculated with density/temperature values found in
+            accompanying paper.)
+	</ol>
+	<ul>
+	<li>Rescorla, A. R., and F. L. Carnahan. 1936. Animal and
+	  Vegetable Oils Viscosity-Temperature
+	  Characteristics. <i>Industrial & Engineering Chemistry</i>
+	  28, no. 10 (October 1): 1212-1213.
+	  <a href="http://dx.doi.org/10.1021/ie50322a022">doi:10.1021/ie50322a022</a>.
+	</li>
+	<li>
+	  Magne, F. C., and E. L. Skau. 1945. Viscosities and
+	  Densities of Solvent-Vegetable Oil Mixtures. <i>Industrial &
+	  Engineering Chemistry</i> 37, no. 11 (November 1):
+	  1097-1101. <a href =
+	  "http://dx.doi.org/10.1021/ie50431a024">doi:10.1021/ie50431a024</a>.
+	</li>
+	</ul>
+
+      </td>
+    </tr>
+  </tfoot>
+  <tbody>
+    <tr>
+      <th>
+	Temperature (Celcius) vs Viscosity (centistokes) for various oils
+      </th>
+    </tr>
+    <td>
+      <div id="viscosity_table">
+	<!-- if Javascript is disabled, provide a link to a HTML table -->
+	<a href="http://spreadsheets.google.com/pub?key=r1rXnD75zsPlvQOcS0j6Kgg">
+	    Table (HTML)
+	  </a>
+	</div>
+	<a href="http://spreadsheets.google.com/pub?key=r1rXnD75zsPlvQOcS0j6Kgg&output=xls">
+	  Excel Spreadsheet (XLS)
+	</a>, 
+	<a href="http://spreadsheets.google.com/pub?key=r1rXnD75zsPlvQOcS0j6Kgg&output=csv">
+	  Comma Separated Values (CSV)
+	</a>
+      </td>
+    </tr>
+    <tr>
+      <td>
+
+	<embed src="viscosity_color.pdf#toolbar=0&navpanes=0&scrollbar=0" style="
+width:33em;height:26em"></embed>
+	<a href="viscosity_color.pdf">
+	  Graph of Viscosity vs Temperature	
+	</a>
+
+      </td>
+    </tr>
+  </tbody>
+</table> 
+<hr>
+
+
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a><br />This <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Text" rel="dc:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.
+
+
+
+</body>
+</html>

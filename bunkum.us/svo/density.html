@@ -1,0 +1,109 @@
+<html>
+<head>
+<title>Density of Vegetable Oils at Different Temperatures -- SVO: 
+Powering Your Vehicle with Straight Vegetable Oil</title>
+<script type="text/javascript" src="/svo/analytics.js"></script>
+<link rel="stylesheet" href="svo.css">
+<meta name="Description" content="Density of various vegetable oils at 
+different temperatures, taken from the literature, with references">
+ <!--Load the AJAX API-->
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+    
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1', {'packages':['table']});
+      
+      // Set a callback to run when the API is loaded.
+      google.setOnLoadCallback(drawTable);
+      
+      // Callback that creates and populates a data table, 
+      // instantiates the table, passes in the data and
+      // draws it.
+      function drawTable() 
+        {
+         var query = new google.visualization.Query(
+         
+'http://spreadsheets.google.com/pub?key=rlIRRLTAk8mCEnI_qzjQB6w&headers=1');
+  
+         // Send the query with a callback function.
+         query.send(handleQueryResponse);
+        }
+
+      function handleQueryResponse(response) 
+        {
+         if (response.isError()) 
+           {
+            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
+            return;
+           }
+
+         var data = response.getDataTable();
+         Table = new google.visualization.Table(document.getElementById('gs_table'));
+         Table.draw(data, {width: '33em', allowHtml : true});
+        }
+
+
+  
+
+
+
+
+    </script>
+</head>
+<body>
+<small><a href = "index.html">SVO -- Resources, updates, corrections,
+errata</a> > Density of vegetable oils </small>
+
+
+<table width="75%">
+  <thead>
+    <tr>
+      <th>
+	Density of Vegetable Oils at Different Temperatures
+      </th>
+    </tr>
+  </thead>
+  <tfoot>
+    <tr>
+      <td>
+Noureddini, H., B. Teoh, and L. Davis Clements. 1992. Densities of 
+vegetable oils and fatty acids. <i>Journal of the American Oil Chemists' 
+Society</i> 69, no. 12 (December 1): 1184-1188. <a 
+href="http://dx.doi.org/10.1007/BF02637677">doi:10.1007/BF02637677</a>.
+</td>
+    </tr>		  
+  </tfoot>
+  <tbody>
+    <tr>
+      <th>
+	Temperature (Celcius) vs Density (g/ml) for various oils
+      </th>
+    </tr>
+    <td>
+      <div id="gs_table">
+	<!-- if Javascript is disabled, provide a link to a HTML table -->
+	<a 
+href="http://spreadsheets.google.com/pub?key=rlIRRLTAk8mCEnI_qzjQB6w">
+	    Table (HTML)
+	  </a>
+	</div>
+	<a 
+href="http://spreadsheets.google.com/pub?key=rlIRRLTAk8mCEnI_qzjQB6w&output=xls">
+	  Excel Spreadsheet (XLS)
+	</a>, 
+	<a 
+href="http://spreadsheets.google.com/pub?key=rlIRRLTAk8mCEnI_qzjQB6w&output=csv">
+	  Comma Separated Values (CSV)
+	</a>
+      </td>
+    </tr>
+  </tbody>
+</table> 
+
+<hr>
+
+<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a><br />This <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Text" rel="dc:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.
+
+
+</body>
+</html>
