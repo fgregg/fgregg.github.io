@@ -1,55 +1,12 @@
 ---
+layout: svo
+title: Fatty Acid Profiles of Various Oils and Fats -- SVO Powering Your Vehicle with Straight Vegetable Oil
+description: Table of fatty acid make up of various oils, taken from the literature, with references.
+extra_js :
+    - fatty_acid.js
 ---
 
-<html>
-<head>
-<title>Fatty Acid Profiles of Various Oils and Fats -- SVO: 
-Powering Your Vehicle with Straight Vegetable Oil</title>
-  {% include google_analytics.html %}
-<link rel="stylesheet" href="svo.css">
-<meta name="Description" content="Table of fatty acid make up of various 
-oils, taken from the literature, with references.">
- <!--Load the AJAX API-->
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-    
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1', {'packages':['table']});
-      
-      // Set a callback to run when the API is loaded.
-      google.setOnLoadCallback(drawFattyAcidTable);
-      
-      // Callback that creates and populates a data table, 
-      // instantiates the table, passes in the data and
-      // draws it.
-      function drawFattyAcidTable() 
-        {
-         var query = new google.visualization.Query(
-         'http://spreadsheets.google.com/pub?key=rWlXuVc-gNrfATR2MTWV_xw');
-  
 
-         query.setQuery('select * where J is not null');
-         // Send the query with a callback function.
-         query.send(handleQueryResponseFA);
-        }
-
-      function handleQueryResponseFA(response) 
-        {
-         if (response.isError()) 
-           {
-            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-            return;
-           }
-
-         var data = response.getDataTable();
-         fattyAcidTable = new google.visualization.Table(document.getElementById('fatty_acid_table'));
-         fattyAcidTable.draw(data, {width: '33em', height: '25em', allowHtml : true});
-        }
-
-
-    </script>
-</head>
-<body>
 <small><a href = "index.html">SVO -- Resources, updates, corrections,
 errata</a> > Fatty Acid Profiles</small>
 <p>The sources for the data below are given in the far right hand
@@ -176,9 +133,3 @@ page.</p>
     </tr>
   </tbody>
 </table> 
-<hr>
-<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a><br />This <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Text" rel="dc:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.
-
-
-</body>
-</html>

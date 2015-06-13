@@ -1,59 +1,11 @@
 ---
+layout : svo
+title : Density of Vegetable Oils at Different Temperatures -- SVO Powering Your Vehicle with Straight Vegetable Oil
+description : Density of various vegetable oils at different temperatures, taken from the literature, with references
+extra_js :
+   - density.js
+
 ---
-
-<html>
-<head>
-<title>Density of Vegetable Oils at Different Temperatures -- SVO: 
-Powering Your Vehicle with Straight Vegetable Oil</title>
-  {% include google_analytics.html %}
-<link rel="stylesheet" href="svo.css">
-<meta name="Description" content="Density of various vegetable oils at 
-different temperatures, taken from the literature, with references">
- <!--Load the AJAX API-->
-    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
-    <script type="text/javascript">
-    
-      // Load the Visualization API and the piechart package.
-      google.load('visualization', '1', {'packages':['table']});
-      
-      // Set a callback to run when the API is loaded.
-      google.setOnLoadCallback(drawTable);
-      
-      // Callback that creates and populates a data table, 
-      // instantiates the table, passes in the data and
-      // draws it.
-      function drawTable() 
-        {
-         var query = new google.visualization.Query(
-         
-'http://spreadsheets.google.com/pub?key=rlIRRLTAk8mCEnI_qzjQB6w&headers=1');
-  
-         // Send the query with a callback function.
-         query.send(handleQueryResponse);
-        }
-
-      function handleQueryResponse(response) 
-        {
-         if (response.isError()) 
-           {
-            alert('Error in query: ' + response.getMessage() + ' ' + response.getDetailedMessage());
-            return;
-           }
-
-         var data = response.getDataTable();
-         Table = new google.visualization.Table(document.getElementById('gs_table'));
-         Table.draw(data, {width: '33em', allowHtml : true});
-        }
-
-
-  
-
-
-
-
-    </script>
-</head>
-<body>
 <small><a href = "index.html">SVO -- Resources, updates, corrections,
 errata</a> > Density of vegetable oils </small>
 
@@ -102,11 +54,3 @@ href="http://spreadsheets.google.com/pub?key=rlIRRLTAk8mCEnI_qzjQB6w&output=csv"
     </tr>
   </tbody>
 </table> 
-
-<hr>
-
-<a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png" /></a><br />This <span xmlns:dc="http://purl.org/dc/elements/1.1/" href="http://purl.org/dc/dcmitype/Text" rel="dc:type">work</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.
-
-
-</body>
-</html>
