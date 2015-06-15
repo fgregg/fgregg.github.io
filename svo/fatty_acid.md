@@ -2,7 +2,7 @@
 layout: svo
 title: Fatty Acid Profiles of Various Oils and Fats -- SVO Powering Your Vehicle with Straight Vegetable Oil
 description: Table of fatty acid make up of various oils, taken from the literature, with references.
-data_file: http://bunkum.us/svo/fatty_acid_profiles.csv
+data_file: data/fatty_acid_profiles.csv
 ---
 
 # Fatty Acid Profiles of Various Oils and Fats, % wt.

@@ -2,7 +2,7 @@
 layout : svo
 title : Kinematic Viscosity of Vegetable Oils at Different Temperatures -- SVO Powering Your Vehicle with Straight Vegetable Oil
 description : Data on the kinematic viscosity of different vegetable oils reported in the literature and presented in table and graph formats
-data_file : http://bunkum.us/svo/centistoke.csv
+data_file : data/centistoke.csv
 ---
 <style type="text/css">
     ol { list-style-type: upper-alpha; }

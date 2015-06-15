@@ -2,7 +2,7 @@
 layout: svo
 title: Fuel Properties of Various Oils and Fats -- SVO Powering Your Vehicle with Straight Vegetable Oil
 description: Table of data on fuel and chemical properties of various vegetable oils taken from the literature, with references
-data_file : http://bunkum.us/svo/fuel_properties.csv
+data_file : data/fuel_properties.csv
 ---
 # Fuel Properties of Various Oils and Fats
 
