@@ -1,6 +1,64 @@
-,,Viscosity,Density,Density,"Surface Tension, dynes/cm",Net Calorific Value,Gross Calorific Value,Cetane,Cold filter clogging point,Pour Point,Cloud Point,Flash Point,Fire point,Auto-Ignition point,"Initial Boiling Point, 0.1% evaporated","Final Boiling Point, 99.5% evaporated",Carbon residue,Ash,Particulate Matter,Sediment content by the extraction method,Insoluble impurities,Unsaponifiable matter,Water by Karl-Fischer,Water and sediment content,Moisture and volatiles by hotplate,"Moisture, Volatiles, Insolubles, and Unsaponifiables",Free Fatty Acid,Acid Value,Iodine value,Saturation Level,Peroxide number,Oxidation stability,Jet Fuel Thermal Oxidation Test rating,Induction Period,Copper Corrosion Rating,Saponification value,Carbon,Hydrogen,Oxygen,Sulfur,Nitrogen,Phosphorus,Phosphorus,Stochiometric air:fuel,
-Fat,Variety or Processing,mm^2/s @ 40 C,kg/l @ 15.6 C,kg/l @ 25 C,ASTM-D 971,MJ/kg,MJ/kg,,C,C,C,C,C,,C,C,% weight,% in weight,mg/100 ml,% volume,% weight,% weight,% weight,% weight,% weight,% weight,% Weight as Oleic acid,mg KOH/g,g I/100g oil,,ppm Oxygen,mg/100ml,ASTM-D 3241,,,mg KOH/g oil,% weight,% weight,% weight,% weight,% weight,% weight,PPM,,Source
-,,"ASTM-D 445, ASTM-D 88",ASTM-D 1298,,,,ASTM-D 270,"ASTM-D 613, ASTM-D 976","ASTM-EN 116, IP 309",ASTM-D 97,ASTM-D 2500,ASTM-D 93,,,ASTM-D 86,ASTM-D 86,"ASTM-D 189, ASTM-D 524",ASTM-D 482,,ASTM-D 473,AOCS Method Ca 3a-46,AOCS Method Ca 6a-40,ASTM-D 1744,ASTM-D 1796,AOCS Method Ca 2b-38,,,,,,,ASTM-D 2274,,,ASTM-D 130,,,,,"ASTM-D 1266, ASTM-D 129, IP 336",,AOCS Method Ca 12-55,,,
+Fat,Variety or Processing,"Viscosity
+mm^2/s @ 40 C
+ASTM-D 445, ASTM-D 88","Density
+kg/l @ 15.6 C
+ASTM-D 1298","Density
+kg/l @ 25 C","Surface Tension
+dynes/cm
+ASTM-D 971","Net Calorific Value
+MJ/kg","Gross Calorific Value
+MJ/kg
+ASTM-D 270","Cetane
+ASTM-D 613, ASTM-D 976","Cold filter clogging point
+C
+ASTM-EN 116, IP 309","Pour Point
+C
+ASTM-D 97","Cloud Point
+C
+ASTM-D 2500","Flash Point
+C
+ASTM-D 93","Fire point
+C",Auto-Ignition point,"Initial Boiling Point, 0.1% evaporated
+C
+ASTM-D 86","Final Boiling Point, 99.5% evaporated
+C
+ASTM-D 86","Carbon residue
+% weight
+ASTM-D 189, ASTM-D 524","Ash
+% in weight
+ASTM-D 482","Particulate Matter
+mg/100 ml","Sediment content by the extraction method
+% volume
+ASTM-D 473","Insoluble impurities
+% weight
+AOCS Method Ca 3a-46","Unsaponifiable matter
+% weight
+AOCS Method Ca 6a-40","Water by Karl-Fischer
+% weight
+ASTM-D 1744","Water and sediment content
+% weight
+ASTM-D 1796","Moisture and volatiles by hotplate
+% weight
+AOCS Method Ca 2b-38","Moisture, Volatiles, Insolubles, and Unsaponifiables
+% weight","Free Fatty Acid
+% Weight as Oleic acid","Acid Value
+mg KOH/g","Iodine value
+g I/100g oil",Saturation Level,"Peroxide number
+ppm Oxygen","Oxidation stability
+mg/100ml
+ASTM-D 2274","Jet Fuel Thermal Oxidation Test rating
+ASTM-D 3241",Induction Period,"Copper Corrosion Rating
+ASTM-D 130","Saponification value
+mg KOH/g oil","Carbon
+% weight","Hydrogen
+% weight","Oxygen
+% weight","Sulfur
+% weight
+ASTM-D 1266, ASTM-D 129, IP 336","Nitrogen
+% weight","Phosphorus
+% weight
+AOCS Method Ca 12-55","Phosphorus
+PPM",Stochiometric air:fuel,Source
 Soybean,Alkali-refined,,,0.922,,,38.9,,,,,269,,,,,,0.002,,,,,,,,,0.2,,109,,6,,,,,189,,,,,,0,,,"Engler, 1983"
 Sunflower,Crude,,,0.918,,,39.6,,,,,255,,,,,,0.01,,,,,,,,,1.3,,130,,12,,,,,197,,,,,,0.46,,,"Engler, 1983"
 Sunflower,Degummed,,,0.92,,,39.3,,,,,257,,,,,,0.01,,,,,,,,,1.5,,128,,14,,,,,201,,,,,,0.07,,,"Engler, 1983"
