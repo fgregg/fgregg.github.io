@@ -10,7 +10,7 @@ data_file : http://bunkum.us/svo/densities.csv
 
 ## Temperature (Celcius) vs Density (g/ml) for various oils
 
-<iframe src="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" width="100%" height="400">
+<iframe src="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" width="100%" height="230">
 	<a href="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}">
 	    Table (HTML)
 	</a>
