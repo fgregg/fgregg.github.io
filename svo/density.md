@@ -2,19 +2,13 @@
 layout : svo
 title : Density of Vegetable Oils at Different Temperatures -- SVO Powering Your Vehicle with Straight Vegetable Oil
 description : Density of various vegetable oils at different temperatures, taken from the literature, with references
-extra_js :
-   - density.js
 data_file : http://bunkum.us/svo/densities.csv
 ---
 # Density of Vegetable Oils at Different Temperatures
 
 ## Temperature (Celcius) vs Density (g/ml) for various oils
 
-<iframe src="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" width="100%" height="230">
-	<a href="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}">
-	    Table (HTML)
-	</a>
-</iframe>
+{% include datapipes.html %}
 
 [CSV Spreadsheet (CSV)]({{ page.data_file }})
 

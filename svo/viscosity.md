@@ -2,10 +2,7 @@
 layout : svo
 title : Kinematic Viscosity of Vegetable Oils at Different Temperatures -- SVO Powering Your Vehicle with Straight Vegetable Oil
 description : Data on the kinematic viscosity of different vegetable oils reported in the literature and presented in table and graph formats
-extra_js :
-  - viscosity.js
 data_file : http://bunkum.us/svo/centistoke.csv
-
 ---
 <style type="text/css">
     ol { list-style-type: upper-alpha; }
@@ -13,11 +10,7 @@ data_file : http://bunkum.us/svo/centistoke.csv
 
 # Kinematic Viscosity of Vegetable Oils at Different Temperatures
 
-<iframe src="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" width="100%" height="400">
-	<a href="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}">
-	    Table (HTML)
-	</a>
-</iframe>
+{% include datapipes.html %}
 
 The sources for the data below are given in the far right hand 
 column of the table, and the full citations are at the bottom of the 
