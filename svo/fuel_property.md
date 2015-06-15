@@ -4,21 +4,21 @@ title: Fuel Properties of Various Oils and Fats -- SVO Powering Your Vehicle wit
 description: Table of data on fuel and chemical properties of various vegetable oils taken from the literature, with references
 extra_js :
    - fuel_property.js
+data_file : http://bunkum.us/svo/fuel_properties.csv
 ---
 # Fuel Properties of Various Oils and Fats
 
-<div id="fuel_property_table">
-  <a href="http://spreadsheets.google.com/pub?key=rUeUiPZs90qigU3pgJ8OSfQ">
-    Table (HTML)
-  </a>
-</div>
+<iframe src="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}" marginwidth="0" marginheight="0" frameborder="0" vspace="0" hspace="0" width="100%" height="400">
+	<a href="http://datapipes.okfnlabs.org/csv/html/?url={{ page.data_file }}">
+	    Table (HTML)
+	</a>
+</iframe>
 
 The sources for the data below are given in the far right hand
 column of the table, and the full citations are at the bottom of the
 page.
 
-[Excel Spreadsheet (XLS)](http://spreadsheets.google.com/pub?key=rUeUiPZs90qigU3pgJ8OSfQ&output=xls)
-[Comma Separated Values (CSV)](http://spreadsheets.google.com/pub?key=rUeUiPZs90qigU3pgJ8OSfQ&output=csv)
+[CSV Spreadsheet (CSV)]({{ page.data_file }})
 
 * Adams, C., J.F. Peters, M.C. Rand, B.J. Schroer, and M.C. Ziemke. 1983. Investigation of soybean oil as a diesel fuel extender: Endurance tests. _Journal of the American Oil Chemists' Society_ 60, no. 8: 1574-1579. [ doi:10.1007/BF02666588 ][1]
 * Altin, R., S. Cetinkaya, and H. S. Yucesu. 2001. The potential of using vegetable oil fuels as fuel for diesel engines. _Energy Conversion and Management_ 42, no. 5 (March): 529-538. [ doi:10.1016/S0196-8904(00)00080-7 ][2]
