@@ -72,13 +72,13 @@ undifferentiating data work.
 # Sustainability
 Data work has three moments
 
-The moment of acquisition--recording and measuring
-The moment of transformation--formatting, projecting, and reconciling
-The moment of interpretation
+1. The moment of acquisition--recording and measuring
+2. The moment of transformation--formatting, projecting, and reconciling
+3. The moment of interpretation
 
 Each of these moments have their costs. Reducing the costs of one of these moments increases demand for the others.
 
-News organizations unique value is in the final moment, the moment of interpration--finding the patterns in the data. Historically, they have also had to bear the costs of acquisition and transformation even though those moments do not differentiate the newsroom's value.
+News organizations' unique value is in the final moment, the moment of interpration--finding the patterns in the data. Historically, they have also had to bear the costs of acquisition and transformation even though those moments do not differentiate the newsroom's value.
 
 Because of the open data movement, news organizations now have much cheaper costs to acquire data about how government, corporations, and other powerful institutions work. The costs of tranformation, though, remain unchanged and are still born by newsrooms.
 
