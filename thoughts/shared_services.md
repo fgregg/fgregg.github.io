@@ -32,6 +32,7 @@ police, jails, courts, and prisons. This data is now starting to
 become available at the scale necessary.
 
 * In 2011, the City put crime report data on the city's data portal
+* In 2012, DataMade started scraping police settlement data from the City Council's website
 * In 2013, Elliot Ramos of WBEZ, with the ACLU, make the first
   successful FOIA of CPD contact cards
 * In 2015, Tracy Siska receives 10 years of criminal conviction data
@@ -41,6 +42,7 @@ become available at the scale necessary.
   years of data
 * Additional data about the jail and prison systems can be extracted
   by scraping the Cook County Jail and IDOC websites
+
 
 We've never had so much data about policing and criminal
 justice. Unfortunately, mere access is not enough to enable the
