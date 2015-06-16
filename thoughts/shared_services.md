@@ -70,13 +70,21 @@ distrustful competitors together to share the costs of necessary but
 undifferentiating data work. 
 
 # Sustainability
+Data work has three moments
 
+The moment of acquisition--recording and measuring
+The moment of transformation--formatting, projecting, and reconciling
+The moment of interpretation
 
-These challenges of working with data are common to almost every
-single beat, and news organizations have significant costs in
-undertaking redundant and non-differentiating data work.
+Each of these moments have their costs. Reducing the costs of one of these moments increases demand for the others.
 
-Some other beats with significant opportunity for shared services.
+News organizations unique value is in the final moment, the moment of interpration--finding the patterns in the data. Historically, they have also had to bear the costs of acquisition and transformation even though those moments do not differentiate the newsroom's value.
+
+Because of the open data movement, news organizations now have much cheaper costs to acquire data about how government, corporations, and other powerful institutions work. The costs of tranformation, though, remain unchanged and are still born by newsrooms.
+
+Because of the beat structure of news, many of the transformations are common and repeated across newsrooms. If this data work could be done in common, it would lower the costs for all participating news organizations while freeing up some of the most valuable internal staff for more powerful interpretive work.
+
+Policing and Public Safety are one beat ripe for a shared services models. But there are others.
 
 ## Politics
 - Campaign finance data from the Illinois State Board of Elections
