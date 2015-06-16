@@ -65,4 +65,32 @@ FEW MORE SENTENCES HERE
 # Sustainability
 
 These challenges of working with data are common to almost every
-single beat, and 
+single beat, and news organizations have significant costs in
+undertaking redundant and non-differentiating data work.
+
+Some other beats with significant opportunity for shared services.
+
+## Politics
+- Campaign finance data from the Illinois State Board of Elections
+- Election results from Chicago, Cook County, and State
+- Lobbying information at multiple levels
+- Contract information at multiple levels
+- Legislative information for City Council, Cook County, and State
+- Dossiers on local and state politicans
+
+## Local Business
+- New construction permits
+- Land sales
+- Business permits
+- Food inspections
+- Movement of property though land review boards
+- Tax Appeals
+- Building violations
+- Problem landlords
+
+Building on the experience of working with reporters and research
+organization focused on policing and public safety, the Associated
+Data Agency will charge member organizations access to up-to-date,
+accurate, ready-to-use data sourced from public bodies. On an ala
+carte basis, members can get training and recieve consulting for their
+deeper investigations.
