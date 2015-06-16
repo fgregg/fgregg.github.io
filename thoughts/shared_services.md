@@ -5,10 +5,10 @@ layout: default
 # Police, Public Safety, and Criminal Justice 
 
 Nationally, we are in the beginning phase of a new civil rights
-movement focused on the how we police people of colors. In our city
-and state, the forces of this movement are well developed.
+movement about how we police people of color. In our city
+and state, the currents of this movement are strong.
 
-* A fiscal crisis that can let traditional law and order politicians
+* A fiscal crisis that lets traditional law and order politicians
   be "smart on crime" and support alternative policies to current,
   expensive public safety policies.
 * Active, public effort by the County and Sheriff to reduce
@@ -20,8 +20,7 @@ and state, the forces of this movement are well developed.
 
 Chicago journalists like Angela Caputo at the Tribune, Rob Wildeboer
 at WBEZ, Jamie Kalven of the Invisible Institute, and staff of the
-Chicago Reporter are all covering public safety and contributing to
-this movement.
+Chicago Reporter have contributed to this movement with their reporting.
 
 Unlike traditional crime reporting, these journalists are focusing on
 the systemic patterns and effects of our policing and criminal justice
@@ -37,7 +36,7 @@ become available at the scale necessary.
   successful FOIA of CPD contact cards
 * In 2015, Tracy Siska receives 10 years of criminal conviction data
   from the Circuit Court of Cook County
-* In 2015, after a five year legal right, Jamie Kalven establishes
+* In 2015, after a five year legal right, Jamie Kalven established
   that police complaint reports are public records and receives four
   years of data
 * Additional data about the jail and prison systems can be extracted
@@ -45,7 +44,7 @@ become available at the scale necessary.
 
 We've never had so much data about policing and criminal
 justice. Unfortunately, mere access is not enough to enable the
-reporting that will let motivate change. These data are large and hard
+reporting that will motivate change. These data are large and hard
 to work with. Much of the reporter's time is spend cleaning up the
 data, or getting in the right format, searching it, filtering it, or
 linking it up with other data.
@@ -60,9 +59,18 @@ the point of productivity, we can share skills on how to ask the
 interesting questions of the data, and share skills for displaying our
 findings in ways that are beautiful and touching.
 
-FEW MORE SENTENCES HERE
+# Shared Services
+These data and this moment provide an opportunity to change the economics
+of data intensive reporting and advocacy. By pooling resources, news and 
+research organizations can pay once to have the basic, critical data work
+done once for everone, and at a fraction of the cost for each organization.
+
+As an honest broker, the McCormick Foundation can bring togethether 
+distrustful competitors together to share the costs of necessary but
+undifferentiating data work. 
 
 # Sustainability
+
 
 These challenges of working with data are common to almost every
 single beat, and news organizations have significant costs in
