@@ -6,7 +6,637 @@
     <description>foo</description>
     <docs>http://www.rssboard.org/rss-specification</docs>
     <generator>python-feedgen</generator>
-    <lastBuildDate>Sat, 20 Jan 2018 04:58:07 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 20 Jan 2018 05:05:32 +0000</lastBuildDate>
+    <item>
+      <title>Mortimer J. Adler talks with Studs Terkel on WFMT ; 1960</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/629.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/629.mp3" length="572488910" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:11:55 +0000</pubDate>
+      <itunes:duration>3245</itunes:duration>
+    </item>
+    <item>
+      <title>Eqbal Ahmad and Muhammad Yunus discuss Pakistan on WFMT ; 1970</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/1105.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/1105.mp3" length="633834214" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:12:22 +0000</pubDate>
+      <itunes:duration>3593</itunes:duration>
+    </item>
+    <item>
+      <title>Nelson Algren discusses capital punishment</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/1489.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/1489.mp3" length="532925478" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:13:15 +0000</pubDate>
+      <itunes:duration>3021</itunes:duration>
+    </item>
+    <item>
+      <title>Nelson Algren discusses  "How the Devil Came Down Division Street".</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/1539.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/1539.mp3" length="215814026" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:13:24 +0000</pubDate>
+      <itunes:duration>1223</itunes:duration>
+    </item>
+    <item>
+      <title>Nelson Algren discusses love of a city ;  1961/03/09</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/1791.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/1791.mp3" length="259544404" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:13:37 +0000</pubDate>
+      <itunes:duration>1471</itunes:duration>
+    </item>
+    <item>
+      <title>Saul Alinsky talks with Studs Terkel on WFMT ; [1971]</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/2110.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/2110.mp3" length="603684834" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:13:48 +0000</pubDate>
+      <itunes:duration>3422</itunes:duration>
+    </item>
+    <item>
+      <title>Tribute to Saul D. Alinsky</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/2237.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/2237.mp3" length="597970210" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:13:54 +0000</pubDate>
+      <itunes:duration>3389</itunes:duration>
+    </item>
+    <item>
+      <title>Woody Allen discusses his work as a comedic writer and performer.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/2709.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/2709.mp3" length="259322062" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:14:43 +0000</pubDate>
+      <itunes:duration>1470</itunes:duration>
+    </item>
+    <item>
+      <title>Studs Terkel dscusses the current British arts scene with Kenneth Allsop.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/2761.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/2761.mp3" length="284760614" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:14:48 +0000</pubDate>
+      <itunes:duration>1614</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Kenneth Allsop, Jonathan Miller and Robert Morley</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/3011.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/3011.mp3" length="629133714" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:15:00 +0000</pubDate>
+      <itunes:duration>3566</itunes:duration>
+    </item>
+    <item>
+      <title>Studs Terkel discusses "Born to Raise Hell" with authors Jack Altman and Dr. Marvin Ziporyn</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/3076.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/3076.mp3" length="565178738" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:15:13 +0000</pubDate>
+      <itunes:duration>3203</itunes:duration>
+    </item>
+    <item>
+      <title>Elissa Aalto and Paul Dukas reflect on architect Alvar Aalto's life</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/3207.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/3207.mp3" length="563683542" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:15:18 +0000</pubDate>
+      <itunes:duration>3195</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Albert Alvarez and Jack LaPorte</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/3250.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/3250.mp3" length="243898918" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:15:27 +0000</pubDate>
+      <itunes:duration>1382</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Albert Alvarez and Jack LaPorte</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/3340.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/3340.mp3" length="513449378" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:15:36 +0000</pubDate>
+      <itunes:duration>2910</itunes:duration>
+    </item>
+    <item>
+      <title>John Anderson discusses his book "Confessions of a Muckraker: The Inside Story of Life in Washington During the Truman, Eisenhower, Kennedy, and Johnson Years"; 1979/05/23.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/3828.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/3828.mp3" length="592307250" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:16:11 +0000</pubDate>
+      <itunes:duration>3357</itunes:duration>
+    </item>
+    <item>
+      <title>Paul Angle and Win Stracke discuss &amp;quot;Crossroads: 1913&amp;quot; Part 1; 1963/07/01.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/4433.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/4433.mp3" length="346219790" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:17:11 +0000</pubDate>
+      <itunes:duration>1962</itunes:duration>
+    </item>
+    <item>
+      <title>Paul Angle and Win Stracke discuss "Crossroads: 1913," Part 2; 1963/07/01.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/4473.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/4473.mp3" length="360447646" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:17:20 +0000</pubDate>
+      <itunes:duration>2043</itunes:duration>
+    </item>
+    <item>
+      <title>Paul Angle and Win Stracke discuss "Crossroads: 1913," ; Part 3.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/4483.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/4483.mp3" length="229193118" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:17:22 +0000</pubDate>
+      <itunes:duration>1299</itunes:duration>
+    </item>
+    <item>
+      <title>Pat Anslett, Kathy Loftus and Wanda Morris talk with Studs Terkel on WFMT ; 1973/03/20</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/4537.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/4537.mp3" length="601919590" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:17:29 +0000</pubDate>
+      <itunes:duration>3412</itunes:duration>
+    </item>
+    <item>
+      <title>Susan Brownell Anthony talks with Studs Terkel ; 1971/10/29</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/4626.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/4626.mp3" length="576526286" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:17:36 +0000</pubDate>
+      <itunes:duration>3268</itunes:duration>
+    </item>
+    <item>
+      <title>2057133-3-1</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/4860.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/4860.mp3" length="612820138" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:17:52 +0000</pubDate>
+      <itunes:duration>3474</itunes:duration>
+    </item>
+    <item>
+      <title>Louis Daniel Armstrong talks with Studs Terkel on WFMT ; 1962/06/24</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5749.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5749.mp3" length="356877578" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:19:19 +0000</pubDate>
+      <itunes:duration>2023</itunes:duration>
+    </item>
+    <item>
+      <title>Richard Atcheison discusses his book "The Bearded Lady: Going on the Commune Trip and Beyond" ; 1971/08/27</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/13815.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/13815.mp3" length="583747778" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:19:32 +0000</pubDate>
+      <itunes:duration>3309</itunes:duration>
+    </item>
+    <item>
+      <title>Edward Atienza talks with Studs Terkel on WFMT ; 1959/10/07</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5764.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5764.mp3" length="569965350" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:19:39 +0000</pubDate>
+      <itunes:duration>3231</itunes:duration>
+    </item>
+    <item>
+      <title>Herman Badillo discusses "A Bill of No Rights: Attica and the American Prison System" ; 1972/06/26 </title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5794.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5794.mp3" length="604764058" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:20:44 +0000</pubDate>
+      <itunes:duration>3428</itunes:duration>
+    </item>
+    <item>
+      <title>Eddie Balchowsky talks with Studs Terkel on WFMT ; 1970</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5800.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5800.mp3" length="291957078" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:20:55 +0000</pubDate>
+      <itunes:duration>1655</itunes:duration>
+    </item>
+    <item>
+      <title>James Baldwin talks with Studs Terkel on WFMT, part 2.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5803.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5803.mp3" length="265397856" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:00 +0000</pubDate>
+      <itunes:duration>1504</itunes:duration>
+    </item>
+    <item>
+      <title>James Baldwin discusses "Nobody Knows My Name".</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5812.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5812.mp3" length="562314202" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:18 +0000</pubDate>
+      <itunes:duration>3187</itunes:duration>
+    </item>
+    <item>
+      <title>James Baldwin talks with Studs Terkel on WFMT ; 1962/09/29</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5815.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5815.mp3" length="498971522" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:30 +0000</pubDate>
+      <itunes:duration>2828</itunes:duration>
+    </item>
+    <item>
+      <title>James Baldwin talks with Studs Terkel on WFMT ; 1962/09/29</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5818.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5818.mp3" length="501186854" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:33 +0000</pubDate>
+      <itunes:duration>2841</itunes:duration>
+    </item>
+    <item>
+      <title>Roger Baldwin talks with Studs Terkel on WFMT ; 1974/06/26</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5821.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5821.mp3" length="595214694" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:39 +0000</pubDate>
+      <itunes:duration>3374</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with William Ball</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5824.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5824.mp3" length="509147490" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:48 +0000</pubDate>
+      <itunes:duration>2886</itunes:duration>
+    </item>
+    <item>
+      <title>Kaye Ballard talks with Studs Terkel on WFMT ; 1960/08/03</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5826.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5826.mp3" length="281374350" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:21:50 +0000</pubDate>
+      <itunes:duration>1595</itunes:duration>
+    </item>
+    <item>
+      <title>Loren Baritz discusses the relationship between education and work ; 1974/07/31</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5831.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5831.mp3" length="319314086" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:22:07 +0000</pubDate>
+      <itunes:duration>1810</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Harry Barnard</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5842.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5842.mp3" length="624122594" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:22:27 +0000</pubDate>
+      <itunes:duration>3538</itunes:duration>
+    </item>
+    <item>
+      <title>Henry Barraud talks with Studs Terkel on WFMT ; 1960/05/05</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5860.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5860.mp3" length="341581908" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:23:20 +0000</pubDate>
+      <itunes:duration>1936</itunes:duration>
+    </item>
+    <item>
+      <title>Anne Baxter talks about acting and Frank Lloyd Wright ; 1979</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5884.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5884.mp3" length="462358490" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:24:27 +0000</pubDate>
+      <itunes:duration>2621</itunes:duration>
+    </item>
+    <item>
+      <title>Marianne Bell, Shirley Wallace and IL Rep. Susan Catania discuss the ERA ; 1982/06/02</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5887.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5887.mp3" length="582552354" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:24:33 +0000</pubDate>
+      <itunes:duration>3302</itunes:duration>
+    </item>
+    <item>
+      <title>Benny Bearskin talks with Studs Terkel on WFMT ; 1970</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5889.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5889.mp3" length="279785850" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:24:36 +0000</pubDate>
+      <itunes:duration>1586</itunes:duration>
+    </item>
+    <item>
+      <title>Simone de Beauvoir discusses the art of writing</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5893.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5893.mp3" length="297431154" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:24:38 +0000</pubDate>
+      <itunes:duration>1686</itunes:duration>
+    </item>
+    <item>
+      <title>Dr. William Beecher, Dorothy Buell, Tom Dustin and Thelma McVey discuss the Indiana Dunes</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5911.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5911.mp3" length="607188678" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:25:16 +0000</pubDate>
+      <itunes:duration>3442</itunes:duration>
+    </item>
+    <item>
+      <title>Jerry Davidson and Mike Bell discuss the Elan School in Maine ; 1976/02/26</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5950.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5950.mp3" length="381213698" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:26:54 +0000</pubDate>
+      <itunes:duration>2161</itunes:duration>
+    </item>
+    <item>
+      <title>Janet Beller discusses her work "Street People" ; 1980/08/01</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5953.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5953.mp3" length="533958250" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:27:00 +0000</pubDate>
+      <itunes:duration>3026</itunes:duration>
+    </item>
+    <item>
+      <title>Lerone Bennett, Jr., John Hope Franklin and Hoyt Fuller discuss the book "Distortions of Negro History" ; 1965/06/03</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5967.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5967.mp3" length="590167596" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:27:33 +0000</pubDate>
+      <itunes:duration>3345</itunes:duration>
+    </item>
+    <item>
+      <title>1994091-3-1</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5974.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5974.mp3" length="548039170" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:27:48 +0000</pubDate>
+      <itunes:duration>3106</itunes:duration>
+    </item>
+    <item>
+      <title>Dan Berman and Bob Fowler discuss death on the job ; 1979/03/29</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5983.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5983.mp3" length="577160154" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:28:10 +0000</pubDate>
+      <itunes:duration>3271</itunes:duration>
+    </item>
+    <item>
+      <title>Carl Bernstein and Bob Woodward discussing the book, "All the President's Men" ; 1974/06/21</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/5998.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/5998.mp3" length="582658306" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:28:41 +0000</pubDate>
+      <itunes:duration>3303</itunes:duration>
+    </item>
+    <item>
+      <title>Hilda Bernstein talks about her life in and exile from South Africa ; 1975/05/21</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6001.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6001.mp3" length="560307114" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:28:48 +0000</pubDate>
+      <itunes:duration>3176</itunes:duration>
+    </item>
+    <item>
+      <title>Daniel Berrigan talks with Studs Terkel on WFMT ; 1972/06</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6004.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6004.mp3" length="618303214" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:28:52 +0000</pubDate>
+      <itunes:duration>3505</itunes:duration>
+    </item>
+    <item>
+      <title>Edwin C. Berry (Bill) discusses civil rights ; 1968</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6010.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6010.mp3" length="398595910" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:29:10 +0000</pubDate>
+      <itunes:duration>2259</itunes:duration>
+    </item>
+    <item>
+      <title>Edwin C. Berry (Bill) discusses civil rights ; 1968</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6013.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6013.mp3" length="366741082" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:29:13 +0000</pubDate>
+      <itunes:duration>2079</itunes:duration>
+    </item>
+    <item>
+      <title>Chicago school teachers and principals discuss Chicago schools ; 1970</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6016.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6016.mp3" length="621659994" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:29:15 +0000</pubDate>
+      <itunes:duration>3524</itunes:duration>
+    </item>
+    <item>
+      <title>Bruno Bettelheim talks with Studs Terkel on WFMT ; 1961/04/01</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6031.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6031.mp3" length="347462320" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:29:54 +0000</pubDate>
+      <itunes:duration>1969</itunes:duration>
+    </item>
+    <item>
+      <title>Bruno Bettelheim talks with Studs Terkel on WFMT ; 1961/04/01</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6034.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6034.mp3" length="314913944" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:29:56 +0000</pubDate>
+      <itunes:duration>1785</itunes:duration>
+    </item>
+    <item>
+      <title>Bruno Bettelheim talks with Studs Terkel on WFMT ; 1961/05/25</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6037.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6037.mp3" length="370687908" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:00 +0000</pubDate>
+      <itunes:duration>2101</itunes:duration>
+    </item>
+    <item>
+      <title>Bruno Bettelheim talks with Studs Terkel on WFMT ; 1961/05/25</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6040.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6040.mp3" length="396236442" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:02 +0000</pubDate>
+      <itunes:duration>2246</itunes:duration>
+    </item>
+    <item>
+      <title>Bruno Bettelheim talks with Studs Terkel on WFMT ; 1967/05</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6043.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6043.mp3" length="403887442" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:12 +0000</pubDate>
+      <itunes:duration>2289</itunes:duration>
+    </item>
+    <item>
+      <title>Bruno Bettelheim talks with Studs Terkel on WFMT ; 1967/05</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6046.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6046.mp3" length="213716178" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:14 +0000</pubDate>
+      <itunes:duration>1211</itunes:duration>
+    </item>
+    <item>
+      <title>Interviews with Dr. Bruno Bettelheim and Marlene Dixon (separate) ; 1969/02/06</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6051.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6051.mp3" length="578965090" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:23 +0000</pubDate>
+      <itunes:duration>3282</itunes:duration>
+    </item>
+    <item>
+      <title>Interviews with Dr. Bruno Bettelheim and Marlene Dixon (separate) ; 1969/02/06</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6054.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6054.mp3" length="579325022" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:27 +0000</pubDate>
+      <itunes:duration>3284</itunes:duration>
+    </item>
+    <item>
+      <title>Interviews with Dr. Bruno Bettelheim and Marlene Dixon (separate) ; 1969/02/06</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6058.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6058.mp3" length="583189870" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:39 +0000</pubDate>
+      <itunes:duration>3306</itunes:duration>
+    </item>
+    <item>
+      <title>Dr. Theodore Binder discusses his time in Peru and Mexico ; 1975/11/03</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6061.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6061.mp3" length="542528862" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:44 +0000</pubDate>
+      <itunes:duration>3075</itunes:duration>
+    </item>
+    <item>
+      <title>Jessie F. (Florence) Binford talks with Studs Terkel about Jane Addams on WFMT.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6064.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6064.mp3" length="607735734" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:30:50 +0000</pubDate>
+      <itunes:duration>3445</itunes:duration>
+    </item>
+    <item>
+      <title>Jessie Binford discusses Hull House and Chicago ; 1968</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6076.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6076.mp3" length="380406062" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:31:31 +0000</pubDate>
+      <itunes:duration>2156</itunes:duration>
+    </item>
+    <item>
+      <title>Jessie Binford discusses Hull House and Chicago ; 1968</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6079.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6079.mp3" length="380262590" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:31:33 +0000</pubDate>
+      <itunes:duration>2155</itunes:duration>
+    </item>
+    <item>
+      <title>Jessie Binford discusses Hull House and Chicago ; 1968</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6082.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6082.mp3" length="507753894" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:31:35 +0000</pubDate>
+      <itunes:duration>2878</itunes:duration>
+    </item>
+    <item>
+      <title>Jessie Binford discusses Hull House and Chicago ; 1968</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6085.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6085.mp3" length="387829242" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:31:38 +0000</pubDate>
+      <itunes:duration>2198</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Jessie Binford.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6091.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6091.mp3" length="561299254" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:31:44 +0000</pubDate>
+      <itunes:duration>3181</itunes:duration>
+    </item>
+    <item>
+      <title>Caroline Bird discusses feminism and sexism ; 1971/08/26.</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6100.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6100.mp3" length="589909130" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:32:09 +0000</pubDate>
+      <itunes:duration>3344</itunes:duration>
+    </item>
+    <item>
+      <title>Mrs. Bailey Bishop and Edith Neisser talk with Studs Terkel on WFMT</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6103.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6103.mp3" length="389065822" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:32:28 +0000</pubDate>
+      <itunes:duration>2205</itunes:duration>
+    </item>
+    <item>
+      <title>Mrs. Bailey Bishop and Edith Neisser talk with Studs Terkel on WFMT</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6106.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6106.mp3" length="173783502" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:32:36 +0000</pubDate>
+      <itunes:duration>985</itunes:duration>
+    </item>
+    <item>
+      <title>Robert Black, Robert Johnson and Gordon Livingston talk with Studs Terkel on WFMT Chicago ; 1970/11/13</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6118.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6118.mp3" length="2031741608" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:32:58 +0000</pubDate>
+      <itunes:duration>3527</itunes:duration>
+    </item>
+    <item>
+      <title>Easley Blackwood talks with Studs Terkel on WFMT ; 1961/03</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6121.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6121.mp3" length="571499950" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:33:11 +0000</pubDate>
+      <itunes:duration>3239</itunes:duration>
+    </item>
+    <item>
+      <title>Easley Blackwood, Leonard Meyer and Ralph Shapey talk with Studs Terkel on WFMT ; 1965</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6127.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6127.mp3" length="531867858" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:33:24 +0000</pubDate>
+      <itunes:duration>3015</itunes:duration>
+    </item>
+    <item>
+      <title>Easley Blackwood, Leonard Meyer and Ralph Shapey talk with Studs Terkel on WFMT ; 1965</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6129.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6129.mp3" length="522174262" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:33:42 +0000</pubDate>
+      <itunes:duration>2960</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Easley Blackwood, Paul Fromm and Ralph Shapey</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6133.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6133.mp3" length="407457558" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:33:49 +0000</pubDate>
+      <itunes:duration>2309</itunes:duration>
+    </item>
+    <item>
+      <title>1967737-3-1</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6139.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6139.mp3" length="521280342" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:34:06 +0000</pubDate>
+      <itunes:duration>2955</itunes:duration>
+    </item>
+    <item>
+      <title>George Blanksten, Irma Edelman, Robert Eisner and Dr. Pedritis talks with Studs Terkel on WFMT ; 1967/04</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6145.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6145.mp3" length="555342322" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:34:17 +0000</pubDate>
+      <itunes:duration>3148</itunes:duration>
+    </item>
+    <item>
+      <title>Maison Central Melun prison, part 1 ; 1962 part 2 ; 1962</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6154.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6154.mp3" length="582464154" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:34:33 +0000</pubDate>
+      <itunes:duration>3301</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Herbert Block</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6160.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6160.mp3" length="584026570" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:34:42 +0000</pubDate>
+      <itunes:duration>3310</itunes:duration>
+    </item>
+    <item>
+      <title>Howard Blum talks about his book "Wanted: The Search for Nazis in America" ; 1977/01/26</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6169.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6169.mp3" length="543679526" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:35:12 +0000</pubDate>
+      <itunes:duration>3082</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with young people</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6171.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6171.mp3" length="250034814" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:35:22 +0000</pubDate>
+      <itunes:duration>1417</itunes:duration>
+    </item>
+    <item>
+      <title>Three Cook County Hospital doctors: Dr. Tessa Fischer, Dr. Mark Bonnell, and Dr. David Moore talk with Studs Terkel on WFMT ; 1975/11/12</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6193.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6193.mp3" length="587021154" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:35:56 +0000</pubDate>
+      <itunes:duration>3327</itunes:duration>
+    </item>
+    <item>
+      <title>Mrs. Bonsigniore, Naomi Brodky, Harriet White and Mrs. Williams talk with Studs Terkel on WFMT</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6195.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6195.mp3" length="315993546" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:36:03 +0000</pubDate>
+      <itunes:duration>1791</itunes:duration>
+    </item>
+    <item>
+      <title>Mrs. Bonsigniore, Naomi Brodky, Harriet White and Mrs. Williams talk with Studs Terkel on WFMT</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6199.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6199.mp3" length="269800306" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:36:19 +0000</pubDate>
+      <itunes:duration>1529</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Rita Boscari</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6214.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6214.mp3" length="394280650" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:36:50 +0000</pubDate>
+      <itunes:duration>2235</itunes:duration>
+    </item>
+    <item>
+      <title>Interview with Sir Allen Lane</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6220.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6220.mp3" length="300500514" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:37:06 +0000</pubDate>
+      <itunes:duration>1703</itunes:duration>
+    </item>
+    <item>
+      <title>Cleopatre Bourdelle, part 1 ; 1962/10/28</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6241.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6241.mp3" length="329139890" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:37:46 +0000</pubDate>
+      <itunes:duration>1865</itunes:duration>
+    </item>
+    <item>
+      <title>Cleopatre Bourdelle, part 2 ; 1962/10/28</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6244.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6244.mp3" length="312434642" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:37:51 +0000</pubDate>
+      <itunes:duration>1771</itunes:duration>
+    </item>
+    <item>
+      <title>William Brashler talks about his book "Bingo Long's Traveling All-Stars Motor Kings" ; 1973/12/10</title>
+      <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6275.mp3</guid>
+      <enclosure url="https://s3.amazonaws.com/wfmt-studs-terkel/published/6275.mp3" length="484239010" type="audio/mpeg"/>
+      <pubDate>Thu, 07 Jul 2016 21:39:38 +0000</pubDate>
+      <itunes:duration>2745</itunes:duration>
+    </item>
     <item>
       <title>1993251-3-1</title>
       <guid isPermaLink="false">https://s3.amazonaws.com/wfmt-studs-terkel/published/6299.mp3</guid>
