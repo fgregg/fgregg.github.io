@@ -12,9 +12,6 @@ Straight Vegetable Oil</i> by Forest Gregg.
 * Buy it on <a href="http://www.amazon.com/SVO-Powering-Vehicle-Straight-Vegetable/dp/0865716129" onClick="recordOutboundLink(this, 'Outbound Links', 'amazon');return false;">Amazon</a>
 * <a href="http://www.worldcat.org/wcpa/isbn/0865716129" onClick="recordOutboundLink(this, 'Outbound Links', 'worldcat');return false;">Find it in a 
 library</a>
-* Check out <a href="http://www.newsociety.com/bookid/4000" onClick="recordOutboundLink(this, 'Outbound Links', 'newsociety');return false;">New 
-Society's catalog page for SVO</a>: includes previews of the table of 
-contents and introduction.
 
 ## Bibliography
 <a href="http://www.zotero.org/groups/vegetable_oil_fuel/items/" onClick="recordOutboundLink(this, 'Outbound Links', 'zotero');return false;">
