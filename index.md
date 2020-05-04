@@ -3,9 +3,8 @@ layout: default
 title: Bunkum
 ---
 
-[SVO - Companion Site][1]  
-[Github Repository][2]
+<h1>{{ site.posts.first.title }}</h1>
+<p class="text-muted">{{ site.posts.first.date | date: '%B %d, %Y' }} | <a href="{{ site.posts.first.url }}">Permalink</a></p>
 
-[1]: svo/
-[2]: https://github.com/fgregg
-  
+{{ site.posts.first.content }}
+
