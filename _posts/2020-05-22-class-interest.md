@@ -7,12 +7,12 @@ description: Are egovernment and "digital service" compatible with civil service
 
 I've been slowly reading *[The Government
 Machine](https://mitpress.mit.edu/books/government-machine)* by Jon
-Apgar. The book is a history of the uses of information and
+Agar. The book is a history of the uses of information and
 information technology in late 19th and early 20th century
 Britain. It's also one of the most useful books I've read about the
 open gov, open data, and civic tech movements.
 
-Apgar's unfolds a story about a series of "expert movements" to get
+Agar's unfolds a story about a series of "expert movements" to get
 the British government to collect information about its peoples,
 industry, and governmental operations and to appropriately use that
 information for effective and efficient government. The conflicts,
@@ -20,10 +20,10 @@ organizational forms, and even personality types should be familiar
 those who have been taken part in similar movements in the early 21st
 century.
 
-Many of Apgar's analyses and and critiques of our Victorians and
+Many of Agar's analyses and and critiques of our Victorians and
 Edwardians predecessors still slice. It's a good book and I recommend it.
 
-Today, I want to talk about one part in particular. In Apgar's
+Today, I want to talk about one part in particular. In Agar's
 account, the leadership of the British civil service was ready to
 adopt office machines (like card sorters and punch cards) because
 there was already a mental and bureaucratic division between the
