@@ -58,7 +58,7 @@ questions.
   *aligned* with the class interests and worldview of top bureaucrats?
   Is this how to understand "Smart Cities"? Is this the way to read
   whatever it is that [Dominic Cummings](https://dominiccummings.com/2020/01/02/two-hands-are-a-lot-were-hiring-data-scientists-project-managers-policy-experts-assorted-weirdos/) is up to?
-* Is reframing of egovernment or digital services that could make it
+* Is there a reframing of egovernment or digital services that could make it
   aligned with the interests of top bureaucrats **and** still command
   the loyalty of current partisans?
 * If the obstacle are values, should we read the "[Public Interest](https://www.newamerica.org/public-interest-technology/blog/defining-public-interest-technology/)"
