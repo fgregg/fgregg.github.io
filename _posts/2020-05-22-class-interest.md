@@ -50,7 +50,7 @@ movements have often positioned them as about introducing different
 values into government as much as, if not more so, then introducing
 new technology.
 
-I truly dont' really know how true this is. I don't really have the
+I don't really know how true this is. I don't have the needful
 intimacy with the leaderships of governmental departments to speak to
 their worldview or interests as group. Still, it has me asking a few
 questions.
