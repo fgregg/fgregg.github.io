@@ -7,6 +7,27 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
   <link rel="stylesheet" href="/assets/css/styles.css">
   {% include google_analytics.html %}
+
+
+  <!-- Twitter metadata -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@forestgregg">
+  <meta name="twitter:creator" content="@forestgregg">
+  {% if page.title %}
+    <meta name="twitter:title" content="{{ page.title }}">
+  {% else %}
+    <meta name="twitter:title" content="{{ site.title }}">
+  {% endif %}
+  {% if page.url %}
+    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  {% endif %}
+  {% if page.description %}
+    <meta name="twitter:description" content="{{ page.description }}">
+  {% endif %}
+  {% if page.image %}
+    <meta name="twitter:image" content="{{ site.url }}{{ page.image }}">
+  {% endif %}
+  
 </head>
 <body>
   <div style="float: left">Slow News by <a href="https://twitter.com/forestgregg">Forest Gregg</a></div><div style="float: right"><a href="/archive.html">Archive</a></div><div style="clear: both;"></div>
@@ -15,7 +36,8 @@
   <p class="text-muted">{{ page.date | date: '%B %d, %Y' }}</p>
   {{ content }}
 
- <hr />
+  <hr />
+  
  <form action="https://tinyletter.com/slow-news" method="post" target="popupwindow" onsubmit="window.open('https://tinyletter.com/slow-news', 'popupwindow', 'scrollbars=yes,width=800,height=600');return true"><p><label for="tlemail">Subscribe to Slow News</label></p><p><input type="email" class="form-control" name="email" id="tlemail" /></p><input type="hidden" value="1" name="embed"/><input type="submit" value="Subscribe" class="btn btn-primary"/></form>
 
 </body>
