@@ -1,6 +1,6 @@
 BODY {
-  min-width: 25em;
   max-width: 33em;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 30px auto;
+  padding-left: 20px;
+  padding-right: 20px;
       }
