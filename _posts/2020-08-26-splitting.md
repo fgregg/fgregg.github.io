@@ -5,7 +5,7 @@ image: "/images/pull_quote_splitting.png"
 description: Digital open gov split the world along a line that ended up not being the most important cleavage in our society.
 ---
 
-The [manifestos](https://web.archive.org/web/20011214121152/http://voxpolitics.com/festo.shtml) of the [early 2000s](https://www.cluetrain.com/) were right: the internet, open source, and cheap computing have put incredible powers within the reach of individuals.
+The [manifestos](https://web.archive.org/web/20011214121152/http://voxpolitics.com/festo.shtml) of the [early](https://dspace.mit.edu/bitstream/handle/1721.1/116994/emergent-democracy.pdf?sequence=1&isAllowed=y) [2000s](https://www.cluetrain.com/) were right: the internet, open source, and cheap computing have put incredible powers within the reach of individuals.
 
 Before the internet, the ability to widely publish information, opinion, and perspectives was only affordable to a limited number of institutions.
 These institutions shaped what issues were on the public agenda and what the public thought about those issues.
