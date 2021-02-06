@@ -34,7 +34,7 @@ function cardinalDirection(closest_point, current_x, current_y) {
 
 function showPosition(position) {
     let result
-    mi_url = `https://services3.arcgis.com/Jdnp1TjADvSDxMAX/ArcGIS/rest/services/open_PresettlementVegetation/FeatureServer/0/query?geometry=${position.coords.longitude}%2C${position.coords.latitude}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&units=esriSRUnit_StatuteMile&outFields=COVERTYPE%2COBJECTID%2CAREA_MI&returnCentroid=true&f=pjson`
+    mi_url = `https://services1.arcgis.com/7w1SUsLNZbGKoz6h/arcgis/rest/services/Michigan_vegetation_c1800/FeatureServer/0/query?geometry=${position.coords.longitude}%2C${position.coords.latitude}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&units=esriSRUnit_StatuteMile&outFields=COVERTYPE%2COBJECTID%2CACRES&returnCentroid=true&f=pjson`
     fetch(mi_url + '&distance=0.0&returnQueryGeometry=true&returnGeometry=false').then(response => response.json()).then(function(json) {
       local_vegetation = json.features[0]
       current_x = json.queryGeometry.x
