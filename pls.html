@@ -24,9 +24,18 @@ function getLocation() {
 
 function showPosition(position) {
     let result
-    mi_url = `https://services3.arcgis.com/Jdnp1TjADvSDxMAX/ArcGIS/rest/services/open_PresettlementVegetation/FeatureServer/0/query?where=&objectIds=&time=&geometry=${position.coords.longitude}%2C${position.coords.latitude}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&resultType=none&distance=0.0&units=esriSRUnit_Meter&returnGeodetic=false&outFields=COVERTYPE&returnGeometry=false&returnCentroid=false&featureEncoding=esriDefault&multipatchOption=xyFootprint&maxAllowableOffset=&geometryPrecision=&outSR=&datumTransformation=&applyVCSProjection=false&returnIdsOnly=false&returnUniqueIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&returnQueryGeometry=false&returnDistinctValues=false&cacheHint=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&having=&resultOffset=&resultRecordCount=&returnZ=false&returnM=false&returnExceededLimitFeatures=true&quantizationParameters=&sqlFormat=none&f=pjson`
-    fetch(mi_url).then(response => response.json()).then(function(json) {
-    x.innerHTML = `<h1>${json.features[0].attributes.COVERTYPE}</h1><br />${position.coords.longitude}`});
+    mi_url = `https://services3.arcgis.com/Jdnp1TjADvSDxMAX/ArcGIS/rest/services/open_PresettlementVegetation/FeatureServer/0//query?geometry=${position.coords.longitude}%2C${position.coords.latitude}&geometryType=esriGeometryPoint&inSR=4326&spatialRel=esriSpatialRelIntersects&units=esriSRUnit_StatuteMile&outFields=COVERTYPE%2COBJECTID%2CAREA_MI&returnGeometry=false&returnCentroid=true&outSR=4326&f=pjson`
+    fetch(mi_url + '&distance=0.0').then(response => response.json()).then(function(json) {
+      local_vegetation = json.features[0]
+      fetch(mi_url + `&distance=1.0&where=OBJECTID+<>+${local_vegetation.attributes.OBJECTID}`).then(response => response.json()).then(function(json) {
+        nearby_vegetation = json.features
+
+        x.innerHTML = `<h1>${local_vegetation.attributes.COVERTYPE}</h1><br />${position.coords.longitude}`
+        for (feature of nearby_vegetation) {
+          x.innerHTML += `<br />${feature.attributes.COVERTYPE}`
+        }
+      })
+    })
 }
 </script>
 
