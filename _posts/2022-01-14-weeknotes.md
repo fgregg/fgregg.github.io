@@ -22,7 +22,7 @@ that](https://observablehq.com/@fgregg/distribution-of-days-from-filing-to-first
 
 After I put together the initial histogram, I decided to look at it by
 year. I'm glad I did because there was a pretty big change in 2015 due
-to Obama era rule changes to shorten delays. h/t Dave Kamper.
+to Obama era rule changes to shorten delays. h/t [Dave Kamper](https://twitter.com/dskamper).
 
 I used a bit of code from [Ben Welsh](https://twitter.com/palewire) to
 add a [download data link as spreadsheet
