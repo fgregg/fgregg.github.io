@@ -14,15 +14,15 @@ I think both went well. Our applicant and interview pool was strong.
 
 #### Union election delays
 [Aaron Sojourner](https://twitter.com/aaronsojourner) asked me if I
-had the distribution of the delay between when workers ask the NLRB
-for an election and the elction being held.
+had the distribution of the delays between when workers ask the NLRB
+for an election and the election being held.
 
 I put together a [Observable notebook to answer
 that](https://observablehq.com/@fgregg/distribution-of-days-from-filing-to-first-election).
 
 After I put together the initial histogram, I decided to look at it by
 year. I'm glad I did because there was a pretty big change in 2015 due
-to Obama era rule changes to shorten delays.
+to Obama era rule changes to shorten delays. h/t Dave Kamper.
 
 I used a bit of code from [Ben Welsh](https://twitter.com/palewire) to
 add a [download data link as spreadsheet
@@ -59,3 +59,8 @@ build a little github action app that sets a budget of the number of
 hours of meetings i can be schedule for during a week by hooking into
 the Calendly and Google Calendar APIs. Sounds like a yak i shouldn't
 shave, but I might.
+
+#### Chicago Journalist Association
+I got DataMade's plaque from the Chicago Journalist Association for our
+first place award of Best Series for the [The Circuit](https://thecircuit.cc/).
+
