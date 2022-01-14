@@ -5,7 +5,7 @@ description: Weeknotes for January 14, 2022
 ---
 
 #### Hiring
-We finished a hiring round for a Developer I. Two things that were different 
+We finished a hiring round for a Developer I. Two things that were different: 
 
 1. we were open to US applicants in Pacific, Mountain, Central, and Eastern timezones (last time we excluded Pacific).
 2. we implemented a [Rooney Rule](https://en.wikipedia.org/wiki/Rooney_Rule) for our interview stage.
