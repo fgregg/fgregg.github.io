@@ -60,7 +60,8 @@ hours of meetings i can be schedule for during a week by hooking into
 the Calendly and Google Calendar APIs. Sounds like a yak i shouldn't
 shave, but I might.
 
-#### Chicago Journalist Association
-I got DataMade's plaque from the Chicago Journalist Association for our
-first place award of Best Series for the [The Circuit](https://thecircuit.cc/).
+#### Chicago Journalist Association Award
+I got DataMade's plaque from the Chicago Journalist Association for
+our first place award of Best Series for the [The
+Circuit](https://thecircuit.cc/).
 
