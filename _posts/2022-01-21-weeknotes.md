@@ -9,7 +9,7 @@ I did a [lot of gardening of the dedupe
 library](https://github.com/dedupeio/dedupe/issues?page=2&q=is%3Aissue+is%3Aclosed+closed%3A2022-01-15..2022-01-23),
 and cut the 2.0.9 version of the library. The big enhancement in this
 release was refactoring the [parallelization of scoring
-pairs](https://github.com/dedupeio/dedupe/pull/936).
+pairs](https://github.com/dedupeio/dedupe/pull/936/files#diff-0af8d57e51708aa45e057ec83aa026a76f6750db803a41edf86054c80e54cc34).
 
 Previously, worker processes pulled chunks of record pairs off a
 queue, scored them, and wrote the results to a memmapped numpy
