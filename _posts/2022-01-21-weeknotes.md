@@ -12,16 +12,16 @@ release was refactoring the [parallelization of scoring
 pairs](https://github.com/dedupeio/dedupe/pull/936).
 
 Previously, worker processes pulled chunks of record pairs off a
-queue, scored them, and wrote the results to a memmaped numpy
+queue, scored them, and wrote the results to a memmapped numpy
 array. Each chunk got its own array backed by a separate file. Then,
 the worker would put the name of the file into a result queue.
 
 A collector process would read those filenames from the result queue
-and open those files and copy the content into as single, big memmaped
+and open those files and copy the content into as single, big memmapped
 numpy array.
 
 I got rid of that collector process and now the scoring workers write
-directly to the same memmaped numpy array. The workers need to know
+directly to the same memmapped numpy array. The workers need to know
 where in the array they should write, and they communicate that
 through a shared memory value, with a built-in locking mechanism.
 
