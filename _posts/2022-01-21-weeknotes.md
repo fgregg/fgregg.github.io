@@ -54,9 +54,7 @@ forks](https://docs.python.org/3/library/multiprocessing.html#contexts-and-start
 then we could set up the workers so they all had access to the same
 dictionary (i.e. same object in memory).
 
-However, forking is not available on Mac OS and Windows; only
-spawning. Parent memory is not shared in this way with spawned
-processes.
+However, forking is not available on Mac OS and Windows, so parent memory is not shared in this way.
 
 So, if we can't use shared memory, then the second best alternative is
 to hold the data in database that each process can access
