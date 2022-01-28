@@ -9,19 +9,19 @@ I did a [lot of gardening of the dedupe
 library](https://github.com/dedupeio/dedupe/issues?page=2&q=is%3Aissue+is%3Aclosed+closed%3A2022-01-15..2022-01-23),
 and cut the 2.0.9 version of the library. The big enhancement in this
 release was refactoring the [parallelization of scoring
-pairs](https://github.com/dedupeio/dedupe/pull/936).
+pairs](https://github.com/dedupeio/dedupe/pull/936/files#diff-0af8d57e51708aa45e057ec83aa026a76f6750db803a41edf86054c80e54cc34).
 
 Previously, worker processes pulled chunks of record pairs off a
-queue, scored them, and wrote the results to a memmaped numpy
+queue, scored them, and wrote the results to a memmapped numpy
 array. Each chunk got its own array backed by a separate file. Then,
 the worker would put the name of the file into a result queue.
 
 A collector process would read those filenames from the result queue
-and open those files and copy the content into as single, big memmaped
+and open those files and copy the content into as single, big memmapped
 numpy array.
 
 I got rid of that collector process and now the scoring workers write
-directly to the same memmaped numpy array. The workers need to know
+directly to the same memmapped numpy array. The workers need to know
 where in the array they should write, and they communicate that
 through a shared memory value, with a built-in locking mechanism.
 
@@ -54,9 +54,7 @@ forks](https://docs.python.org/3/library/multiprocessing.html#contexts-and-start
 then we could set up the workers so they all had access to the same
 dictionary (i.e. same object in memory).
 
-However, forking is not available on Mac OS and Windows; only
-spawning. Parent memory is not shared in this way with spawned
-processes.
+However, forking is not available on Mac OS and Windows, so parent memory is not shared in this way.
 
 So, if we can't use shared memory, then the second best alternative is
 to hold the data in database that each process can access
