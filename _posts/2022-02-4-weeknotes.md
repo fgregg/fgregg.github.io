@@ -36,7 +36,7 @@ two-thirds of voluntary recognitions, and are missing data on about
 third of all private-sector organizing. Given overall trends in organizing,
 it's likely that these are underestimates.
 
-Basically, there are two ideas for filling this lacuna ([see thread](https://twitter.com/forestgregg/status/1488305426810773509):
+Basically, there are two ideas for filling this lacuna ([see thread](https://twitter.com/forestgregg/status/1488305426810773509)):
 
 1. Try to find units that have filed a notice to bargain with the FMCS that do not appear in the NLRB data
 2. Survey unions
