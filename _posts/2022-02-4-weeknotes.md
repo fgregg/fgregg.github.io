@@ -42,7 +42,7 @@ Basically, there are two ideas for filling this lacuna ([see thread](https://twi
 2. Survey unions
 
 As of right now, we really don't have a good understanding of the trends in
-union organizing. We have great data on NLRB-election organzing, but that
+union organizing. We have great data on NLRB-election organizing, but that
 may be a small part of the overall picture.
 
 ### Reflections on Weeknotes
