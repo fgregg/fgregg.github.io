@@ -4,7 +4,6 @@ layout: post
 description: What's possible when we don't require intensive attention from one another.
 ---
 
-### Asynchronous civics
 Parenting, at least the way I do it, has a lot of time when I’m not
 doing much, but it is time of a particular type.
 
