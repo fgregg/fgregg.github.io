@@ -5,7 +5,7 @@ description: What's possible when we don't require intensive attention from one 
 ---
 
 Parenting, at least the way I do it, has a lot of time when I’m not
-doing much, but it is time of a particular type.
+doing much. But it is time of a particular type.
 
 It is time that is interrupted; interruptible; passing at places not
 fully under my control; and during which I need to passively attend to
