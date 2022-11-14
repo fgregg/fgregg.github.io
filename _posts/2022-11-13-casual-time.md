@@ -37,9 +37,9 @@ more casual. If activities can fit better into my life, my hope is
 that I will more of them.
 
 [Datasette](https://datasette.io/),
-[Observable](https://observablehq.com/@fgregg), GitHub Actions make
-data analysis much more casual. It's not pleasant to write SQL on a
-phone, and even worse to write JavaScript, but it’s possible to do
+[Observable](https://observablehq.com/@fgregg), and GitHub Actions
+make data analysis much more casual. It's not pleasant to write SQL on
+a phone, and even worse to write JavaScript, but it’s possible to do
 casually now.
 
 This is the second post I've initially drafted in the notes app of my
