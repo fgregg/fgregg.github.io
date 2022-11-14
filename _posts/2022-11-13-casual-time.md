@@ -31,6 +31,7 @@ Examples of casual activities:
 | Not thinking about things | Listening to music | 
 | Whittling | Reading | 
 
+
 I've been trying to make some other activities I want to want to do
 more casual. If activities can fit better into my life, my hope is
 that I will more of them.
