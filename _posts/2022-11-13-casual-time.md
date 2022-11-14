@@ -4,8 +4,6 @@ layout: post
 description: What fits into fragmented time?
 ---
 
-Casual time
-
 [I've been thinking about the type of time I have these
 days](https://bunkum.us/2022/11/06/asynch-civics.html): time that is
 interrupted; interruptible; passing at places not fully under my
