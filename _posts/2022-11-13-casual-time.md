@@ -32,7 +32,7 @@ Examples of casual activities:
 <br />
 I've been trying to make some other activities I want to want to do
 more casual. If activities can fit better into my life, my hope is
-that I will more of them.
+that I will do more of them.
 
 [Datasette](https://datasette.io/),
 [Observable](https://observablehq.com/@fgregg), and GitHub Actions
@@ -50,7 +50,7 @@ push-ups, stretch out my hamstrings, or practice harmonica while
 hanging at the playground, but it seems too embarrassing to draw that
 attention to myself.
 
-But I'm not sure that's right. Maybe i need to just get over it.
+But I'm not sure that's right. Maybe I need to just get over it.
 
 A lot of the internet depends on taking our casual time, but I haven't
 been able to find good writing about it.  I'm sure it’s out there and
