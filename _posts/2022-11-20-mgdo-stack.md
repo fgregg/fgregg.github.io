@@ -33,7 +33,7 @@ Here are some examples:
 * Storage of large artifacts
 * Parallelism
 * A large user base
-* Free! (For public repos)
+* Free! (For public repositories)
 
 The only real limitation I've run into is that execution time for a single job is limited to six hours, which can be constraining for large scrapes. Getting around this can take some creativity. Often the best solution is to split the job into smaller bites and run many parallel jobs.
 
@@ -43,10 +43,10 @@ The limit on artifact size attached to a release is 100Gb which has been quite e
 
 Here's how I set up [the Github Actions script](https://github.com/fgregg/warehouse-etl/blob/main/.github/workflows/build.yml).
 
-### Private Repos
+### Private Repositories
 For private jobs, GitHub you get 2000-3000 minutes of execution time for free a month depending on your account type, and then Github charges $0.008/per minute  after that. 
 
-That can get expensive, but GitHub allows you to dispatch github action jobs on your servers. Azure spot instances + [cirun.io](https://cirun.io/) makes intensive use of GitHub actions on private repos very affordable.
+That can get expensive, but GitHub allows you to dispatch github action jobs on your servers. Azure spot instances + [cirun.io](https://cirun.io/) makes intensive use of GitHub actions on private repositories affordable.
 
 That GitHub is owned by Microsoft, and that  I can pay for GitHub actions and also have an option to pay someone else for the server-time are all some comfort on persistence of the service.
 
@@ -67,7 +67,7 @@ Here's what the [Github Actions file](https://github.com/labordata/warehouse/blo
 [Observable](https://observablehq.com) is a lyrical platform for writing JavaScript notebooks for data analysis and visualisation. It has excellent support for working with databases and Datasette instances (using the JSON API I mentioned above).
 
 Many of this notebooks are updated automatically, as the GitHub
-actions craetes updated databases, which are pulled into the Datasette
+actions creates updated databases, which are pulled into the Datasette
 warehouses.
 
 Being able to do arbitrarily complicated SQL queries across multiple tables and then working with the the analysis and visualisation all on a reactive front-end is very, very to fast to build.
