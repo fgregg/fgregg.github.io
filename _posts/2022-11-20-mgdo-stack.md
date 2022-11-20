@@ -14,7 +14,7 @@ Over the past year, I’ve refined a stack for my personal projects that has bee
 ## Makefile for a sqlite Database
 For each dataset, I'll make a repository that turns source data into a sqlite database with a single `make` command. The repositories [follow this template](https://github.com/fgregg/warehouse-etl). 
 
-[csvkit](https://csvkit.readthedocs.io/en/latest/), [sqlite-utils](https://sqlite-utils.datasette.io/en/stable/), and [csvs-to-sqlite](https://pypi.org/project/csvs-to-sqlite/) are often the workhouses of the ELT code. Thanks [Christopher Groskopf](https://twitter.com/onyxfish), [James McKinney](http://www.jamespetermckinney.com/) and [Simon Willison](https://fedi.simonwillison.net/@simon)!
+[csvkit](https://csvkit.readthedocs.io/en/latest/), [sqlite-utils](https://sqlite-utils.datasette.io/en/stable/), and [csvs-to-sqlite](https://pypi.org/project/csvs-to-sqlite/) are often the workhouses of the ETL code. Thanks [Christopher Groskopf](https://twitter.com/onyxfish), [James McKinney](http://www.jamespetermckinney.com/) and [Simon Willison](https://fedi.simonwillison.net/@simon)!
 
 Here are some examples:
 * [Illinois Campaign Finance Database](https://github.com/fgregg/ilcampaigncash)
