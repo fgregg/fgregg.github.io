@@ -1,8 +1,37 @@
+@font-face {
+  font-family: "oe";
+  src: url("../fonts/OPTIEngraversOldEnglish.otf");
+}
+
+.mast {
+    font-family: 'oe';
+    font-size: 22px;
+}
+
+nav {
+    
+    border-bottom: 2px solid #552222;
+    margin-bottom: 15px;
+    display: flex;
+    height: 100%;
+		   
+}
+
 BODY {
   max-width: 33em;
   margin: 30px auto;
   padding-left: 20px;
   padding-right: 20px;
-  font-family: 'serif';
+  font-family: 'PT Serif', 'serif';
   font-size: 16px;
-      }
+  background-color:  #FFFFFE;
+  color: #444444
+}
+
+
+hr {
+    border: none;
+    height: 2px;
+    /* Set the hr color */
+    background-color: #552222; /* Modern Browsers */
+}
