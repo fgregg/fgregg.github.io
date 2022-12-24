@@ -27,7 +27,8 @@ Examples of casual activities:
 | Looking at plants or telecom equipment | Playing casual games like candy crush or duolingo |
 | Thinking about things | Social media |
 | Not thinking about things | Listening to music | 
-| Whittling | Reading | 
+| Whittling | Reading |
+{:class="table table-bordered"}
 
 <br />
 I've been trying to make some other activities I want to want to do
