@@ -1,5 +1,5 @@
 ---
-title: A sqlite data layer for dedupe
+title: A sqlite data layer for dedupe?
 layout: post
 description: Thinking through the benefits and costs of sqlite as a data layer for the dedupe library
 ---
@@ -46,7 +46,8 @@ import multiprocessing
 
 pool = multiprocessing.pool(NUM_PROCESSES)
 
-block_keys = pool.imap_unordered(blocking_function, data stream)
+block_keys = pool.imap_unordered(blocking_function, 
+                                 data stream)
 ```
 
 But this ends up not being very useful, because of interprocess communication. 
@@ -87,8 +88,14 @@ first seven characters of the address field. Even with a good parallel
 processing model, it will be very hard for a Python solution to beat
 
 ```sql
-INSERT INTO block_keys (key, record_id) SELECT substring(address, 1, 7), record_id from data;
+INSERT INTO block_keys (key, record_id)
+SELECT
+    substring(address, 1, 7),
+    record_id
+FROM
+    data;
 ```
+
 
 ### Collateral benefits
 
