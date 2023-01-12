@@ -22,7 +22,7 @@ in a sqlite database, the base library could significantly increase
 the scale of data that could be processed into the tens of millions
 
 
-## Benefits
+## Benefits of a sqlite data layer
 
 ### Costs of interprocess-communication 
 
@@ -109,7 +109,7 @@ Moving to an architecture that requires the data to be stored in a
 relational database would remove that restriction.
 
 
-## Downsides
+## Downsides of a sqlite data layer
 
 ### Type Inflexibility
 
