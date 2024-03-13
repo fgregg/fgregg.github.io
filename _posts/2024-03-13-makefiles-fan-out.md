@@ -1,7 +1,8 @@
 ---
-title: Makefile and fan-out data flows
+title: It's hard to express a fan-out data flow in Makefiles
 author: Forest Gregg
 layout: post
+description: Makefiles, Snakefiles, and Tupfiles don't let you express fan-out data well.
 ---
 
 We've been using Makefiles for our reproducible data builds at
