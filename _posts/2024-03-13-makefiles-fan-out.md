@@ -79,7 +79,7 @@ intermediate steps between fanning out the data into the `data` directory and fa
 reference, where it would be better to have somethign more local.
 
 [Tupfiles'](https://gittup.org/tup/) bottom-up syntax is better for
-this. Assuming that the data directory already exists, a tupfile might
+this. Assuming that the data directory already exists, a Tupfile might
 look like this
 
 ```tupfile
