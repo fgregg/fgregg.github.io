@@ -87,12 +87,11 @@ look like this
 : *.csv.trimmed |> csvstack %f > %o |> complete.csv
 ```
 
-I was not able to get `tup` running without setting up FUSE, a
-kernel extension, which I did not want to do. But from reading the
-docs, I don't think there's a simple way to express the extraction of
-the CSVs from the zipfile. Since Tupfiles cannot be recursive, i'm not
-even sure it's possible to run a single Tupfile command and build
-everything.
+I was not able to get `tup` running without setting up FUSE, a kernel
+extension, which I did not want to do. But from reading the docs, I
+don't think there's a simple way to express the extraction of the CSVs
+from the zipfile. I'm not even sure it's possible to run a single
+Tupfile command and build everything.
 
 It makes sense that build systems that were orginally and primarily built for building
 programs do not handle fan-outs well. They show up rarely when creating programs. 
