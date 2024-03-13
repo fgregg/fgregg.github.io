@@ -102,7 +102,7 @@ them elegantly.
 
 If you know of a build system that does this well, please let me know! 
 
-(I know Airflow and Prefect and their sestren exist. I'm looking for a
+(I know Airflow and Prefect and their sistren exist. I'm looking for a
 build system that a reasonable person would actually use on a small,
 one-off data build)
 
