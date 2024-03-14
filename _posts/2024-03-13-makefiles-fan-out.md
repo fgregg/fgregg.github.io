@@ -45,7 +45,7 @@ data : data.zip
 
 [Snakemake](https://snakemake.readthedocs.io/en/stable/) improves on
 this a bit with its checkpoint syntax. It is better than a recursive
-call, but here too we can't we can’t clearly read off the whole chain
+call, but here, too, we can’t clearly read off the whole chain
 of dependency relations.
 
 ```
