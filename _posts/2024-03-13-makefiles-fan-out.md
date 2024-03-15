@@ -106,6 +106,8 @@ If you know of a build system that does this well, please let me know!
 build system that a reasonable person would actually use on a small,
 one-off data build)
 
-
-
+**Addendum**: The problem I'm describing here is a species of "dynamic
+dependency," described well in the lovely paper, ["Build Systems à la
+Carte: Theory and
+Practice"](https://www.microsoft.com/en-us/research/uploads/prod/2020/04/build-systems-jfp.pdf).
 
