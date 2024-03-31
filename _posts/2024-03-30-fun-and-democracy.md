@@ -14,7 +14,7 @@ authoritarian default of online spaces, where typically the founders
 of an online group gets to make all the rules for the group,
 
 I don't really buy grander claims that the lack of democracy online is
-leading us to fascism offline, but Schneider doesn't really put a lot
+leading us to authoritarianism offline, but Schneider doesn't really put a lot
 of force behind making that link. Nevertheless, it could still be good
 for our online associational lives to be more democratic, and
 Schneider presents a number of creative ideas about how we could go
