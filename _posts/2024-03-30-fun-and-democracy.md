@@ -6,30 +6,19 @@ description: But a democracy that's only important when things are dire doesn't 
 ---
 
 Nathan Schneider's book [*Governable
-Spaces*](https://nathanschneider.info/books/governable-spaces/_) make
-an explicitly Tocquevillian argument. Tocqueville argued that the
-associational life of antebellum, white, male Americans gave them the
-opportunities to practice collective decision making and group
-problem-solving which taught them the skills and habits that
-safeguarded the nation's democracy. Schneider argues that online
-association life is typically authoritarian, what he calls "implicit
-feudalism," and that is teaching us to accept and even welcome
-autocracy.
+Spaces*](https://nathanschneider.info/books/governable-spaces/_)
+revolves on the key observation that that online associational life is
+typically authoritarian, what he calls "implicit feudalism." It's a
+really smart point, and Schneider does a good job tracing the
+authoritarian default of online spaces, where typically the founders
+of an online group gets to make all the rules for the group,
 
-It is an incisive observation about online communities, and Schneider
-does a good job tracing the authoritarian default of online spaces,
-where typically the founders of an online group gets to make all the
-rules for the group,
-
-I don't really buy the argument the lack of democracy online is
+I don't really buy grander claims that the lack of democracy online is
 leading us to fascism offline, but Schneider doesn't really put a lot
-of force behind making that link. To be fair, I also don't really buy
-Toqueville's original argument either.
-
-Nevertheless, it could still be good for our online associational
-lives to be more democratic, and Schneider presents a number of
-creative ideas about how we could go about making that democracy
-happen online.
+of force behind making that link. Nevertheless, it could still be good
+for our online associational lives to be more democratic, and
+Schneider presents a number of creative ideas about how we could go
+about making that democracy happen online.
 
 But, here's the thing, Group decision making, democracy, politics—they
 can be a real drag.
