@@ -8,10 +8,11 @@ description: But a democracy that's only important when things are dire doesn't 
 Nathan Schneider's new book [*Governable
 Spaces*](https://nathanschneider.info/books/governable-spaces/_)
 revolves around the key observation that online associational life is
-typically authoritarian, what he calls "implicit feudalism." It's a
-really smart point, and Schneider does a good job tracing the
-authoritarian default of online spaces, where typically the founders
-of an online group get to make all the rules for the group, indefinitely.
+typically authoritarian in its governance, what he calls "implicit
+feudalism." It's a really smart point, and Schneider does a good job
+tracing the authoritarian default of online spaces, where typically
+the founders of an online group get to make all the rules for the
+group, indefinitely.
 
 I don't really buy the grander claims that the lack of democracy online is
 leading us to authoritarianism offline, but Schneider doesn't really put a lot
