@@ -7,28 +7,27 @@ description: But a democracy that's only important when things are dire doesn't 
 
 Nathan Schneider's new book [*Governable
 Spaces*](https://nathanschneider.info/books/governable-spaces/_)
-revolves on the key observation that that online associational life is
+revolves around the key observation that online associational life is
 typically authoritarian, what he calls "implicit feudalism." It's a
 really smart point, and Schneider does a good job tracing the
 authoritarian default of online spaces, where typically the founders
 of an online group gets to make all the rules for the group,
 
-I don't really buy grander claims that the lack of democracy online is
+I don't really buy the grander claims that the lack of democracy online is
 leading us to authoritarianism offline, but Schneider doesn't really put a lot
 of force behind making that link. Nevertheless, it could still be good
 for our online associational lives to be more democratic, and
 Schneider presents a number of creative ideas about how we could go
-about making that democracy happen online.
+about making that online democracy happen.
 
 But, here's the thing, Group decision making, democracy, politics—they
 can be a real drag.
 
-When I am thinking about the joining a website, of undertaking any new
-activity, the promise of getting a chance to argue with strangers
-about what we should do next is not a key selling point.  I may be
-very grateful for democracy if I come to care deeply about the thing
-and am worried about the direction it is going in, but it's not what
-gets me in the door, and may well dissuade me from stepping through.
+When I am thinking about joining a website the promise of getting a
+chance to argue with strangers about what we should do next is not a
+selling point. Later, if I come to care deeply, I may be very grateful
+for the chance to have a say, but it's not what gets me in the door,
+and may well dissuade me from stepping through.
 
 Most of people who buy a condo aren't doing it because they want a
 condo board.
