@@ -6,7 +6,7 @@ description: But a democracy that's only important when things are dire doesn't 
 ---
 
 Nathan Schneider's new book [*Governable
-Spaces*](https://nathanschneider.info/books/governable-spaces/_)
+Spaces*](https://nathanschneider.info/books/governable-spaces/)
 revolves around the key observation that online associational life is
 typically authoritarian in its governance, what he calls "implicit
 feudalism." It's a really smart point, and Schneider does a good job
