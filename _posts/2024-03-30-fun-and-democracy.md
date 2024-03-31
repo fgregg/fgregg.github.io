@@ -6,14 +6,14 @@ description: But a democracy that's only important when things are dire doesn't 
 ---
 
 Nathan Schneider's book [*Governable
-Spaces*](https://nathanschneider.info/books/governable-spaces/_ make
+Spaces*](https://nathanschneider.info/books/governable-spaces/_) make
 an explicitly Tocquevillian argument. Tocqueville argued that the
 associational life of antebellum, white, male Americans gave them the
 opportunities to practice collective decision making and group
 problem-solving which taught them the skills and habits that
 safeguarded the nation's democracy. Schneider argues that online
-association life is typically authoritarian, what he calls implicit
-feudalism, and that is teaching us to accept and even welcome
+association life is typically authoritarian, what he calls "implicit
+feudalism," and that is teaching us to accept and even welcome
 autocracy.
 
 It is an incisive observation about online communities, and Schneider
