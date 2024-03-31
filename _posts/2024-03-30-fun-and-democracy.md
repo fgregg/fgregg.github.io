@@ -53,10 +53,9 @@ far from the best fun. Democracy can be a joy, but it often isn't, and
 I do wish the book attended more to designing for democratic joy.
 
 Schneider returns often to Hirschman's classic enumerations of how
-people can respond to a bad situation: loyalty, exit, and voice.
-
-Under the authoritarian default of online spaces, our only recourse is
-to exit. Schneider would like us to have effective voice.
+people can respond to a bad situation: loyalty, exit, and voice. Under
+the authoritarian default of online spaces, our only recourse is to
+exit. Schneider would like us to have effective voice.
 
 But a democracy that's only important when things are dire doesn't
 sound like a lot of fun.
