@@ -2,6 +2,7 @@
 title: A sqlite data layer for dedupe?
 layout: post
 description: Thinking through the benefits and costs of sqlite as a data layer for the dedupe library
+tags: tech
 ---
 
 

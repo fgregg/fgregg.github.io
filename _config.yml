@@ -2,3 +2,6 @@ plugins:
   - jekyll-feed
 
 include: [ _headers ]
+
+feed:
+  tags: true

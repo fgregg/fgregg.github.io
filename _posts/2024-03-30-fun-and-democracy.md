@@ -3,6 +3,7 @@ title: Democracy and Fun
 author: Forest Gregg
 layout: post 
 description: But a democracy that's only important when things are dire doesn't sound like a lot of fun.
+tags: civics
 ---
 
 Nathan Schneider's new book [*Governable

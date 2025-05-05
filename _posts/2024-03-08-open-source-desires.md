@@ -2,6 +2,7 @@
 title: Open Source desires
 layout: post
 description: Why do people do this open source anyway?
+tags: open-source
 ---
 
 

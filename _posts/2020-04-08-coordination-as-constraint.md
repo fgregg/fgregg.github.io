@@ -1,6 +1,7 @@
 ---
 title: Coordination as the constraint, small addendum
 layout: post
+tags: civics
 ---
 
 In my last newsletter, I shared some things I learned about responding to crises.

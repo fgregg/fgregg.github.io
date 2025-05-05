@@ -2,6 +2,7 @@
 title: January 21, 2022 -  Weeknotes
 layout: post
 description: Weeknotes for January 21, 2022
+tags: tech
 ---
 
 #### Dedupe

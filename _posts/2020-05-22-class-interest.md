@@ -3,6 +3,7 @@ title: Bureaucracy, Technology, and Class Interests
 layout: post
 image: "/images/pull_quote_class_interest.png"
 description: Are egovernment and 'digital service' compatible with civil service elite's worldview?
+tags: civics
 ---
 
 I've been slowly reading *[The Government

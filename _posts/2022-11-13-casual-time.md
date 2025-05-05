@@ -2,6 +2,7 @@
 title: Casual Time
 layout: post
 description: What fits into fragmented time?
+tags: civics
 ---
 
 [I've been thinking about the type of time I have these

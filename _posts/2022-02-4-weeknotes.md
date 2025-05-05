@@ -2,6 +2,7 @@
 title: February 4th, 2022 - Weeknotes
 layout: post
 description: Weeknotes for Febrary 4th, 2022
+tags: labor
 ---
 
 ### Labor Data

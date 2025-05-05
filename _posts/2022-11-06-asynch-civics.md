@@ -2,6 +2,7 @@
 title: Asynchronous Civics
 layout: post
 description: What's possible when we don't require intensive attention from one another.
+tags: civics
 ---
 
 Parenting, at least the way I do it, has a lot of time when I’m not

@@ -2,6 +2,7 @@
 title: The MGDO Stack
 layout: post
 description: Small pieces loosely joined
+tags: tech
 ---
 
 Over the past year, I’ve refined a stack for my personal projects that has been productive and fun.

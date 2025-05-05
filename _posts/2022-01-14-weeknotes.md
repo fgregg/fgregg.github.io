@@ -2,6 +2,7 @@
 title: January 14, 2022 -  Weeknotes
 layout: post
 description: Weeknotes for January 14, 2022
+tags: labor
 ---
 
 #### Hiring

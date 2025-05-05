@@ -2,6 +2,7 @@
 title: Critical Technical Practice and Democracy
 author: Forest Gregg
 layout: post
+tags: civics
 ---
 
 Looking back at the limited success of forty years of Artificial

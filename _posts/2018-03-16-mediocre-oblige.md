@@ -1,6 +1,7 @@
 ---
 title: mediocre oblige
 layout: post
+tags: civics
 ---
 
 Civic tech, or at least my work in it, is largely about helping

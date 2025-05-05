@@ -1,6 +1,7 @@
 ---
 title: Limits of omniscience
 layout: post
+tags: civics
 ---
 
 Two weeks ago, a friend asked me what opportunities tech and data provided for improving our democracy.

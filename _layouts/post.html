@@ -35,6 +35,14 @@
    <article>
   <h1>{{ page.title }}</h1>
   <p class="text-muted">{{ page.date | date: '%B %d, %Y' }}</p>
+  {%- if page.tags -%}
+    {% for tag in page.tags %}<p>
+        <a href="{{site.baseurl}}/archive.html#{{tag | slugize}}">
+            #{{ tag }}
+        </a>
+	</p>
+    {% endfor %}
+  {%- endif -%}
   {{ content }}
   </article>
   </main>

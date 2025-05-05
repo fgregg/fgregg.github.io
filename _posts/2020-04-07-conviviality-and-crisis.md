@@ -1,6 +1,7 @@
 ---
 title: Conviviality and Crisis
 layout: post
+tags: civics
 ---
 
 After the 2016 election, I started thinking about disaster again.

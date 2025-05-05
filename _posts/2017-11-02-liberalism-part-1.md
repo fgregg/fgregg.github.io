@@ -2,6 +2,7 @@
 title: Liberalism, part 1
 author: Forest Gregg
 layout: post
+tags: civics
 ---
 
 Liberalism is the major political philosophy of American civic

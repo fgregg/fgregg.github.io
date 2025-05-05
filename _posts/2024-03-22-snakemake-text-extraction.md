@@ -3,6 +3,7 @@ title: Snakemake for PDF text extraction is pretty pleasant
 author: Forest Gregg
 layout: post
 description: A Snakefile for writing a PDF text extraction pipeline is a lot nicer than an equivalent Makefile.
+tags: tech
 ---
 
 For [Chicago Councilmatic](https://chicago.councilmatic.org/), we've wanted to experiment with using a

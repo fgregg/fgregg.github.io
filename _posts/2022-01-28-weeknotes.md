@@ -2,6 +2,7 @@
 title: January 28, 2022 - Weeknotes
 layout: post
 description: Weeknotes for January 28, 2022
+tags: tech
 ---
 
 ### Labor Data
