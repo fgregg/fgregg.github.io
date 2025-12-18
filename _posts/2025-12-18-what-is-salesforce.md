@@ -24,13 +24,13 @@ If you are web developer, then this is just a variation of MVC. Where objects ar
 
 What that means is that you can build web applications of arbitrary complexity within Salesforce, mainly through their web interface. 
 
-A web application of abitrary complexity that's not really under version control, and which is not really fully testable, and which is really only works within single, proprietary environment. Yikes!
+A web application of arbitrary complexity that's not really under version control, and which is not really fully testable, and which is really only works within single, proprietary environment. Yikes!
 
 On the other hand, it's serverless. Also, most of the security issues are SalesForce's problems not yours. 
 
-Politically, Salesforce has other advantages. For organizations, building the web application in SalesForce often only requires the unit to get authorization for purchasing a single service, whereas as building the application in a normal programming language and deployed to normal servers would require the coordination and collaboratinog with the IT department. Additionaly, the the build within Salesforce can sometimes be characterized as OpEx instead of CapEx, which can sometimes be helpful.
+Politically, Salesforce has other advantages. For organizations, building the web application in SalesForce often only requires the unit to get authorization for purchasing a single service, whereas as building the application in a normal programming language and deployed to normal servers would require the coordination and collaborating with the IT department. Additionally, the the build within Salesforce can sometimes be characterized as OpEx instead of CapEx, which can sometimes be helpful.
 
-So Salesforce is a way of building web applications without fully acknowledging that's waht you are doing. It's an impressive technical achievement.
+So Salesforce is a way of building web applications without fully acknowledging that's what you are doing. It's an impressive technical achievement.
 
 
 
