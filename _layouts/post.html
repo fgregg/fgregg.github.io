@@ -11,25 +11,25 @@
   <link rel="stylesheet" href="/assets/css/styles.css">
   <link rel="alternate" type="application/atom+xml" title="Slow News" href="/feed.xml" />
 
-  <!-- Twitter metadata -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:site" content="@forestgregg">
-  <meta name="twitter:creator" content="@forestgregg">
+  <link rel="me" href="https://bsky.app/profile/bunkum.us" />
+
+  <!-- Open Graph metadata for link previews -->
+  <meta property="og:type" content="article">
   {% if page.title %}
-    <meta name="twitter:title" content="{{ page.title }}">
+  <meta property="og:title" content="{{ page.title }}">
   {% else %}
-    <meta name="twitter:title" content="{{ site.title }}">
-  {% endif %}
-  {% if page.url %}
-    <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+  <meta property="og:title" content="{{ site.title }}">
   {% endif %}
   {% if page.description %}
-    <meta name="twitter:description" content="{{ page.description }}">
+  <meta property="og:description" content="{{ page.description }}">
   {% endif %}
-  
+  {% if page.url %}
+  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {% endif %}
+
 </head>
 <body>
-  <nav><span style="float: left"><span class="mast">Slow News</span> by <a rel="me" href="https://mastodon.social/@fgregg">Forest Gregg</a></span><span style="align-self: flex-end;  margin-left: auto;">  
+  <nav><span style="float: left"><span class="mast">Slow News</span> by <a rel="me" href="https://bsky.app/profile/bunkum.us">Forest Gregg</a></span><span style="align-self: flex-end;  margin-left: auto;">  
       <a href="/archive.html">Archive</a></span></nav>
   <main>
    <article>
