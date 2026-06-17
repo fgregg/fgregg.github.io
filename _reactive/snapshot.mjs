@@ -11,7 +11,8 @@
 //
 // Usage: node snapshot.mjs <site-dir>   (defaults to ../_site)
 import {chromium} from "playwright";
-import {readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync} from "node:fs";
+import {readFileSync, writeFileSync, readdirSync, mkdirSync, existsSync, copyFileSync} from "node:fs";
+import {createHash} from "node:crypto";
 import {fileURLToPath} from "node:url";
 import {dirname, join, relative, extname} from "node:path";
 import {createServer} from "node:http";
@@ -42,6 +43,55 @@ const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
 const site = process.argv[2] ? join(process.cwd(), process.argv[2]) : join(repo, "_site");
 const SITE_URL = process.env.SITE_URL || "https://labordata.github.io";
+
+// Incremental cache: rendering every post in Chromium is the slow part of a
+// build, so we keep the rendered SVG/PNG snapshots (+ a manifest of content
+// hashes) in .snapshot-cache, persisted across CI runs. A post is re-rendered
+// only when its built HTML changes; otherwise the cached artifacts are reused.
+// (Live-data charts get a slightly stale *fallback*, which is fine — the live
+// page re-renders with fresh data when JS runs.) Bump VERSION to force a rebuild.
+const SNAPSHOT_VERSION = "1";
+const cacheDir = join(repo, ".snapshot-cache");
+const manifestPath = join(cacheDir, "manifest.json");
+const manifest = existsSync(manifestPath)
+  ? JSON.parse(readFileSync(manifestPath, "utf8"))
+  : {};
+const hashHtml = (html) =>
+  createHash("sha256").update(SNAPSHOT_VERSION + "\n" + html).digest("hex");
+const snapDir = (slug) => join(site, "assets", "snapshots", slug);
+
+function copyDir(from, to) {
+  mkdirSync(to, {recursive: true});
+  for (const name of readdirSync(from)) copyFileSync(join(from, name), join(to, name));
+}
+
+// Reuse a cached snapshot: copy artifacts back into _site and re-inject the SVG
+// fallbacks + social card into the freshly-built HTML, without launching Chromium.
+function applyCached(file, slug, builtHtml, cached) {
+  copyDir(join(cacheDir, slug), snapDir(slug));
+  let html = builtHtml;
+  for (const id of cached.charts) {
+    const svg = readFileSync(join(cacheDir, slug, `${id}.svg`), "utf8");
+    const empty = `<div id="${id}" class="reactive-cell"></div>`;
+    html = html.replace(empty, `<div id="${id}" class="reactive-cell">${svg}</div>`);
+  }
+  if (cached.card && !html.includes('property="og:image"')) {
+    const cardUrl = `${SITE_URL}/${cached.card}`;
+    html = html.replace(
+      "</head>",
+      `\n  <meta property="og:image" content="${cardUrl}">` +
+        `\n  <meta name="twitter:image" content="${cardUrl}">\n</head>`,
+    );
+  }
+  writeFileSync(file, html);
+  return {file, charts: cached.charts, chartPngs: cached.chartPngs, card: cached.card};
+}
+
+// Persist a freshly-rendered post's artifacts into the cache for next time.
+function persistToCache(slug, r, hash) {
+  copyDir(snapDir(slug), join(cacheDir, slug));
+  manifest[slug] = {hash, charts: r.charts, chartPngs: r.chartPngs, card: r.card};
+}
 
 // A built post is "reactive" if it imports the reactive runtime bundle.
 function findReactivePosts(dir, found = []) {
@@ -104,23 +154,31 @@ async function snapshotPost(page, file, baseUrl) {
   mkdirSync(outDir, {recursive: true});
 
   let html = readFileSync(file, "utf8");
+  const chartPngs = {}; // id -> relative PNG path (for the feed)
   for (const {id, svg} of withCharts) {
-    const svgPath = join(outDir, `${id}.svg`);
-    writeFileSync(svgPath, svg);
-    // inject the SVG as the mount div's initial content (the fallback)
+    writeFileSync(join(outDir, `${id}.svg`), svg);
+    // page fallback: inline the SVG as the mount div's initial content (crisp,
+    // scalable, works with no JS).
     const empty = `<div id="${id}" class="reactive-cell"></div>`;
-    const filled = `<div id="${id}" class="reactive-cell">${svg}</div>`;
-    html = html.replace(empty, filled);
+    html = html.replace(empty, `<div id="${id}" class="reactive-cell">${svg}</div>`);
+    // feed fallback: a rasterized PNG. Feeds reference it by URL (so the feed
+    // stays tiny) and feed readers render <img> reliably, unlike inline SVG
+    // which many of them strip. Screenshot the mount div, not the bare SVG.
+    const el = await page.$(`#${id}`);
+    if (el) {
+      const pngRel = `assets/snapshots/${slug}/${id}.png`;
+      await el.screenshot({path: join(site, pngRel)});
+      chartPngs[id] = pngRel;
+    }
   }
 
-  // social card: PNG of the first chart cell. Screenshot the mount div (not the
-  // bare SVG — SVG elements often lack the layout box needed for a raster grab),
-  // and write into _site so it deploys.
+  // social card = the first chart's PNG (reuse the per-chart raster above).
   const firstId = withCharts[0].id;
-  const cardRel = `assets/snapshots/${slug}/card.png`;
-  const cardAbs = join(site, cardRel);
-  const el = await page.$(`#${firstId}`);
-  if (el) await el.screenshot({path: cardAbs});
+  const cardRel = chartPngs[firstId] ?? `assets/snapshots/${slug}/card.png`;
+  if (!chartPngs[firstId]) {
+    const el = await page.$(`#${firstId}`);
+    if (el) await el.screenshot({path: join(site, cardRel)});
+  }
   const cardUrl = `${SITE_URL}/${cardRel}`;
   // add og:image / twitter:image to <head> if not already present
   if (!html.includes('property="og:image"')) {
@@ -131,21 +189,26 @@ async function snapshotPost(page, file, baseUrl) {
   }
 
   writeFileSync(file, html);
-  return {file, charts: withCharts.map((c) => c.id), card: cardRel};
+  return {file, charts: withCharts.map((c) => c.id), chartPngs, card: cardRel};
 }
 
-// Inject the same SVG fallbacks into feed.xml content (CDATA-escaped HTML).
+// Inject chart fallbacks into feed.xml as hosted-PNG <img> references (not inline
+// SVG): the feed aggregates every post into one file — inlining the SVGs pushed
+// it past Cloudflare Pages' 25 MiB limit (a dot-density map alone is several
+// MiB) — and many feed readers strip inline <svg> anyway. A URL-referenced PNG
+// keeps the feed tiny and renders reliably in readers.
 function patchFeed(results) {
   const feed = join(site, "feed.xml");
   if (!existsSync(feed)) return;
   let xml = readFileSync(feed, "utf8");
   for (const r of results) {
-    const slug = relative(site, r.file).replace(/\.html$/, "").replace(/[\/\\]/g, "-");
     for (const id of r.charts) {
-      const svg = readFileSync(join(site, "assets", "snapshots", slug, `${id}.svg`), "utf8");
-      // feed content escapes HTML; jekyll-feed CDATA-wraps, so raw replace works
+      const pngRel = r.chartPngs?.[id];
+      if (!pngRel) continue;
+      // feed content is CDATA-wrapped HTML, so a raw string replace works
       const empty = `<div id="${id}" class="reactive-cell"></div>`;
-      xml = xml.split(empty).join(`<div id="${id}" class="reactive-cell">${svg}</div>`);
+      const img = `<div id="${id}" class="reactive-cell"><img src="${SITE_URL}/${pngRel}" alt="chart" style="max-width:100%"></div>`;
+      xml = xml.split(empty).join(img);
     }
   }
   writeFileSync(feed, xml);
@@ -162,16 +225,38 @@ const baseUrl = `http://localhost:${port}`;
 const browser = await chromium.launch();
 const page = await browser.newPage({viewport: {width: 900, height: 1400}, deviceScaleFactor: 2});
 const results = [];
+let rendered = 0, reused = 0;
 for (const file of posts) {
+  const slug = relative(site, file).replace(/\.html$/, "").replace(/[\/\\]/g, "-");
+  const builtHtml = readFileSync(file, "utf8");
+  const hash = hashHtml(builtHtml);
+  const cached = manifest[slug];
+  const cacheHit =
+    cached &&
+    cached.hash === hash &&
+    cached.charts.every((id) => existsSync(join(cacheDir, slug, `${id}.svg`)));
+
+  if (cacheHit) {
+    results.push(applyCached(file, slug, builtHtml, cached));
+    reused++;
+    console.log(`snapshot: ${relative(site, file)} — reused cache (${cached.charts.length} charts)`);
+    continue;
+  }
+
   const r = await snapshotPost(page, file, baseUrl);
   if (r) {
+    persistToCache(slug, r, hash);
     results.push(r);
-    console.log(`snapshot: ${relative(site, r.file)} — ${r.charts.length} charts, card ${r.card}`);
+    rendered++;
+    console.log(`snapshot: ${relative(site, r.file)} — rendered ${r.charts.length} charts, card ${r.card}`);
   } else {
+    // Don't cache "no charts" — it may be a transient render timeout; retry next build.
     console.log(`snapshot: ${relative(site, file)} — no charts rendered (skipped)`);
   }
 }
 await browser.close();
 server.close();
+mkdirSync(cacheDir, {recursive: true});
+writeFileSync(manifestPath, JSON.stringify(manifest, null, 1));
 patchFeed(results);
-console.log(`snapshot: patched ${results.length} post(s) + feed.xml`);
+console.log(`snapshot: ${rendered} rendered, ${reused} reused; patched ${results.length} post(s) + feed.xml`);

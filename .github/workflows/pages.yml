@@ -57,6 +57,15 @@ jobs:
         env:
           JEKYLL_ENV: production
 
+      - name: Cache chart snapshots
+        # Persist rendered SVG/PNG snapshots + manifest across runs so the
+        # snapshot step only re-renders posts whose built HTML changed.
+        uses: actions/cache@v4
+        with:
+          path: .snapshot-cache
+          key: snapshots-${{ github.sha }}
+          restore-keys: snapshots-
+
       - name: Pre-render chart fallbacks + social cards
         working-directory: _reactive
         # Loads each reactive post headless, snapshots charts into _site as
