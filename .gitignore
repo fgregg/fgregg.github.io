@@ -1,0 +1,13 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+
+# Reactive runtime bundle + vendored assets — built in CI by
+# _reactive/bundle-runtime.mjs, not committed.
+/assets/js/reactive-runtime.js
+/assets/js/reactive-runtime.css
+/assets/js/datasette-client.js
+/assets/js/toms-table.js
+/assets/snapshots/
+/assets/katex/

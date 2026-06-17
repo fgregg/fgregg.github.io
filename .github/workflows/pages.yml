@@ -1,0 +1,87 @@
+name: Build and deploy to Cloudflare Pages
+
+# Slow News (bunkum.us) is hosted on Cloudflare Pages (fgregg-github-io). It can't
+# be built by Pages' own git integration: the custom Jekyll plugins
+# (_plugins/reactive.rb, katex.rb, standard_site.rb) require an --unsafe build,
+# and the reactive runtime is bundled with esbuild + pre-rendered with headless
+# Chromium. So we build the whole thing here and push the finished _site to the
+# Pages project with `wrangler pages deploy` (direct upload — no wrangler.toml).
+# Cloudflare's git auto-build for this project should be off.
+
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# One deploy at a time; cancel an in-progress run when a newer push lands.
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.2"
+          bundler-cache: true # bundle install + cache gems
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: _reactive/package-lock.json
+
+      - name: Install reactive tooling
+        working-directory: _reactive
+        run: npm ci
+
+      - name: Install Chromium (for chart snapshots)
+        working-directory: _reactive
+        run: npx playwright install --with-deps chromium-headless-shell
+
+      - name: Bundle reactive runtime
+        working-directory: _reactive
+        run: npm run build # -> assets/js/reactive-runtime.{js,css}, katex assets
+
+      - name: Build site (unsafe — enables _plugins)
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Pre-render chart fallbacks + social cards
+        working-directory: _reactive
+        # Loads each reactive post headless, snapshots charts into _site as
+        # static SVG fallbacks (for feeds / no-JS) and a PNG og:image card.
+        run: node snapshot.mjs
+        env:
+          SITE_URL: https://bunkum.us
+
+      - name: Sync to ATmosphere (Standard.Site)
+        working-directory: _atproto
+        # Publishes/updates site.standard.publication + .document records for each
+        # post via @atproto/api. Idempotent. Reads the committed .well-known file.
+        # continue-on-error: syndication is a side-channel — a missing secret or an
+        # AT Protocol hiccup must never block the deploy.
+        continue-on-error: true
+        run: npm ci && npm run sync
+        env:
+          ATPROTO_PASSWORD: ${{ secrets.ATPROTO_PASSWORD }}
+          CI: "true"
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          # Direct upload of the prebuilt _site; --branch=master publishes to the
+          # project's production domain.
+          command: pages deploy _site --project-name=fgregg-github-io --branch=master

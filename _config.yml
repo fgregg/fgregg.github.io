@@ -1,7 +1,12 @@
 plugins:
   - jekyll-feed
 
-include: [ _headers ]
+include: [ _headers, .well-known ]
 
 feed:
   tags: true
+
+# Standard.Site syndication (see _plugins/standard_site.rb, _atproto/).
+standard_site:
+  did: did:plc:jwcnmli4jkle63x4oqouiylu
+  pub_rkey: slow-news # matches PUBLICATION_RKEY in _atproto/records.js
