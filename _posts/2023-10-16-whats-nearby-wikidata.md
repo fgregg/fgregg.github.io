@@ -53,9 +53,9 @@ const sparql = `SELECT DISTINCT ?item ?itemLabel ?article WHERE {
       wikibase:radius "${radius * 1.60934}";
       wikibase:distance ?distance.
   }
+  ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> .
+  # Label only the final nearby items, not every coordinate in the radius.
   SERVICE wikibase:label { bd:serviceParam wikibase:language "[AUTO_LANGUAGE],en". }
-  
-  ?article schema:about ?item ; schema:isPartOf <https://en.wikipedia.org/> ;
 }
 ORDER BY (?distance)
 `;
