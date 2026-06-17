@@ -83,7 +83,7 @@ const band_count = (() => {
 ```
 
 ```js
-display(md`**Over-filmed for their size**
+display(md`**Over-set for their size**
 
 | City | Population | Movies | Expected | per 100k |
 |---|--:|--:|--:|--:|
@@ -98,7 +98,7 @@ ${ranked
 ```
 
 ```js
-display(md`**Under-filmed for their size**
+display(md`**Under-set for their size**
 
 | City | Population | Movies | Expected | per 100k |
 |---|--:|--:|--:|--:|
