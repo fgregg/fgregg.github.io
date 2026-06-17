@@ -107,11 +107,16 @@ hr {
    uses markdown-it-anchor's linkInsideHeader). */
 .header-anchor {
     margin-left: 0.25em;
-    color: #999;
     text-decoration: none;
     font-weight: normal;
     opacity: 0;
     transition: opacity 0.1s ease;
+}
+/* Match the heading colour, not the site's blue a:link/a:visited (which would
+   otherwise win on specificity). */
+a.header-anchor:link,
+a.header-anchor:visited {
+    color: inherit;
 }
 h2:hover > .header-anchor,
 h3:hover > .header-anchor,
