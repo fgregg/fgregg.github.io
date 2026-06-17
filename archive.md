@@ -27,6 +27,24 @@ layout: default
     </ul>
   </div>
 {% endfor %}
+
+{% assign untagged = site.posts | where_exp: "post", "post.tags == empty" %}
+{% if untagged.size > 0 %}
+  <div class="tag-list">
+    <h3 class="post-list-heading line-bottom"> Other: </h3>
+    <ul class="post-list post-list-narrow">
+     {% for post in untagged %}
+     <li>
+       {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
+         <a href="{{ post.url | relative_url }}">
+           {{ post.title | escape }}
+         </a>
+        - <i>{{ post.date | date: date_format }}</i>
+     </li>
+     {% endfor %}
+    </ul>
+  </div>
+{% endif %}
 </div>
 
 
