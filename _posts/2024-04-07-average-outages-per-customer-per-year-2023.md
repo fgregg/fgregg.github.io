@@ -178,7 +178,12 @@ const average_outages_by_county = await d3
 ```
 
 ```js
-display(Inputs.table(average_outages_by_county));
+// ~740 counties — too many rows for a plain table, so Tom's.
+const table = (await import("/assets/js/toms-table.js")).default;
+```
+
+```js
+display(table(average_outages_by_county));
 ```
 
 ```js
@@ -189,5 +194,5 @@ const state_data = await d3.csv(
 ```
 
 ```js
-display(Inputs.table(state_data));
+display(table(state_data));
 ```

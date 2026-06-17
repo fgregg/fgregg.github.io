@@ -385,24 +385,6 @@ Plot.plot({
 ```
 
 ```js
-const outages_by_house_district = house_district_outages.features
-  .map((d) => ({
-    district: d.properties.LABEL,
-    "affected customers": d.properties.n_affected_customers
-  }))
-  .sort((a, b) => b["affected customers"] - a["affected customers"]);
-```
-
-```js
-const outages_by_senate_district = senate_district_outages.features
-  .map((d) => ({
-    district: d.properties.LABEL,
-    "affected customers": d.properties.n_affected_customers
-  }))
-  .sort((a, b) => b["affected customers"] - a["affected customers"]);
-```
-
-```js
 const house_district_outages = outages_per_area(dte_house_districts, indexed_outages);
 ```
 
@@ -861,11 +843,3 @@ const storm_tracks = show_storm_tracks
   : [];
 ```
 
-
-```js
-display(Inputs.table(outages_by_house_district));
-```
-
-```js
-display(Inputs.table(outages_by_senate_district));
-```
