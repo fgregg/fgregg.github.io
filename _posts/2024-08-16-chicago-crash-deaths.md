@@ -84,12 +84,40 @@ const deaths_by_year = (() => {
 ```
 
 ```js
-display(Inputs.table(deaths_by_year));
+display(htmlTable(deaths_by_year));
 ```
 
 ```js
-// The original also showed the underlying fatal-crash records as a data table.
-display(Inputs.table(data));
+// Standard HTML table (picks up the site table CSS); wrapped for horizontal
+// scroll on narrow screens.
+const htmlTable = (rows) => {
+  const cols = rows.length ? Object.keys(rows[0]) : [];
+  return html`<div style="overflow-x: auto">
+    <table>
+      <thead>
+        <tr>
+          ${cols.map((c) => html`<th>${c}</th>`)}
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(
+          (r) => html`<tr>
+            ${cols.map((c) => html`<td>${r[c]}</td>`)}
+          </tr>`,
+        )}
+      </tbody>
+    </table>
+  </div>`;
+};
+```
+
+```js
+// ~5,000 fatal-crash records — too many rows for a plain table, so Tom's.
+const table = (await import("/assets/js/toms-table.js")).default;
+```
+
+```js
+display(table(data));
 ```
 
 ```js

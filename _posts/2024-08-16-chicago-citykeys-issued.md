@@ -90,12 +90,31 @@ const citykeys_by_year = (() => {
 ```
 
 ```js
-display(table(citykeys_by_year));
+display(htmlTable(citykeys_by_year));
 ```
 
 ```js
-// Tom MacWright's table component, vendored in the reactive runtime build.
-const table = (await import("/assets/js/toms-table.js")).default;
+// Standard HTML table from an array of row objects (picks up the site table
+// CSS); wrapped for horizontal scroll on narrow screens.
+const htmlTable = (rows) => {
+  const cols = rows.length ? Object.keys(rows[0]) : [];
+  return html`<div style="overflow-x: auto">
+    <table>
+      <thead>
+        <tr>
+          ${cols.map((c) => html`<th>${c}</th>`)}
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(
+          (r) => html`<tr>
+            ${cols.map((c) => html`<td>${r[c]}</td>`)}
+          </tr>`,
+        )}
+      </tbody>
+    </table>
+  </div>`;
+};
 ```
 
 ```js
