@@ -33,7 +33,7 @@ const radius = view(
 ```
 
 ```js
-display(table(dataTable));
+display(htmlTable(dataTable));
 ```
 
 ```js
@@ -153,8 +153,27 @@ const proj4 = (await import("https://esm.sh/proj4@2.8")).default;
 ```
 
 ```js
-// Tom MacWright's table component, vendored in the reactive runtime build.
-const table = (await import("/assets/js/toms-table.js")).default;
+// Standard HTML table (picks up the site table CSS); wrapped for horizontal
+// scroll on narrow screens.
+const htmlTable = (rows) => {
+  const cols = rows.length ? Object.keys(rows[0]) : [];
+  return html`<div style="overflow-x: auto">
+    <table>
+      <thead>
+        <tr>
+          ${cols.map((c) => html`<th>${c}</th>`)}
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(
+          (r) => html`<tr>
+            ${cols.map((c) => html`<td>${r[c]}</td>`)}
+          </tr>`,
+        )}
+      </tbody>
+    </table>
+  </div>`;
+};
 ```
 
 ```js

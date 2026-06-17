@@ -426,9 +426,12 @@ The data has information about pre-school, but right now we are going to just lo
 Unfortunately, we will also only be considering four demographic groups: non-Hispanic Blacks, Hispanics, non-Hispanic whites, and non-Hispanic other. This is because we will be using data from the Illinois Department of Public health on births and those are the only demographic groups they report.
 
 ```js
-const table = view(Inputs.table(
-  grade_data.map((d) => ({ ...d, year: d.year.toString() }))
-));
+// grade_data is ~900 rows — too many for a plain table, so Tom's.
+const table = (await import("/assets/js/toms-table.js")).default;
+```
+
+```js
+display(table(grade_data.map((d) => ({ ...d, year: d.year.toString() }))));
 ```
 
 ```js
@@ -475,22 +478,45 @@ I have compiled the [data for Chicago births](https://docs.google.com/spreadshee
 
 ```js
 display(
-Inputs.table(
-  birth_data_raw
-    .map(({ total, male, female, white, black, other, ...rest }) => ({
-      ...rest,
-      year: rest.year.toString()
-    }))
-    .filter(
-      (d) =>
-        d["non-hispanic white"] ||
-        d["non-hispanic black"] ||
-        d["non-hispanic other"] ||
-        d["hispanic"]
-    ),
-  { layout: "auto" }
-)
+  htmlTable(
+    birth_data_raw
+      .map(({ total, male, female, white, black, other, ...rest }) => ({
+        ...rest,
+        year: rest.year.toString(),
+      }))
+      .filter(
+        (d) =>
+          d["non-hispanic white"] ||
+          d["non-hispanic black"] ||
+          d["non-hispanic other"] ||
+          d["hispanic"],
+      ),
+  ),
 );
+```
+
+```js
+// Standard HTML table (picks up the site table CSS); wrapped for horizontal
+// scroll on narrow screens.
+const htmlTable = (rows) => {
+  const cols = rows.length ? Object.keys(rows[0]) : [];
+  return html`<div style="overflow-x: auto">
+    <table>
+      <thead>
+        <tr>
+          ${cols.map((c) => html`<th>${c}</th>`)}
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(
+          (r) => html`<tr>
+            ${cols.map((c) => html`<td>${r[c]}</td>`)}
+          </tr>`,
+        )}
+      </tbody>
+    </table>
+  </div>`;
+};
 ```
 
 ```js
