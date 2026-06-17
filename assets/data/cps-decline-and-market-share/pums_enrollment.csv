@@ -1,0 +1,193 @@
+year,race,type,count
+2000,African American,not enrolled,15612.0
+2000,African American,private,25026.0
+2000,African American,public,220600.0
+2000,Hispanic,not enrolled,19216.0
+2000,Hispanic,private,21369.0
+2000,Hispanic,public,155967.0
+2000,other,not enrolled,1016.0
+2000,other,private,4314.0
+2000,other,public,22522.0
+2000,white,not enrolled,3818.0
+2000,white,private,41120.0
+2000,white,public,44257.0
+2005,African American,not enrolled,12774.0
+2005,African American,private,15886.0
+2005,African American,public,182622.0
+2005,Hispanic,not enrolled,11739.0
+2005,Hispanic,private,15150.0
+2005,Hispanic,public,167302.0
+2005,other,not enrolled,713.0
+2005,other,private,4460.0
+2005,other,public,22183.0
+2005,white,not enrolled,2964.0
+2005,white,private,34632.0
+2005,white,public,38083.0
+2006,African American,not enrolled,10424.0
+2006,African American,private,20219.0
+2006,African American,public,177044.0
+2006,Hispanic,not enrolled,12943.0
+2006,Hispanic,private,12462.0
+2006,Hispanic,public,162997.0
+2006,other,not enrolled,1855.0
+2006,other,private,3629.0
+2006,other,public,18426.0
+2006,white,not enrolled,3116.0
+2006,white,private,37852.0
+2006,white,public,33743.0
+2007,African American,not enrolled,11738.0
+2007,African American,private,14537.0
+2007,African American,public,180146.0
+2007,Hispanic,not enrolled,10406.0
+2007,Hispanic,private,19804.0
+2007,Hispanic,public,153563.0
+2007,other,not enrolled,1329.0
+2007,other,private,3933.0
+2007,other,public,23013.0
+2007,white,not enrolled,2657.0
+2007,white,private,35281.0
+2007,white,public,38894.0
+2008,African American,not enrolled,10815.0
+2008,African American,private,15622.0
+2008,African American,public,171469.0
+2008,Hispanic,not enrolled,8660.0
+2008,Hispanic,private,17488.0
+2008,Hispanic,public,150266.0
+2008,other,not enrolled,483.0
+2008,other,private,2645.0
+2008,other,public,20282.0
+2008,white,not enrolled,2453.0
+2008,white,private,41024.0
+2008,white,public,35097.0
+2009,African American,not enrolled,10486.0
+2009,African American,private,15597.0
+2009,African American,public,168751.0
+2009,Hispanic,not enrolled,8934.0
+2009,Hispanic,private,12791.0
+2009,Hispanic,public,160610.0
+2009,other,not enrolled,816.0
+2009,other,private,3224.0
+2009,other,public,22444.0
+2009,white,not enrolled,3183.0
+2009,white,private,37393.0
+2009,white,public,39755.0
+2010,African American,not enrolled,12458.0
+2010,African American,private,13546.0
+2010,African American,public,171608.0
+2010,Hispanic,not enrolled,6339.0
+2010,Hispanic,private,12678.0
+2010,Hispanic,public,163308.0
+2010,other,not enrolled,357.0
+2010,other,private,3198.0
+2010,other,public,19501.0
+2010,white,not enrolled,2820.0
+2010,white,private,28032.0
+2010,white,public,37324.0
+2011,African American,not enrolled,8693.0
+2011,African American,private,11656.0
+2011,African American,public,155129.0
+2011,Hispanic,not enrolled,8169.0
+2011,Hispanic,private,12468.0
+2011,Hispanic,public,166416.0
+2011,other,not enrolled,574.0
+2011,other,private,2832.0
+2011,other,public,18174.0
+2011,white,not enrolled,1703.0
+2011,white,private,30068.0
+2011,white,public,35243.0
+2012,African American,not enrolled,7306.0
+2012,African American,private,16194.0
+2012,African American,public,143945.0
+2012,Hispanic,not enrolled,8209.0
+2012,Hispanic,private,15004.0
+2012,Hispanic,public,159584.0
+2012,other,not enrolled,99.0
+2012,other,private,3990.0
+2012,other,public,21548.0
+2012,white,not enrolled,1324.0
+2012,white,private,26175.0
+2012,white,public,31397.0
+2013,African American,not enrolled,4789.0
+2013,African American,private,12062.0
+2013,African American,public,142364.0
+2013,Hispanic,not enrolled,6734.0
+2013,Hispanic,private,14142.0
+2013,Hispanic,public,163546.0
+2013,other,not enrolled,688.0
+2013,other,private,5080.0
+2013,other,public,21357.0
+2013,white,not enrolled,2502.0
+2013,white,private,28188.0
+2013,white,public,30227.0
+2014,African American,not enrolled,6085.0
+2014,African American,private,11525.0
+2014,African American,public,137748.0
+2014,Hispanic,not enrolled,7322.0
+2014,Hispanic,private,12372.0
+2014,Hispanic,public,165167.0
+2014,other,not enrolled,823.0
+2014,other,private,5016.0
+2014,other,public,20438.0
+2014,white,not enrolled,1359.0
+2014,white,private,24318.0
+2014,white,public,33079.0
+2015,African American,not enrolled,5989.0
+2015,African American,private,12485.0
+2015,African American,public,130260.0
+2015,Hispanic,not enrolled,5868.0
+2015,Hispanic,private,11340.0
+2015,Hispanic,public,159105.0
+2015,other,not enrolled,1002.0
+2015,other,private,3760.0
+2015,other,public,21077.0
+2015,white,not enrolled,2200.0
+2015,white,private,21904.0
+2015,white,public,39118.0
+2016,African American,not enrolled,6124.0
+2016,African American,private,9730.0
+2016,African American,public,121331.0
+2016,Hispanic,not enrolled,4928.0
+2016,Hispanic,private,15315.0
+2016,Hispanic,public,157532.0
+2016,other,not enrolled,1221.0
+2016,other,private,5703.0
+2016,other,public,18983.0
+2016,white,not enrolled,2542.0
+2016,white,private,28735.0
+2016,white,public,34175.0
+2017,African American,not enrolled,2802.0
+2017,African American,private,9633.0
+2017,African American,public,124030.0
+2017,Hispanic,not enrolled,4784.0
+2017,Hispanic,private,11415.0
+2017,Hispanic,public,152008.0
+2017,other,not enrolled,230.0
+2017,other,private,5095.0
+2017,other,public,23669.0
+2017,white,not enrolled,1543.0
+2017,white,private,28751.0
+2017,white,public,35055.0
+2018,African American,not enrolled,3890.0
+2018,African American,private,11864.0
+2018,African American,public,112502.0
+2018,Hispanic,not enrolled,4447.0
+2018,Hispanic,private,14204.0
+2018,Hispanic,public,143240.0
+2018,other,not enrolled,786.0
+2018,other,private,5591.0
+2018,other,public,22710.0
+2018,white,not enrolled,1287.0
+2018,white,private,27551.0
+2018,white,public,37646.0
+2019,African American,not enrolled,5334.0
+2019,African American,private,8350.0
+2019,African American,public,115751.0
+2019,Hispanic,not enrolled,6484.0
+2019,Hispanic,private,18941.0
+2019,Hispanic,public,142455.0
+2019,other,not enrolled,703.0
+2019,other,private,4568.0
+2019,other,public,24190.0
+2019,white,not enrolled,1338.0
+2019,white,private,29592.0
+2019,white,public,41096.0
