@@ -96,7 +96,7 @@ const co_sponsorships = (() => {
 // (what the original client did) and parse it.
 const chicago_council = (sql) =>
   fetch(
-    "https://puddle.bunkum.us/chicago_council.csv?_stream=on&sql=" +
+    "https://puddle.datamade.us/chicago_council.csv?_stream=on&sql=" +
       encodeURIComponent(sql),
   )
     .then((r) => r.text())
