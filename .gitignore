@@ -11,3 +11,6 @@ _site/
 /assets/js/toms-table.js
 /assets/snapshots/
 /assets/katex/
+
+# chart snapshot cache (persisted via CI cache, not committed)
+.snapshot-cache/
