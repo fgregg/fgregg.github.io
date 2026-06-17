@@ -14,6 +14,7 @@ import {cpSync, mkdirSync, readFileSync, writeFileSync} from "node:fs";
 const here = dirname(fileURLToPath(import.meta.url));
 const repo = join(here, "..");
 const ourInspect = join(here, "inspect.js");
+const ourMd = join(here, "md.js");
 
 // a tiny entry that re-exports exactly what the plugin's generated script imports
 const runtimeEntry = `
@@ -31,7 +32,7 @@ await build({
   stdin: {contents: runtimeEntry, resolveDir: here, sourcefile: "reactive-entry.js", loader: "js"},
   outfile: join(repo, "assets", "js", "reactive-runtime.js"),
   plugins: [{
-    name: "swap-inspector",
+    name: "swap-modules",
     setup(b) {
       // notebook-kit's runtime/display.js and runtime/index.js import "./inspect.js";
       // redirect that to our DOM-aware version. Match the relative path "./inspect.js"
@@ -39,6 +40,13 @@ await build({
       b.onResolve({filter: /(^|\/)inspect\.js$/}, (args) => {
         if (/notebook-kit[\/\\]dist[\/\\]src[\/\\]runtime[\/\\]/.test(args.importer)) {
           return {path: ourInspect};
+        }
+      });
+      // notebook-kit's stdlib/recommendedLibraries.js does `import("./md.js")`;
+      // redirect to our md (hover `#` heading anchor instead of whole-heading link).
+      b.onResolve({filter: /(^|\/)md\.js$/}, (args) => {
+        if (/notebook-kit[\/\\]dist[\/\\]src[\/\\]runtime[\/\\]stdlib[\/\\]/.test(args.importer)) {
+          return {path: ourMd};
         }
       });
     },

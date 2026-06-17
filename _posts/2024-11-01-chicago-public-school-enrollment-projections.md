@@ -4,11 +4,10 @@ author: Forest Gregg
 layout: post
 date: 2024-11-01
 description: A cohort-survival bootstrap forecast of Chicago Public Schools K-12 enrollment, overall and by race/ethnicity, with credible intervals.
-reactive: true
+reactive: cellular
 ---
 
-```js
-display(md`## Kindergarten though 12th Grade Enrollment, Historical and Projected
+## Kindergarten though 12th Grade Enrollment, Historical and Projected
 
 K-12 enrollment has been declining in Chicago Public Schools for ${latest_enrollment_year - school_age_years.find(d => d.count === d3.max(school_age_years.map(d => d.count))).year} years: from a high of ${d3.max(school_age_years.map(d => d.count)).toLocaleString()} students enrolled in ${school_age_years.find(d => d.count === d3.max(school_age_years.map(d => d.count))).year} down to ${school_age_years.find(d => d.year === latest_enrollment_year && d.race === 'Total').count.toLocaleString()} students in ${latest_enrollment_year}.
 
@@ -17,16 +16,13 @@ Based on ${latest_enrollment_year} enrollment and counts of Chicago births throu
     {
       maximumFractionDigits: 0,
       maximumSignificantDigits: 2
-    })} students by the ${latest_birth_year + 5}-${latest_birth_year + 6} school year.`);
-```
+    })} students by the ${latest_birth_year + 5}-${latest_birth_year + 6} school year.
 
-```js
-display(md`| school year   | projected enrollment (95% credible interval) | 
+| school year   | projected enrollment (95% credible interval) | 
 | ------ | --------: |
 | 2025-2026 | ${credible_interval(2025, 'Total')} |
 | 2026-2027 | ${credible_interval(2026, 'Total')} |
-| 2027-2028 | ${credible_interval(2027, 'Total')} |`);
-```
+| 2027-2028 | ${credible_interval(2027, 'Total')} |
 
 ```js
 display(
@@ -75,15 +71,13 @@ Plot.plot({
 
 ## Kindergarten though 12th Grade Enrollment By Race and Ethnicity, Historical and Projected 
 
-```js
-display(md`The enrollment decline is caused by two demographic trends. First, [Chicago has been losing African Americans of all ages for about twenty years](https://today.uic.edu/uic-report-examines-black-population-loss-in-chicago). Second, the Latino baby boom peaked around 2001 and Latino births have been falling since.
+The enrollment decline is caused by two demographic trends. First, [Chicago has been losing African Americans of all ages for about twenty years](https://today.uic.edu/uic-report-examines-black-population-loss-in-chicago). Second, the Latino baby boom peaked around 2001 and Latino births have been falling since.
 
 | school year   | African American | Latino |  white | other |
 | ------ | --------: | -: | -: | -: |
 | 2025-2026 | ${credible_interval(2025, "African American")} | ${credible_interval(2025, "Hispanic")} | ${credible_interval(2025, "white")} | ${credible_interval(2025, "other")} |
 | 2026-2027 | ${credible_interval(2026, "African American")} | ${credible_interval(2026, "Hispanic")} | ${credible_interval(2026, "white")} | ${credible_interval(2026, "other")} |
-| 2027-2028 | ${credible_interval(2027, "African American")} | ${credible_interval(2027, "Hispanic")} | ${credible_interval(2027, "white")} | ${credible_interval(2027, "other")} |`);
-```
+| 2027-2028 | ${credible_interval(2027, "African American")} | ${credible_interval(2027, "Hispanic")} | ${credible_interval(2027, "white")} | ${credible_interval(2027, "other")} |
 
 ```js
 display(
@@ -129,8 +123,7 @@ Plot.plot({
 );
 ```
 
-```js
-display(md`## Methodology
+## Methodology
 Our projections are based on combining two separate projections.
 
 First, we predict the number of students enrolled in 1st grade through 12th grade based on the number of students enrolled in kindergarten through 11th grade in the prior year. In the literature on school enrollment projections, this is called the [grade progression rate method](https://nces.ed.gov/programs/projections/projections2021/app_a1.asp). 
@@ -156,8 +149,7 @@ This gives us **one** projection trajectory. We then repeat the process ${replic
 * Reincorporated transitions that had their endpoint in 2020
 
 ### October 2024 Updates
-* Change sampling weights for choosing a year's transition rate from ∝  ${tex`(\text{year}_i - \text{year}_0)^{1.5}`} to ∝ ${tex`2.5^{(\text{year}_i - \text{year}_0)}`} to increase effect of recent years.`);
-```
+* Change sampling weights for choosing a year's transition rate from ∝  ${tex`(\text{year}_i - \text{year}_0)^{1.5}`} to ∝ ${tex`2.5^{(\text{year}_i - \text{year}_0)}`} to increase effect of recent years.
 
 ## Forecast Accuracy
 For each year that we make forecasts, we will record the actual total enrollment .
