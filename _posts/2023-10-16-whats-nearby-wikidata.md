@@ -3,9 +3,11 @@ title: what's nearby, wikidata?
 author: Forest Gregg
 layout: post
 date: 2023-10-16
-description: A geolocation tool that lists Wikipedia articles about places near you, via Wikidata's SPARQL endpoint.
+description: Lists wikidata entries with wikipedia pages near you.
 reactive: true
 ---
+
+A [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) sibling of [Wikipedia:Nearby](https://en.wikipedia.org/wiki/Wikipedia:Nearby).
 
 ```js
 const radius = view(Inputs.range([0.25, 50], {
