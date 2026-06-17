@@ -89,7 +89,7 @@ In the next section, we propose a family of maps that have much better effective
 ### October 31 Plan Data
 
 ```js
-display(Inputs.table(may_17_draft_plan_data));
+display(table(may_17_draft_plan_data));
 ```
 
 ## Computer Generated Plans
@@ -161,7 +161,7 @@ display(md`### Plan ${plan_number} data`);
 ```
 
 ```js
-display(Inputs.table(district_data));
+display(table(district_data));
 ```
 
 ## Conclusion
@@ -350,6 +350,11 @@ const turfjs = await import("https://esm.sh/@turf/turf@7");
 ```js
 // topojson-client via CDN (Observable provided it as a stdlib builtin).
 const topojson = await import("https://esm.sh/topojson-client@3");
+```
+
+```js
+// Tom MacWright's table component, vendored in the reactive runtime build.
+const table = (await import("/assets/js/toms-table.js")).default;
 ```
 
 ```js
