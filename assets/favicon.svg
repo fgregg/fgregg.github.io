@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" shape-rendering="crispEdges">
+  <!-- newspaper page -->
+  <rect x="0" y="0" width="32" height="32" fill="#ffffff"/>
+  <!-- masthead bar -->
+  <rect x="0" y="0" width="32" height="7" fill="#552222"/>
+  <!-- ink underrule beneath the masthead -->
+  <rect x="0" y="7" width="32" height="1" fill="#333333"/>
+  <!-- left column: a heavier headline line, then body lines -->
+  <rect x="3"  y="11" width="11" height="2" fill="#333333" fill-opacity="0.6"/>
+  <rect x="3"  y="15" width="11" height="2" fill="#333333" fill-opacity="0.35"/>
+  <rect x="3"  y="19" width="11" height="2" fill="#333333" fill-opacity="0.35"/>
+  <rect x="3"  y="23" width="11" height="2" fill="#333333" fill-opacity="0.35"/>
+  <!-- right column -->
+  <rect x="18" y="11" width="11" height="2" fill="#333333" fill-opacity="0.6"/>
+  <rect x="18" y="15" width="11" height="2" fill="#333333" fill-opacity="0.35"/>
+  <rect x="18" y="19" width="11" height="2" fill="#333333" fill-opacity="0.35"/>
+  <rect x="18" y="23" width="11" height="2" fill="#333333" fill-opacity="0.35"/>
+  <!-- center gutter hairline -->
+  <line x1="16" y1="10" x2="16" y2="26" stroke="#d4d4d0" stroke-width="1"/>
+  <!-- outer border -->
+  <rect x="0.5" y="0.5" width="31" height="31" fill="none" stroke="#8a8a8a" stroke-width="1"/>
+</svg>

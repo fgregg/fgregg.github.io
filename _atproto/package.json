@@ -1,0 +1,21 @@
+{
+  "name": "labordata-atproto",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Syndicates the Notes on Labor Data blog to the ATmosphere as Standard.Site records (via @atproto/api).",
+  "scripts": {
+    "sync": "if [ -f .env ]; then node --env-file=.env records.js; else node records.js; fi",
+    "icon": "node make-icon.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "@atproto/api": "^0.20.10",
+    "front-matter": "^4.0.2"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "^2.6.2"
+  }
+}

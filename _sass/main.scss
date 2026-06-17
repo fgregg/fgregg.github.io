@@ -4,6 +4,24 @@
   font-display: swap;
 }
 
+:root {
+  /* Observable Inputs (reactive posts) read these custom properties. Without
+     --sans-serif the inputs' `font: 13px/1.2 var(--sans-serif)` declaration is
+     invalid and the controls inherit the body font; defining it restores their
+     intended compact sizing. */
+  --sans-serif: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+  --monospace: "SF Mono", Menlo, Consolas, monospace;
+}
+
+/* Live Observable cells in posts with `reactive: true`. */
+.reactive-cell {
+  margin: 1.5rem 0;
+}
+.reactive-cell svg {
+  max-width: 100%;
+  height: auto;
+}
+
 .mast {
     font-family: 'oe', 'PT Serif', 'serif';
     font-size: 22px;
