@@ -1,0 +1,9 @@
+# Teach mdformat to leave ${…} interpolations alone in reactive (cellular) posts.
+#
+# The myst extension's dollar-math parser treats $…$ as math, so it escapes the
+# dollar signs in lines with multiple ${…} interpolations (e.g. "${a} … ${b}"
+# -> "${a} … $\{b}"), breaking reactive cells. No post actually uses $…$/$$
+# math (reactive posts render math via ${tex`…`}), so we drop myst and keep the
+# extensions we do use: GFM tables, footnotes, and YAML front matter.
+extensions = ["gfm", "tables", "footnote", "front_matters"]
+wrap = 80
