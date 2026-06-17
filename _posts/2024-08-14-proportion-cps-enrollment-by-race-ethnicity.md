@@ -3,11 +3,9 @@ title: Proportion CPS Enrollment by Race / Ethnicity
 author: Forest Gregg
 layout: post
 date: 2024-08-14
-description: Chicago Public Schools enrollment by race/ethnicity over time, by grade — as counts or as proportions.
+description: Chicago Public Schools enrollment by race/ethnicity over time, by grade
 reactive: true
 ---
-
-# Proportion CPS Enrollment by Race / Ethnicity
 
 ```js
 const grade = view(
@@ -21,7 +19,10 @@ const grade = view(
 
 ```js
 const offset = view(
-  Inputs.radio(["count", "proportion"], { label: "Select one", value: "proportion" }),
+  Inputs.radio(["count", "proportion"], {
+    label: "Select one",
+    value: "proportion",
+  }),
 );
 ```
 
@@ -74,7 +75,9 @@ const grade_data = [
   ...d3
     .flatRollup(
       cps_demo_data.filter((d) =>
-        new Set(["Full-Day Kindergarten", "Half-Day Kindergarten"]).has(d.grade),
+        new Set(["Full-Day Kindergarten", "Half-Day Kindergarten"]).has(
+          d.grade,
+        ),
       ),
       (v) => d3.sum(v, (d) => d.count),
       (d) => d.year,

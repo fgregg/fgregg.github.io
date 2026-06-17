@@ -3,93 +3,54 @@ title: What's Growing Around Here (Road Trip Version)?
 author: Forest Gregg
 layout: post
 date: 2024-12-28
-description: What crop is grown right around you (or any point) — sampling the USDA Cropland Data Layer raster near your location.
+description: What crop is grown right around you?
 reactive: true
 ---
 
-Here are the crops and land cover at your location in 2023, according to the [2023 National Cropland Data Layer](https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php) from the United States Department of Agriculture's National Agricultural Statistics Service.
+Here are the crops and land cover at your location in 2023, according to the
+[2023 National Cropland Data Layer](https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php)
+from the United States Department of Agriculture's National Agricultural
+Statistics Service.
 
-For nice maps, see [this notebook](https://observablehq.com/@fgregg/what-are-they-growing-around-here).
-
-```js
-const radius = view(Inputs.select(
-  new Map([
-    ["100 yards", 0.05681818],
-    ["quarter mile", 0.25],
-    ["half mile", 0.5],
-    ["mile", 1],
-    ["two miles", 2]
-  ]),
-  {
-    label: "Radius",
-    value: "100 yards"
-  }
-));
-```
+For nice maps, see [this post]({% post_url 2024-12-30-what-are-they-growing-around-here %}).
 
 ```js
-display(
-table(dataTable)
-);
-```
-
-## Appendix
-
-```js
-const debug_longitude = view(Inputs.text({
-  label: "Longitude",
-  value: -122.5,
-  disabled: use_geolocation
-}));
-```
-
-```js
-const debug_latitude = view(Inputs.text({
-  label: "Latitude",
-  value: 37.55,
-  disabled: use_geolocation
-}));
-```
-
-```js
-display(md`For debugging: ${position.coords.longitude}, ${position.coords.latitude}`);
-```
-
-```js
-const use_geolocation = view(
-  Inputs.toggle({ label: "Use browser location?", value: true }),
+const radius = view(
+  Inputs.select(
+    new Map([
+      ["100 yards", 0.05681818],
+      ["quarter mile", 0.25],
+      ["half mile", 0.5],
+      ["mile", 1],
+      ["two miles", 2],
+    ]),
+    {
+      label: "Radius",
+      value: "100 yards",
+    },
+  ),
 );
 ```
 
 ```js
-// Geolocation is assumed available (a reactive flag in the original).
-const can_use_geolocation = true;
+display(table(dataTable));
 ```
 
 ```js
-const position = can_use_geolocation && use_geolocation ? geoposition : debug_position;
-```
-
-```js
-const debug_position = ({
-  coords: {
-    latitude: Number(debug_latitude),
-    longitude: Number(debug_longitude)
-  }
-});
+const position = geoposition;
 ```
 
 ```js
 const dataTable = crop_mappings
   .map(([name, id]) => ({
     name,
-    prop: landuseProportions.get(id)
+    prop: landuseProportions.get(id),
   }))
   .filter((d) => d.prop)
   .sort((a, b) => b.prop - a.prop)
   .map(({ name, prop }) => ({
     name,
-    percent: Math.round(prop * 100)
+    percent: Math.round(prop * 100),
   }));
 ```
 
@@ -97,14 +58,14 @@ const dataTable = crop_mappings
 const landuseProportions = d3.rollup(
   values[0],
   (v) => v.length / values[0].length,
-  (d) => d
+  (d) => d,
 );
 ```
 
 ```js
 const values = high_res_image.readRasters({
   window: pixel_state_window,
-  fillValue: 0
+  fillValue: 0,
 });
 ```
 
@@ -117,7 +78,7 @@ const pixel_state_window = (() => {
     ~~((projectedLocalBbox[0][0] - bbox[0]) * width_scale),
     ~~((projectedLocalBbox[1][1] - bbox[3]) * height_scale),
     ~~((projectedLocalBbox[1][0] - bbox[0]) * width_scale),
-    ~~((projectedLocalBbox[0][1] - bbox[3]) * height_scale)
+    ~~((projectedLocalBbox[0][1] - bbox[3]) * height_scale),
   ];
 })();
 ```
@@ -125,19 +86,13 @@ const pixel_state_window = (() => {
 ```js
 const projectedLocalBbox = [
   project.forward([localBbox.minLon, localBbox.minLat]),
-  project.forward([localBbox.maxLon, localBbox.maxLat])
+  project.forward([localBbox.maxLon, localBbox.maxLat]),
 ];
 ```
 
 ```js
-display(
-bbox
-);
-```
-
-```js
 const project = proj4(
-  "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs"
+  "+proj=aea +lat_0=23 +lon_0=-96 +lat_1=29.5 +lat_2=45.5 +x_0=0 +y_0=0 +datum=NAD83 +units=m +no_defs",
 );
 ```
 
@@ -145,7 +100,7 @@ const project = proj4(
 const localBbox = bboxAroundPoint(
   position.coords.latitude,
   position.coords.longitude,
-  radius
+  radius,
 );
 ```
 
@@ -166,15 +121,9 @@ function bboxAroundPoint(lat, lon, distanceInMiles = 1) {
     minLat,
     minLon,
     maxLat,
-    maxLon
+    maxLon,
   };
 }
-```
-
-```js
-display(
-geoposition.coords.latitude
-);
 ```
 
 ```js
@@ -190,7 +139,9 @@ const crops_raster = geotiff.fromUrl("https://storage.bunkum.us/2023_clds.tif");
 ```
 
 ```js
-const crop_mappings = await fetch("/assets/data/whats-growing-road-trip-version/crop_mappings.json").then((r) => r.json());
+const crop_mappings = await fetch(
+  "/assets/data/whats-growing-road-trip-version/crop_mappings.json",
+).then((r) => r.json());
 ```
 
 ```js
@@ -208,7 +159,6 @@ const table = (await import("/assets/js/toms-table.js")).default;
 
 ```js
 const geoposition = Generators.observe((next) => {
-  
   navigator.geolocation.watchPosition(
     next,
     (error) => {
@@ -218,9 +168,8 @@ const geoposition = Generators.observe((next) => {
     },
     {
       enableHighAccuracy: true,
-      maximumAge: 1000
-    }
+      maximumAge: 1000,
+    },
   );
 });
 ```
-

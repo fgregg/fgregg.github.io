@@ -9,7 +9,7 @@ reactive: true
 
 Data from the [2023 National Cropland Data Layer](https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php) from the United States Department of Agriculture's National Agricultural Statistics Service.
 
-To see the crops around your current location, [see this notebook](https://observablehq.com/@fgregg/whats-growing-around-here-road-trip-version).
+To see the crops around your current location, [see this post]({% post_url 2024-12-28-whats-growing-around-here-road-trip-version %}).
 
 ```js
 const selected_crop = view(Inputs.select(state_crop_map, {

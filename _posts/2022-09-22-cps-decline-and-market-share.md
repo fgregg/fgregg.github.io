@@ -8,51 +8,58 @@ reactive: true
 ---
 
 ```js
-display(md`The decline in CPS enrollment is due mainly to there being fewer children living in Chicago, and not families choosing to send their children to Catholic or other private schools. The market share of CPS vs private schools has remained fairly constant over the past 15 years.
+display(md`
+The decline in CPS enrollment is due mainly to there being fewer children living
+in Chicago, and not families choosing to send their children to Catholic or
+other private schools. The market share of CPS vs private schools has remained
+fairly constant over the past 15 years.
 
-The market share data comes from the American Community Survey, where respondents are [asked about about the schooling for each member of their household](https://censusreporter.org/topics/education/).
+The market share data comes from the American Community Survey, where
+respondents are
+[asked about about the schooling for each member of their household](https://censusreporter.org/topics/education/).
 
 The survey question is as follows:
-<img src="/assets/data/cps-decline-and-market-share/census-school-question.png" alt="drawing" width="400"/>`);
+<img src="/assets/data/cps-decline-and-market-share/census-school-question.png" alt="drawing" width="400"/>
+`);
 ```
 
 ### Census School Age Children vs CPS K-12 Enrollment
 
 ```js
 display(
-Plot.plot({
-  marginRight: 75,
-  y: {
-    grid: true,
-    tickFormat: "2s",
-    nice: true
-  },
-  x: {
-    nice: true
-  },
-  marks: [
-    Plot.line(
-      school_age_years.filter((d) => d.race === "Total"),
-      {
-        x: (d) => new Date(d.year.toString()),
-        y: "count",
-        stroke: "type"
-      }
-    ),
-    Plot.text(
-      school_age_years.filter((d) => d.race === "Total"),
-      Plot.selectMaxX({
-        x: (d) => new Date(d.year.toString()),
-        y: "count",
-        z: "type",
-        text: (d) => (d.type === "enrollment" ? "Enrollment" : "Population"),
-        textAnchor: "start",
-        dy: 5,
-        dx: 5
-      })
-    )
-  ]
-})
+  Plot.plot({
+    marginRight: 75,
+    y: {
+      grid: true,
+      tickFormat: "2s",
+      nice: true,
+    },
+    x: {
+      nice: true,
+    },
+    marks: [
+      Plot.line(
+        school_age_years.filter((d) => d.race === "Total"),
+        {
+          x: (d) => new Date(d.year.toString()),
+          y: "count",
+          stroke: "type",
+        },
+      ),
+      Plot.text(
+        school_age_years.filter((d) => d.race === "Total"),
+        Plot.selectMaxX({
+          x: (d) => new Date(d.year.toString()),
+          y: "count",
+          z: "type",
+          text: (d) => (d.type === "enrollment" ? "Enrollment" : "Population"),
+          textAnchor: "start",
+          dy: 5,
+          dx: 5,
+        }),
+      ),
+    ],
+  }),
 );
 ```
 
@@ -60,26 +67,26 @@ Plot.plot({
 
 ```js
 display(
-Plot.plot({
-  color: {
-    legend: true
-  },
-  y: {
-    grid: true,
-    nice: true,
-    percent: true,
-    label: "Market %"
-  },
-  marks: [
-    Plot.areaY(collapse_enrollment, {
-      x: (d) => new Date(d.year.toString()),
-      y: "count",
-      z: "type",
-      fill: "type",
-      offset: "expand"
-    })
-  ]
-})
+  Plot.plot({
+    color: {
+      legend: true,
+    },
+    y: {
+      grid: true,
+      nice: true,
+      percent: true,
+      label: "Market %",
+    },
+    marks: [
+      Plot.areaY(collapse_enrollment, {
+        x: (d) => new Date(d.year.toString()),
+        y: "count",
+        z: "type",
+        fill: "type",
+        offset: "expand",
+      }),
+    ],
+  }),
 );
 ```
 
@@ -87,31 +94,31 @@ Plot.plot({
 
 ```js
 display(
-Plot.plot({
-  color: {
-    legend: true
-  },
-  facet: {
-    data: pums_enrolled,
-    x: "race"
-  },
-  y: {
-    grid: true,
-    nice: true,
-    percent: true,
-    label: "Market %"
-  },
-  marks: [
-    Plot.areaY(pums_enrolled, {
-      x: (d) => new Date(d.year),
-      y: "count",
-      z: "type",
-      fill: "type",
-      offset: "expand",
-      reverse: true
-    })
-  ]
-})
+  Plot.plot({
+    color: {
+      legend: true,
+    },
+    facet: {
+      data: pums_enrolled,
+      x: "race",
+    },
+    y: {
+      grid: true,
+      nice: true,
+      percent: true,
+      label: "Market %",
+    },
+    marks: [
+      Plot.areaY(pums_enrolled, {
+        x: (d) => new Date(d.year),
+        y: "count",
+        z: "type",
+        fill: "type",
+        offset: "expand",
+        reverse: true,
+      }),
+    ],
+  }),
 );
 ```
 
@@ -122,20 +129,22 @@ const acs_enrollment_share = school_age_years
     ...d,
     acs: count,
     enrollment: school_age_years.find(
-      (e) => e.race === d.race && e.type === "enrollment" && e.race === d.race
-    ).count
+      (e) => e.race === d.race && e.type === "enrollment" && e.race === d.race,
+    ).count,
   }))
   .map((d) => ({ ...d, share: d.enrollment / d.acs }));
 ```
 
 ```js
-const school_age_years_race = school_age_years.filter((d) => d.race !== "Total");
+const school_age_years_race = school_age_years.filter(
+  (d) => d.race !== "Total",
+);
 ```
 
 ```js
 const school_age_years = [
   ...total_census.map((d) => ({ ...d, type: "acs" })),
-  ...race_totals.map((d) => ({ ...d, type: "enrollment" }))
+  ...race_totals.map((d) => ({ ...d, type: "enrollment" })),
 ].filter((d) => d.year > 2004 && d.year < 2022);
 ```
 
@@ -145,7 +154,7 @@ const total_census = d3
     census_age.filter((d) => d.start > 0),
     (v) => d3.sum(v, (d) => d.count),
     (d) => d.race,
-    (d) => d.year
+    (d) => d.year,
   )
   .map((d) => Object.fromEntries(d3.zip(["race", "year", "count"], d.flat())));
 ```
@@ -157,15 +166,15 @@ const race_totals = d3
       new Set([
         ...d3.range(0, 13),
         "Full-Day Kindergarten",
-        "Half-Day Kindergarten"
-      ]).has(d.grade)
+        "Half-Day Kindergarten",
+      ]).has(d.grade),
     ),
     (v) => d3.sum(v, (d) => d.count),
     (d) => d.year,
     (d) =>
       new Set(["African American", "Hispanic", "white", "Total"]).has(d.race)
         ? d.race
-        : "other"
+        : "other",
   )
   .map(([year, race, count]) => ({ year, race, count }));
 ```
@@ -179,15 +188,15 @@ const census_age = [
       (v) => d3.sum(v, (d) => (d.race === "Total" ? d.count : -d.count)),
       (d) => d.start,
       (d) => d.end,
-      (d) => d.year
+      (d) => d.year,
     )
     .map(([start, stop, year, count]) => ({
       race: "other",
       start,
       stop,
       year,
-      count
-    }))
+      count,
+    })),
 ];
 ```
 
@@ -210,8 +219,8 @@ const census_variables = [
       { sex: "female", start: 5, end: 9, variable: "B01001_028E" },
       { sex: "female", start: 10, end: 14, variable: "B01001_029E" },
       { sex: "female", start: 15, end: 17, variable: "B01001_030E" },
-      { sex: "female", start: 18, end: 19, variable: "B01001_031E" }
-    ]
+      { sex: "female", start: 18, end: 19, variable: "B01001_031E" },
+    ],
   },
   {
     race: "African American",
@@ -226,8 +235,8 @@ const census_variables = [
       { sex: "female", start: 5, end: 9, variable: "B01001B_019E" },
       { sex: "female", start: 10, end: 14, variable: "B01001B_020E" },
       { sex: "female", start: 15, end: 17, variable: "B01001B_021E" },
-      { sex: "female", start: 18, end: 19, variable: "B01001B_022E" }
-    ]
+      { sex: "female", start: 18, end: 19, variable: "B01001B_022E" },
+    ],
   },
   {
     race: "white",
@@ -242,8 +251,8 @@ const census_variables = [
       { sex: "female", start: 5, end: 9, variable: "B01001H_019E" },
       { sex: "female", start: 10, end: 14, variable: "B01001H_020E" },
       { sex: "female", start: 15, end: 17, variable: "B01001H_021E" },
-      { sex: "female", start: 18, end: 19, variable: "B01001H_022E" }
-    ]
+      { sex: "female", start: 18, end: 19, variable: "B01001H_022E" },
+    ],
   },
   {
     race: "Hispanic",
@@ -258,9 +267,9 @@ const census_variables = [
       { sex: "female", start: 5, end: 9, variable: "B01001I_019E" },
       { sex: "female", start: 10, end: 14, variable: "B01001I_020E" },
       { sex: "female", start: 15, end: 17, variable: "B01001I_021E" },
-      { sex: "female", start: 18, end: 19, variable: "B01001I_022E" }
-    ]
-  }
+      { sex: "female", start: 18, end: 19, variable: "B01001I_022E" },
+    ],
+  },
 ];
 ```
 
@@ -280,14 +289,14 @@ const collapse_sex = (ages) =>
       (d) => d.race,
       (d) => d.start,
       (d) => d.end,
-      (d) => d.year
+      (d) => d.year,
     )
     .map(([race, start, stop, year, count]) => ({
       race,
       start,
       stop,
       year,
-      count
+      count,
     }));
 ```
 
@@ -297,12 +306,12 @@ const collapse_enrollment = d3
     census_enrollment_by_grade_group,
     (v) => d3.sum(v, (d) => d.count),
     (d) => d.type,
-    (d) => d.year
+    (d) => d.year,
   )
   .map(([type, year, count]) => ({
     type,
     year,
-    count
+    count,
   }));
 ```
 
@@ -315,10 +324,10 @@ const reshapeAge = (data) =>
           ...age_var,
           race: d.race,
           year: e.year,
-          count: e[age_var.variable]
-        }))
+          count: e[age_var.variable],
+        })),
       )
-      .flat()
+      .flat(),
   );
 ```
 
@@ -330,7 +339,7 @@ const censusGroupYears = async (variables, start = 2005, stop = 2022) => {
       if (year !== 2020) {
         const census_group = await fetchCensusGroup(
           year,
-          variable.census_group
+          variable.census_group,
         );
         variable.census_data.push(census_group);
       }
@@ -343,7 +352,7 @@ const censusGroupYears = async (variables, start = 2005, stop = 2022) => {
 ```js
 const fetchCensusGroup = async function (year, base_var = "B01001") {
   const response = await fetch(
-    `https://census-api.bunkum.us/data/${year}/acs/acs1?get=NAME,group(${base_var})&for=place:14000&in=state:17`
+    `https://census-api.bunkum.us/data/${year}/acs/acs1?get=NAME,group(${base_var})&for=place:14000&in=state:17`,
   );
   const data = await response.json();
   const data_obj = Object.fromEntries(d3.zip(...data));
@@ -361,8 +370,8 @@ const census_enrollment_by_grade_group = (() => {
         ...grade_var,
         type: grade_var.type,
         year: e.year,
-        count: e[grade_var.variable]
-      }))
+        count: e[grade_var.variable],
+      })),
     )
     .flat();
 })();
@@ -373,7 +382,7 @@ const raw_census_enrollment = censusGroupYears([enrollment_variable]);
 ```
 
 ```js
-const enrollment_variable = ({
+const enrollment_variable = {
   census_group: "B14002",
   grade_vars: [
     { type: "public", sex: "male", start: 0, end: 0, variable: "B14002_008E" },
@@ -388,7 +397,7 @@ const enrollment_variable = ({
       sex: "male",
       start: 9,
       end: 12,
-      variable: "B14002_018E"
+      variable: "B14002_018E",
     },
 
     {
@@ -396,59 +405,59 @@ const enrollment_variable = ({
       sex: "female",
       start: 0,
       end: 0,
-      variable: "B14002_032E"
+      variable: "B14002_032E",
     },
     {
       type: "private",
       sex: "female",
       start: 0,
       end: 0,
-      variable: "B14002_033E"
+      variable: "B14002_033E",
     },
     {
       type: "public",
       sex: "female",
       start: 1,
       end: 4,
-      variable: "B14002_035E"
+      variable: "B14002_035E",
     },
     {
       type: "private",
       sex: "female",
       start: 1,
       end: 4,
-      variable: "B14002_036E"
+      variable: "B14002_036E",
     },
     {
       type: "public",
       sex: "female",
       start: 5,
       end: 8,
-      variable: "B14002_038E"
+      variable: "B14002_038E",
     },
     {
       type: "private",
       sex: "female",
       start: 5,
       end: 8,
-      variable: "B14002_039E"
+      variable: "B14002_039E",
     },
     {
       type: "public",
       sex: "female",
       start: 9,
       end: 12,
-      variable: "B14002_041E"
+      variable: "B14002_041E",
     },
     {
       type: "private",
       sex: "female",
       start: 9,
       end: 12,
-      variable: "B14002_042E"
-    }
-  ]
-});
+      variable: "B14002_042E",
+    },
+  ],
+};
 ```
 
 ```js
@@ -460,50 +469,13 @@ const cps_demo_data = d3.csv(
 );
 ```
 
-```sql
-with re as (
-  select
-    case
-      when race = 1
-      and hispan = 0 then 'white'
-      when race = 2
-      and hispan = 0 then 'African American'
-      when hispan != 0 then 'Hispanic'
-      else 'other'
-    end as race_ethnicity,
-    case
-      when "SCHLTYPE" = 1 then "not enrolled"
-      when "SCHLTYPE" = 2 then "public"
-      when "SCHLTYPE" = 3 then "private"
-      else "SCHLTYPE"
-    end as school_type,
-    *
-  from
-    "usa_00003"
-)
-select
-  YEAR as year,
-  race_ethnicity as race,
-  school_type as "type",
-  sum("PERWT") as count
-from
-  re
-where
-  "YEAR" >= 2000
-  and EDUCD < 62
-  AND AGE < 18
-  AND AGE > 5
-group by
-  YEAR,
-  race_ethnicity,
-  school_type
-  ```
-
 ```js
 const pums_enrolled = pums_enrollment.filter((d) => d.type !== "not enrolled");
 ```
 
 ```js
-const pums_enrollment = d3.csv("/assets/data/cps-decline-and-market-share/pums_enrollment.csv", d3.autoType);
+const pums_enrollment = d3.csv(
+  "/assets/data/cps-decline-and-market-share/pums_enrollment.csv",
+  d3.autoType,
+);
 ```
-
