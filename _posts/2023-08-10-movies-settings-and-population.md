@@ -30,7 +30,7 @@ display(
     x: { type: "log", label: "population →", grid: true },
     y: {
       type: "log",
-      label: "movies →",
+      label: "movies ↑",
       grid: true,
       domain: [0.8, d3.max(band_count, (d) => d.upper)],
     },
@@ -247,4 +247,3 @@ const model = (() => {
   return { b0, b1, phi, mu };
 })();
 ```
-
