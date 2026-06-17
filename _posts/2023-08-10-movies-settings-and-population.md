@@ -21,8 +21,8 @@ in which we expect 50% of the data to fall and lighter gray band is the same for
 Hover over a dot to see the city's details.
 
 The data comes from mighty
-[wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page), with all the
-biases that entails.
+[wikidata](https://query.wikidata.org/#SELECT%20DISTINCT%20%3Fplace%20%3FplaceLabel%20%3Fpopulation%20%3FmovieCount%20WHERE%20%7B%0A%20%20%7B%0A%20%20%20%20SELECT%20%3Fplace%20%28COUNT%28%3Fmovie%29%20AS%20%3FmovieCount%29%20WHERE%20%7B%0A%20%20%20%20%20%20%3Fmovie%20wdt%3AP31%20wd%3AQ11424%20%3B%20%20%20%23%20instance%20of%3A%20film%0A%20%20%20%20%20%20%20%20%20%20%20%20%20wdt%3AP840%20%3Fplace%20.%20%20%20%20%20%20%23%20narrative%20location%0A%20%20%20%20%7D%20GROUP%20BY%20%3Fplace%0A%20%20%7D%0A%20%20%3Fplace%20wdt%3AP17%20wd%3AQ30%20%3B%20%20%20%20%20%20%20%20%20%20%20%23%20country%3A%20United%20States%0A%20%20%20%20%20%20%20%20%20wdt%3AP31/wdt%3AP279%2A%20wd%3AQ515%20%3B%20%23%20%28a%20subclass%20of%29%20city%0A%20%20%20%20%20%20%20%20%20wdt%3AP1082%20%3Fpopulation%20.%20%20%20%20%20%23%20population%0A%20%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%0A%7D%0AORDER%20BY%20DESC%28%3FmovieCount%29),
+with all the biases that entails.
 
 ```js
 display(
