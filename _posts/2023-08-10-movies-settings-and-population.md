@@ -82,13 +82,6 @@ const band_count = (() => {
 })();
 ```
 
-### The leaderboard
-
-Ranked by the size-adjusted residual — the deviance residual from the model,
-which (unlike a raw ratio) doesn't let a single film in a tiny town run away
-with the list. These are the cities filmed most and least, relative to what
-their population predicts.
-
 ```js
 display(md`**Over-filmed for their size**
 
