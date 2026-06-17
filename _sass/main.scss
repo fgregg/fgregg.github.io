@@ -101,3 +101,25 @@ hr {
     /* Set the hr color */
     background-color: #552222; /* Modern Browsers */
 }
+
+/* Reactive-cell heading anchors: plain heading text plus a small `#` deep-link
+   that fades in on hover/focus (headings render via the swapped-in `md`, which
+   uses markdown-it-anchor's linkInsideHeader). */
+.header-anchor {
+    margin-left: 0.25em;
+    text-decoration: none;
+    font-weight: normal;
+    opacity: 0;
+    transition: opacity 0.1s ease;
+}
+/* Match the heading colour, not the site's blue a:link/a:visited (which would
+   otherwise win on specificity). */
+a.header-anchor:link,
+a.header-anchor:visited {
+    color: inherit;
+}
+h2:hover > .header-anchor,
+h3:hover > .header-anchor,
+.header-anchor:focus {
+    opacity: 1;
+}

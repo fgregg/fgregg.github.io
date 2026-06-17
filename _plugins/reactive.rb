@@ -1,15 +1,24 @@
 # Reactive-cell Jekyll plugin.
 #
-# For any post with `reactive: true` in its front matter, this turns fenced
-# ```js code blocks into live Observable reactive cells — the literate-notebook
-# experience (cells re-run when their inputs change, display()/view()/Inputs/
-# Plot all available) inside an ordinary _posts/ Markdown file.
+# Two modes, chosen by front matter:
 #
-# How: a pre_render hook pulls the ```js blocks out of the raw Markdown, sends
-# their sources to a Node sidecar (_reactive/transpile.mjs) that runs Observable
-# Notebook Kit's transpiler to infer each cell's reactive dependencies, then
-# replaces the blocks with <div id="cell-N"> mount points and emits one
-# <script type="module"> that wires the cells via the Observable runtime.
+#   reactive: true      — block mode. Only fenced ```js code blocks become live
+#                         Observable reactive cells; the surrounding Markdown is
+#                         rendered statically by Jekyll/kramdown as usual.
+#
+#   reactive: cellular  — cellular mode. The WHOLE body is split into an ordered
+#                         sequence of cells: ```js fences become js cells, and
+#                         the Markdown between them becomes md cells (compiled
+#                         with notebook-kit's transpileTemplate). One Markdown
+#                         flavor, `${…}` reactive anywhere in prose, and no
+#                         display(md`…`) wrappers. The whole body is then
+#                         client-rendered (see issue #20 for the SEO/SSR story).
+#
+# How: a pre_render hook turns the cells into <div id="cell-N"> mount points,
+# sends their sources to a Node sidecar (_reactive/transpile.mjs) that runs
+# Observable Notebook Kit's transpiler to infer each cell's reactive
+# dependencies, then emits one <script type="module"> that wires the cells via
+# the Observable runtime.
 #
 # NOTE: custom plugins require an unsafe Jekyll build (e.g. GitHub Actions),
 # not the default GitHub Pages build.
@@ -26,9 +35,31 @@ module Reactive
   # match fenced ```js ... ``` blocks
   FENCE = /^```js\s*\n(.*?)\n```$/m
 
-  def self.transpile(sources)
-    out, err, status = Open3.capture3("node", SIDECAR, stdin_data: {cells: sources}.to_json)
-    raise "reactive: transpile failed: #{err}" unless status.success?
+  # Split a whole document body into an ordered list of cells: each ```js fence
+  # becomes a {mode: "js"} cell and the Markdown between fences becomes a
+  # {mode: "md"} cell. Blank-only Markdown gaps are dropped.
+  def self.split_cells(content)
+    cells = []
+    last = 0
+    content.scan(FENCE) do
+      m = Regexp.last_match
+      pre = content[last...m.begin(0)]
+      cells << {mode: "md", source: pre} unless pre.strip.empty?
+      cells << {mode: "js", source: m[1]}
+      last = m.end(0)
+    end
+    tail = content[last..] || ""
+    cells << {mode: "md", source: tail} unless tail.strip.empty?
+    cells
+  end
+
+  def self.transpile(cells, path = nil)
+    payload = {cells: cells}
+    payload[:path] = path if path
+    out, err, status = Open3.capture3("node", SIDECAR, stdin_data: payload.to_json)
+    # The sidecar emits a human-readable message (doc, cell, location, snippet)
+    # on stderr; surface that directly rather than a raw acorn stack trace.
+    raise(err.strip.empty? ? "reactive: transpile failed#{path && " in #{path}"}" : err.strip) unless status.success?
     JSON.parse(out)["cells"]
   end
 
@@ -65,19 +96,44 @@ module Reactive
   end
 end
 
-Jekyll::Hooks.register [:posts, :documents], :pre_render do |doc|
-  next unless doc.data["reactive"]
-
-  sources = []
-  # replace each ```js block with a mount div, collecting sources in order
-  doc.content = doc.content.gsub(Reactive::FENCE) do
-    sources << Regexp.last_match(1)
-    %(<div id="cell-#{sources.size - 1}" class="reactive-cell"></div>)
+module Reactive
+  def self.mount_divs(cells)
+    cells.map { |c| %(<div id="cell-#{c["id"]}" class="reactive-cell"></div>) }.join("\n\n")
   end
 
-  next if sources.empty?
+  # Cellular mode: the whole body becomes cells (md + js), in document order.
+  def self.render_cellular(doc)
+    cells = split_cells(doc.content)
+    return if cells.empty?
+    transpiled = transpile(cells, doc.relative_path)
+    doc.content = mount_divs(transpiled) + "\n\n" + render_script(transpiled)
+  end
 
-  cells = Reactive.transpile(sources)
-  # append the wiring script to the end of the post body
-  doc.content += "\n\n" + Reactive.render_script(cells)
+  # Block mode (legacy): only ```js blocks become cells; prose stays static.
+  def self.render_blocks(doc)
+    sources = []
+    doc.content = doc.content.gsub(FENCE) do
+      sources << Regexp.last_match(1)
+      %(<div id="cell-#{sources.size - 1}" class="reactive-cell"></div>)
+    end
+    return if sources.empty?
+    cells = transpile(sources, doc.relative_path)
+    doc.content += "\n\n" + render_script(cells)
+  end
+end
+
+Jekyll::Hooks.register [:posts, :documents], :pre_render do |doc|
+  next unless doc.data["reactive"]
+  # A post triggers this hook under both the :posts and :documents owners, so it
+  # fires twice. Block mode is idempotent (no ```js left on the second pass) but
+  # cellular mode is not — guard on the already-injected runtime import so we
+  # only transform once. (Content is re-read fresh on each rebuild, so this does
+  # not wrongly skip in --watch.)
+  next if doc.content.include?(Reactive::RUNTIME)
+
+  if doc.data["reactive"].to_s == "cellular"
+    Reactive.render_cellular(doc)
+  else
+    Reactive.render_blocks(doc)
+  end
 end
