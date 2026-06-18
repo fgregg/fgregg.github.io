@@ -2,7 +2,7 @@
 title: Cocktail Ingredients Optimizer
 author: Forest Gregg
 layout: post
-date: 2026-06-02
+date: 2025-01-21
 description: A branch-and-bound search for the set of N bar ingredients that lets you make the most distinct cocktails.
 reactive: true
 ---
@@ -11,14 +11,15 @@ For a fixed number of ingredients, which ingredients will let you make the most 
 
 This notebook uses a branch and bound algorithm, in a web worker, to try to find the best ingredient list for you. 
 
-Code ported from https://github.com/fgregg/cocktails.
 
 ```js
-const num_ingredients = view(Inputs.range([2, 129], {
-  label: "Number of Ingredients",
-  step: 1,
-  value: 30
-}));
+const num_ingredients = view(
+  Inputs.range([2, 129], {
+    label: "Number of Ingredients",
+    step: 1,
+    value: 30,
+  }),
+);
 ```
 
 With ${num_ingredients} ingredients, you can make ${search_results.length} cocktail(s).
@@ -42,9 +43,9 @@ const ingredients = Array.from(
         accumulator.set(ingredient, (accumulator.get(ingredient) ?? 0) + 1),
         accumulator
       ),
-      new Map()
+      new Map(),
     )
-    .entries()
+    .entries(),
 ).sort((a, b) => b[1] - a[1]);
 ```
 
@@ -67,7 +68,9 @@ self.onmessage = (e) => {
   self.close();
 };
 `;
-  const url = URL.createObjectURL(new Blob([code], { type: "text/javascript" }));
+  const url = URL.createObjectURL(
+    new Blob([code], { type: "text/javascript" }),
+  );
   const w = new Worker(url);
   w.onmessage = (ev) => notify(ev.data);
   w.postMessage({
@@ -90,14 +93,14 @@ function* search(options) {
   let highest = [];
 
   const original_candidates = options.candidates.filter(
-    (cocktail) => cocktail.length <= maxSize
+    (cocktail) => cocktail.length <= maxSize,
   );
 
   heuristicScoring(original_candidates);
   original_candidates.sort((a, b) => a.cost - b.cost);
 
   const toExplore = [
-    [original_candidates, options.partial ?? [], options.forbidden ?? []]
+    [original_candidates, options.partial ?? [], options.forbidden ?? []],
   ];
 
   while (toExplore.length > 0 && remainingCalls--) {
@@ -119,7 +122,7 @@ function* search(options) {
       partialIngredients,
       highestScore,
       maxSize,
-      forbidden
+      forbidden,
     );
 
     if (shouldContinue) {
@@ -128,23 +131,23 @@ function* search(options) {
       const newPartialIngredients = union(best, partialIngredients);
       const coveredCandidates = new Set(
         candidates.filter((cocktail) =>
-          isSubsetOf(cocktail, newPartialIngredients)
-        )
+          isSubsetOf(cocktail, newPartialIngredients),
+        ),
       );
 
       const permittedCandidates = difference(
         candidates,
-        coveredCandidates
+        coveredCandidates,
       ).filter(
-        (cocktail) => union(cocktail, newPartialIngredients).size <= maxSize
+        (cocktail) => union(cocktail, newPartialIngredients).size <= maxSize,
       );
 
       const remaining = candidates.filter(
         (cocktail) =>
           !isSubsetOf(
             best.filter((ingredient) => !cocktail.includes(ingredient)),
-            partialIngredients
-          )
+            partialIngredients,
+          ),
       );
 
       toExplore.push([remaining, partial, [...forbidden, best]]);
@@ -152,7 +155,7 @@ function* search(options) {
       toExplore.push([
         permittedCandidates,
         [...partial, ...coveredCandidates],
-        forbidden
+        forbidden,
       ]);
     }
   }
@@ -165,15 +168,16 @@ const heuristicScoring = (candidates) => {
     .flat()
     .reduce(
       (acc, ingredient) => (
-        acc.set(ingredient, (acc.get(ingredient) ?? 0) + 1), acc
+        acc.set(ingredient, (acc.get(ingredient) ?? 0) + 1),
+        acc
       ),
-      new Map()
+      new Map(),
     );
 
   candidates.forEach((cocktail) => {
     const cost = cocktail.reduce(
       (sum, ingredient) => sum + 1 / cardinality.get(ingredient),
-      0
+      0,
     );
     cocktail.cost = cost;
 
@@ -193,16 +197,16 @@ const keepExploring = (
   partialIngredients,
   highestScore,
   maxSize,
-  forbidden
+  forbidden,
 ) => {
   const threshold = highestScore - partial.length;
 
   return (
     [totalBound, singletonBound].every(
-      (bound) => bound(candidates, partialIngredients, maxSize) > threshold
+      (bound) => bound(candidates, partialIngredients, maxSize) > threshold,
     ) &&
     !forbidden.some((forbiddenCocktail) =>
-      isSubsetOf(forbiddenCocktail, partialIngredients)
+      isSubsetOf(forbiddenCocktail, partialIngredients),
     )
   );
 };
@@ -224,7 +228,7 @@ const singletonBound = (candidates, partialIngredients, maxSize) => {
    */
 
   const nUniqueCocktails = candidates.filter(
-    (cocktail) => cocktail.singular
+    (cocktail) => cocktail.singular,
   ).length;
 
   const ingredientBudget = maxSize - partialIngredients.size;
@@ -240,7 +244,7 @@ const singletonBound = (candidates, partialIngredients, maxSize) => {
 
 ```js
 const cocktails = new ArrayKeyedMap(
-  Object.entries(data).map(([name, ingredients]) => [ingredients.sort(), name])
+  Object.entries(data).map(([name, ingredients]) => [ingredients.sort(), name]),
 );
 ```
 
@@ -260,12 +264,13 @@ const union = (A, B) => {
 ```
 
 ```js
-const data = await fetch("/assets/data/cocktail-ingredients-optimizer/ingredients.json").then((r) => r.json());
+const data = await fetch(
+  "/assets/data/cocktail-ingredients-optimizer/ingredients.json",
+).then((r) => r.json());
 ```
 
 ```js
-const ArrayKeyedMap = (
-  await import("https://esm.sh/array-keyed-map@2.1.3")
-).default;
+const ArrayKeyedMap = (await import("https://esm.sh/array-keyed-map@2.1.3"))
+  .default;
 ```
 
