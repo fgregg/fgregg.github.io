@@ -29,7 +29,7 @@ In a overwrought digression, I'm setting up a [proxy to the BLS
 API](https://bls-api.bunkum.us) that sets right the CORS headers so that
 data from the BLS can be pulled into other sites.
 
-Prompted by a [suggestion by David Eads](https://twitter.com/eads/status/1486027015861985282), the proxy is a [Cloudflare worker](https://workers.cloudflare.com/). It was pretty easy to get set up, because Cloudflare already had a recipe
+Prompted by a [suggestion by David Eads](https://bsky.app/profile/eads.bsky.social), the proxy is a [Cloudflare worker](https://workers.cloudflare.com/). It was pretty easy to get set up, because Cloudflare already had a recipe
 for making a [CORS proxy](https://developers.cloudflare.com/workers/examples/cors-header-proxy). 
 
 I'm adapting this recipe to specialize it for the BLS site and to

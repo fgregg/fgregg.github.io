@@ -10,7 +10,7 @@ This week I got the FOIA for voluntary recognition notices filed with the
 NLRB in the fourth quarter of 2021. This meant we had the first full
 year of data since notice program restarted in the fall of 2020.
 
-[Daily Union Elections](https://twitter.com/UnionElections) had sent
+[Daily Union Elections](https://bsky.app/profile/unionelections.bsky.social) had sent
 me a spreadsheet of voluntary recognitions that they had collected from
 twitter for the first nine months of 2021. I took this opportunity to
 compare the data sets.
@@ -30,14 +30,14 @@ a certified representative in an NLRB election in 2021.
 
 According to [Professor Kate Bronfenbrenner, since the 1990's more than 
 half of newly organized private-sector workers were organized outside of an 
-NLRB election](https://twitter.com/KBronfenbrenner/status/1488508090760769541).
+NLRB election](https://bsky.app/profile/klbrenner.bsky.social).
 
 If that pattern holds, then we don't really have data on about
 two-thirds of voluntary recognitions, and are missing data on about
 third of all private-sector organizing. Given overall trends in organizing,
 it's likely that these are underestimates.
 
-Basically, there are two ideas for filling this lacuna ([see thread](https://twitter.com/forestgregg/status/1488305426810773509)):
+Basically, there are two ideas for filling this lacuna ([see thread](https://bsky.app/profile/bunkum.us)):
 
 1. Try to find units that have filed a notice to bargain with the FMCS that do not appear in the NLRB data
 2. Survey unions

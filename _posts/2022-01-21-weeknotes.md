@@ -90,7 +90,7 @@ nice.
 ### Remarkable 2
 [I asked twitter for recommendations for e-readers that handled pdfs
 of articles
-well](https://twitter.com/forestgregg/status/1482503176934891521). The
+well](https://bsky.app/profile/bunkum.us). The
 resounding recommendation was for a Remarkable 2. I ordered one with
 my DataMade annual office-equipment stipend, and it came on
 Thursday. So far, I really like it. It's a cool, in a McLuhan
