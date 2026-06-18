@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-11-01
 description: A cohort-survival bootstrap forecast of Chicago Public Schools K-12 enrollment, overall and by race/ethnicity, with credible intervals.
-reactive: cellular
+reactive: true
 ---
 
 ## Kindergarten though 12th Grade Enrollment, Historical and Projected

@@ -21,8 +21,7 @@ const num_ingredients = view(Inputs.range([2, 129], {
 }));
 ```
 
-```js
-display(md`With ${num_ingredients} ingredients, you can make ${search_results.length} cocktail(s).
+With ${num_ingredients} ingredients, you can make ${search_results.length} cocktail(s).
 
 | Cocktail | Ingredients |
 |----------|-------------|
@@ -32,8 +31,7 @@ Here's the shopping list:
 
 | Ingredient | Number of Cocktails |
 |------------|---------------------|
-${ingredients.map(details => `| ${details.join(' | ')} |`).join("\n")}`);
-```
+${ingredients.map(details => `| ${details.join(' | ')} |`).join("\n")}
 
 ```js
 const ingredients = Array.from(

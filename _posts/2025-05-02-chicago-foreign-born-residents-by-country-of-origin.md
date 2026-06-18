@@ -7,13 +7,11 @@ description: Chicago foreign-born residents by country of origin over time, from
 reactive: true
 ---
 
-```js
-display(md`We can get a sense of international immigration flows by looking at the people living in Chicago who were born in other countries between 2005 and ${last_year}. Increases in these populations are due to immigration, declines are due to emigration and deaths.
+We can get a sense of international immigration flows by looking at the people living in Chicago who were born in other countries between 2005 and ${last_year}. Increases in these populations are due to immigration, declines are due to emigration and deaths.
 
 [Fourteen foreign countries each contribute more than 1% of the 2020 Chicago foreign-born population](https://censusreporter.org/data/table/?table=B05006&geo_ids=16000US1714000&primary_geo_id=16000US1714000): Mexico, China, Poland, India, Philippines, Guatemala, Ecuador, Nigeria, South Korea, Vietnam, Ukraine, Colombia, Pakistan, and Canada.
 
-The number of Chicago residents born in Mexico has been declining, but they still make up the vast plurality of Chicago's foreign-born residents.`);
-```
+The number of Chicago residents born in Mexico has been declining, but they still make up the vast plurality of Chicago's foreign-born residents.
 
 ```js
 display(

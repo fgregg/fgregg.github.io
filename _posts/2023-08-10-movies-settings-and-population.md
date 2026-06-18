@@ -82,8 +82,7 @@ const band_count = (() => {
 })();
 ```
 
-```js
-display(md`**Over-set for their size**
+**Over-set for their size**
 
 | City | Population | Movies | Expected | per 100k |
 |---|--:|--:|--:|--:|
@@ -94,11 +93,9 @@ ${ranked
       `| ${d.city} | ${d.population.toLocaleString()} | ${d.movies} | ${d.expected.toFixed(1)} | ${d.rate.toFixed(1)} |`,
   )
   .join("\n")}
-`);
-```
 
-```js
-display(md`**Under-set for their size**
+
+**Under-set for their size**
 
 | City | Population | Movies | Expected | per 100k |
 |---|--:|--:|--:|--:|
@@ -110,8 +107,7 @@ ${ranked
       `| ${d.city} | ${d.population.toLocaleString()} | ${d.movies} | ${d.expected.toFixed(1)} | ${d.rate.toFixed(1)} |`,
   )
   .join("\n")}
-`);
-```
+
 
 ```js
 // Rank every city by its deviance residual from the ZT-Poisson fit (scaled by

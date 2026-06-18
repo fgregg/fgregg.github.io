@@ -19,11 +19,9 @@ A five character prefix usually returns between one and five users, and then you
 const updateButton = view(Inputs.button("Update"));
 ```
 
-```js
-display(md`App friendly:  <a href="https://play.spotify.com/search/${user_hash_prefix}" target="_blank">https://play.spotify.com/search/${user_hash_prefix}</a>
+App friendly:  <a href="https://play.spotify.com/search/${user_hash_prefix}" target="_blank">https://play.spotify.com/search/${user_hash_prefix}</a>
 
-More specific search for desktop:  <a href="https://play.spotify.com/search/${user_hash_prefix}/users" target="_blank">https://play.spotify.com/search/${user_hash_prefix}/users</a>`);
-```
+More specific search for desktop:  <a href="https://play.spotify.com/search/${user_hash_prefix}/users" target="_blank">https://play.spotify.com/search/${user_hash_prefix}/users</a>
 
 ```js
 const user_hash_prefix = (() => {

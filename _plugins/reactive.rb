@@ -1,18 +1,11 @@
 # Reactive-cell Jekyll plugin.
 #
-# Two modes, chosen by front matter:
-#
-#   reactive: true      — block mode. Only fenced ```js code blocks become live
-#                         Observable reactive cells; the surrounding Markdown is
-#                         rendered statically by Jekyll/kramdown as usual.
-#
-#   reactive: cellular  — cellular mode. The WHOLE body is split into an ordered
-#                         sequence of cells: ```js fences become js cells, and
-#                         the Markdown between them becomes md cells (compiled
-#                         with notebook-kit's transpileTemplate). One Markdown
-#                         flavor, `${…}` reactive anywhere in prose, and no
-#                         display(md`…`) wrappers. The whole body is then
-#                         client-rendered (see issue #20 for the SEO/SSR story).
+# For any post with `reactive: true` in its front matter, the WHOLE body is split
+# into an ordered sequence of cells: ```js fences become js cells, and the
+# Markdown between them becomes md cells (compiled with notebook-kit's
+# transpileTemplate). One Markdown flavor, `${…}` reactive anywhere in prose, and
+# no display(md`…`) wrappers. The whole body is then client-rendered (see issue
+# #20 for the SEO/SSR story).
 #
 # How: a pre_render hook turns the cells into <div id="cell-N"> mount points,
 # sends their sources to a Node sidecar (_reactive/transpile.mjs) that runs
@@ -101,39 +94,22 @@ module Reactive
     cells.map { |c| %(<div id="cell-#{c["id"]}" class="reactive-cell"></div>) }.join("\n\n")
   end
 
-  # Cellular mode: the whole body becomes cells (md + js), in document order.
-  def self.render_cellular(doc)
+  # The whole body becomes cells (md + js), in document order.
+  def self.render(doc)
     cells = split_cells(doc.content)
     return if cells.empty?
     transpiled = transpile(cells, doc.relative_path)
     doc.content = mount_divs(transpiled) + "\n\n" + render_script(transpiled)
-  end
-
-  # Block mode (legacy): only ```js blocks become cells; prose stays static.
-  def self.render_blocks(doc)
-    sources = []
-    doc.content = doc.content.gsub(FENCE) do
-      sources << Regexp.last_match(1)
-      %(<div id="cell-#{sources.size - 1}" class="reactive-cell"></div>)
-    end
-    return if sources.empty?
-    cells = transpile(sources, doc.relative_path)
-    doc.content += "\n\n" + render_script(cells)
   end
 end
 
 Jekyll::Hooks.register [:posts, :documents], :pre_render do |doc|
   next unless doc.data["reactive"]
   # A post triggers this hook under both the :posts and :documents owners, so it
-  # fires twice. Block mode is idempotent (no ```js left on the second pass) but
-  # cellular mode is not — guard on the already-injected runtime import so we
-  # only transform once. (Content is re-read fresh on each rebuild, so this does
-  # not wrongly skip in --watch.)
+  # fires twice; guard on the already-injected runtime import so we only transform
+  # once. (Content is re-read fresh on each rebuild, so this does not wrongly skip
+  # in --watch.)
   next if doc.content.include?(Reactive::RUNTIME)
 
-  if doc.data["reactive"].to_s == "cellular"
-    Reactive.render_cellular(doc)
-  else
-    Reactive.render_blocks(doc)
-  end
+  Reactive.render(doc)
 end

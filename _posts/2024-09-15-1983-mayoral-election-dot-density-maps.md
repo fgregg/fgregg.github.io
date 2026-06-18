@@ -7,13 +7,11 @@ description: Dot-density maps of the 1983 Chicago mayoral general election (Haro
 reactive: true
 ---
 
-```js
-display(md`Here is a [dot-density map](https://en.wikipedia.org/wiki/Dot_distribution_map) of voters for the [1983 mayoral election](https://en.wikipedia.org/wiki/1983_Chicago_mayoral_election) between Harold Washington and Bernard Epton. Washington received ${(washington_total).toLocaleString()} votes to Epton's ${(epton_total).toLocaleString()}. Each dot represent ${(people_per_dot).toLocaleString()} voters. 
+Here is a [dot-density map](https://en.wikipedia.org/wiki/Dot_distribution_map) of voters for the [1983 mayoral election](https://en.wikipedia.org/wiki/1983_Chicago_mayoral_election) between Harold Washington and Bernard Epton. Washington received ${(washington_total).toLocaleString()} votes to Epton's ${(epton_total).toLocaleString()}. Each dot represent ${(people_per_dot).toLocaleString()} voters. 
 
 The data comes from [LaDale Winling](https://mastodon.social/@lwinling@mastodon.top)'s [Chicago Elections Project](https://www.chicagoelectionsproject.com/). Professor Winling has collected precinct level election results for historical elections and digitized the electoral precinct maps.
 
-One thing that these maps make clear is that while Harold Washington did have support along the north side lake front, so called "Lakefront Liberals," those areas went heavier for Epton. This is point that Gary Rivlin discusses in depth in his great book on Harold Washington, [*Fire on the Prairie*](https://garyrivlin.com/book/fire-on-the-prairie/).`);
-```
+One thing that these maps make clear is that while Harold Washington did have support along the north side lake front, so called "Lakefront Liberals," those areas went heavier for Epton. This is point that Gary Rivlin discusses in depth in his great book on Harold Washington, [*Fire on the Prairie*](https://garyrivlin.com/book/fire-on-the-prairie/).
 
 ```js
 display(

@@ -21,9 +21,7 @@ const radius = view(Inputs.range([0.25, 50], {
 const refresh = view(Inputs.button("refresh"));
 ```
 
-```js
-display(md`${data_list}`);
-```
+${data_list}
 
 ```js
 const coords = refresh

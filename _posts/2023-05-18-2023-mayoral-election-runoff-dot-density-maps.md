@@ -7,9 +7,7 @@ description: Dot-density maps of the 2023 Chicago mayoral runoff (Johnson vs. Va
 reactive: true
 ---
 
-```js
-display(md`Here is a [dot-density map](https://en.wikipedia.org/wiki/Dot_distribution_map) of voters for the 2023 runoff mayoral election. Each dot represent ${(people_per_dot).toLocaleString()} voters. Brandon Johnsons got ${(johnson_total).toLocaleString()} votes to Paul Vallas's ${(vallas_total).toLocaleString()} votes.`);
-```
+Here is a [dot-density map](https://en.wikipedia.org/wiki/Dot_distribution_map) of voters for the 2023 runoff mayoral election. Each dot represent ${(people_per_dot).toLocaleString()} voters. Brandon Johnsons got ${(johnson_total).toLocaleString()} votes to Paul Vallas's ${(vallas_total).toLocaleString()} votes.
 
 ```js
 display(html`<div class="container" style="display: flex;">

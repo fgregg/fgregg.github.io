@@ -125,9 +125,7 @@ Inputs.button([
 );
 ```
 
-```js
-display(md`### Plan ${plan_number}`);
-```
+### Plan ${plan_number}
 
 ```js
 display(
@@ -156,9 +154,7 @@ button(district_borders, `plan_${plan_number}.geojson`)
 );
 ```
 
-```js
-display(md`### Plan ${plan_number} data`);
-```
+### Plan ${plan_number} data
 
 ```js
 display(table(district_data));

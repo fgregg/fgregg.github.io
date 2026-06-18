@@ -7,8 +7,7 @@ description: Why CPS enrollment is falling — fewer school-age children in Chic
 reactive: true
 ---
 
-```js
-display(md`
+
 The decline in CPS enrollment is due mainly to there being fewer children living
 in Chicago, and not families choosing to send their children to Catholic or
 other private schools. The market share of CPS vs private schools has remained
@@ -20,8 +19,7 @@ respondents are
 
 The survey question is as follows:
 <img src="/assets/data/cps-decline-and-market-share/census-school-question.png" alt="drawing" width="400"/>
-`);
-```
+
 
 ### Census School Age Children vs CPS K-12 Enrollment
 

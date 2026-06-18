@@ -7,8 +7,7 @@ description: Tracking whether Chicago Public Schools has certified enough staff 
 reactive: true
 ---
 
-```js
-display(md`According to CPS’s [online database](https://www.cps.edu/about/policies/physical-restraint-time-out-resources/), **${trained_required.toLocaleString()} required staff** have completed their training in legal and safer methods of physically restraining students and have a non-expired certification as of today.*
+According to CPS’s [online database](https://www.cps.edu/about/policies/physical-restraint-time-out-resources/), **${trained_required.toLocaleString()} required staff** have completed their training in legal and safer methods of physically restraining students and have a non-expired certification as of today.*
 
 There are at least **${remaining_schools.length} schools** that do not have enough certified staff.
 
@@ -16,20 +15,16 @@ CPS is under a corrective order from the Illinos State Board of Education (ISBE)
 
 Per [ISBE required staffing ratios](https://bunkum.us/CPS_PRTO_Trained_Staff_Ratio.pdf), CPS needs to train around ${total_required.toLocaleString()} employees. Out of that number, ${security_officers.toLocaleString()} are security officers; ${administrators.toLocaleString()} administrators; and ${staff.toLocaleString()} other staff. Of these groups, ${(certifications.filter(d => d.training_complete && d.expiration_date > due_date && d.class === 'security officer').length / security_officers).toLocaleString(undefined, { style: 'percent'})} of security officers have been trained; ${(d3.sum(nonfungible.map(d => Math.min(d.certified_admin, d.admin))) / administrators).toLocaleString(undefined, { style: 'percent'})} of administrators have been trained; and ${(d3.sum(nonfungible.map(d => Math.min(d.certified_other_staff, d.other_staff)))/ staff).toLocaleString(undefined, { style: 'percent'})} of other staff have been trained. CPS can choose to substitute additional trained staff for administrators.
 
-\* Some schools have trained more than the required number of staff, so there a total of ${(certifications.filter(d => d.training_complete && d.expiration_date > due_date).length).toLocaleString()} staff with current certifications.`);
-```
+\* Some schools have trained more than the required number of staff, so there a total of ${(certifications.filter(d => d.training_complete && d.expiration_date > due_date).length).toLocaleString()} staff with current certifications.
 
-```js
-display(md`## Reduced requirements
+## Reduced requirements
 As the 2023-2024 school year neared, CPS claimed that ISBE only requires that each school has all security officers trained and two non-security staff trained. This is a substantially lower standard and would only require CPS to train ${(non_charters.length * 2 + security_officers).toLocaleString()} staff.
 
 There are ${lower_trained_required.length} schools where all listed security officers have completed their training and their certifications have not expired as of today, and where at least two non-security staff will have valid certifications.
 
-**${non_charters.length - lower_trained_required.length} schools** still do not meet this lower standard.`);
-```
+**${non_charters.length - lower_trained_required.length} schools** still do not meet this lower standard.
 
-```js
-display(md`## Further reduced requirements
+## Further reduced requirements
 
 After school started, CPS claimed that ISBE is only requiring them to train two staff, of any type, per school.
 This would require training ${(non_charters.length * 2).toLocaleString()} staff.
@@ -39,8 +34,7 @@ Security staff, CPS seems to be claiming, do not need to trained.
 ${nonfungible.filter(
   (d) =>
     d.certified_admin + d.certified_other_staff + d.certified_security > 1).length} schools meet this standard, and **${nonfungible.filter(
-  (d) => d.certified_admin + d.certified_other_staff + d.certified_security < 2).length} school(s)** do not.`);
-```
+  (d) => d.certified_admin + d.certified_other_staff + d.certified_security < 2).length} school(s)** do not.
 
 ```js
 display(
