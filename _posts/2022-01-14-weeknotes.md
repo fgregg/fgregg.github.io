@@ -14,7 +14,7 @@ We finished a hiring round for a Developer I. Two things that were different:
 I think both went well. Our applicant and interview pool was strong.
 
 #### Union election delays
-[Aaron Sojourner](https://twitter.com/aaronsojourner) asked me if I
+[Aaron Sojourner](https://bsky.app/profile/aaronsojourner.org) asked me if I
 had the distribution of the delays between when workers ask the NLRB
 for an election and the election being held.
 
@@ -23,9 +23,9 @@ that](https://notes.labordata.bunkum.us/2022/01/13/distribution-of-days-to-elect
 
 After I put together the initial histogram, I decided to look at it by
 year. I'm glad I did because there was a pretty big change in 2015 due
-to Obama era rule changes to shorten delays. h/t [Dave Kamper](https://twitter.com/dskamper).
+to Obama era rule changes to shorten delays. h/t [Dave Kamper](https://bsky.app/profile/dskamper.bsky.social).
 
-I used a bit of code from [Ben Welsh](https://twitter.com/palewire) to
+I used a bit of code from [Ben Welsh](https://bsky.app/profile/palewi.re) to
 add a [download data link as spreadsheet
 (csv)](https://observablehq.com/@palewire/saving-csv) to the
 notebook. I'd like to do this for everything going forward.
@@ -40,7 +40,7 @@ other union formations occuring outside of the NLRB. I suspect that
 the [voluntary recognition notices filed to the NLRB are a partial
 picture](https://labordata.bunkum.us/voluntary_recognitions).
 
-[@UnionElections](https://twitter.com/UnionElections) sent me a list
+[@UnionElections](https://bsky.app/profile/unionelections.bsky.social) sent me a list
 of voluntary recognitions that he had compiled. When I get the [Q4
 2022 voluntary recognition data from the
 NLRB](https://www.muckrock.com/foi/united-states-of-america-10/voluntary-recognitions-october-1-2021-december-31-2021-122468/),

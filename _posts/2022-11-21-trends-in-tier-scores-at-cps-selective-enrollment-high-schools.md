@@ -17,7 +17,7 @@ These charts show how the average score, minimum score, and maximum score, per T
 
 Since 2010, CPS has changed the way that the academic scores were calculated three times: in 2015 and in both 2021 and 2022. The scores of the incoming students are not directly comparable across these changes. (h/t to [@chris430218](https://twitter.com/chris430218/status/1524800150505398273) for letting me know that the score calculation changed from 2021 to 2022.)
 
-The [data for this](https://docs.google.com/spreadsheets/d/1_qPr8OYuRU43aApCy0m0gQll_wNfETysVSjD_bNZWN4/edit#gid=1850105614) was compiled by [Denali Dasgupta](https://twitter.com/naxattack) and [Forest Gregg](https://mastodon.social/@fgregg).
+The [data for this](https://docs.google.com/spreadsheets/d/1_qPr8OYuRU43aApCy0m0gQll_wNfETysVSjD_bNZWN4/edit#gid=1850105614) was compiled by [Denali Dasgupta](https://bsky.app/profile/denali.bsky.social) and [Forest Gregg](https://bsky.app/profile/bunkum.us).
 
 ## Tier Trends All Schools
 
