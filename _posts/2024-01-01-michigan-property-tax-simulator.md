@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-01-01
 description: An interactive simulator of how Michigan property-tax proposals would change a homeowner's bill.
-reactive: true
+reactive: cellular
 ---
 
 Michigan property tax regime is mainly determined by two constitutional amendments to the Michigan constitution: the Headlee amendment and Proposal A.
@@ -37,8 +37,7 @@ If a property is improved by an addition or a new building, then the assessed va
 
 In a rising market, Proposal A means that that long-time property owners will pay a substantially smaller share of tax then newer owners, and when combined with the Headlee amendment, long-timer owners may pay less in absolute, real-dollars.
 
-```js
-display(md`## Simulation
+## Simulation
 
 In order to understand the dynamics of the tax system better, here is a dynamic simulation of the evolution of a tax system with the Headlee amendment and Proposal A.
 
@@ -46,8 +45,7 @@ We start with 100,000 parcels, each assessed at $100,000. We step forward year a
 
 We also set a ${inflation.toLocaleString(undefined, {style: "percent"})} rate. We also start the simulation with a tax rate of 0.005 (5 mills), and let the Headlee adjustments float that down if needed.
 
-You can adjust most of these numbers and see how that changes the assessed value, the taxable value, and tax revenue.`);
-```
+You can adjust most of these numbers and see how that changes the assessed value, the taxable value, and tax revenue.
 
 ```js
 const transfer_rate = view(Inputs.range([0, 0.1], {
@@ -183,8 +181,7 @@ Plot.plot({
 );
 ```
 
-```js
-display(md`## Proposal A as a transfer from newer property owners to longer-term property owners
+## Proposal A as a transfer from newer property owners to longer-term property owners
 
 In a rising property market, Proposal A transfers wealth from new property owners and property owners that have improved their property to longer-term owners and owners who have not made improvements.
 
@@ -203,8 +200,7 @@ ${tex.block`
 \text{transfer} = \text{bill}_{\text{prop A}} - \text{bill}_{\text{without prop A}} 
 `}
 
-If the transfer is positive, then the tax payer is subsidizing others tax payers' lower bills. If the transfer is negative, then tax payer is being subsidized by other tax payers.`);
-```
+If the transfer is positive, then the tax payer is subsidizing others tax payers' lower bills. If the transfer is negative, then tax payer is being subsidized by other tax payers.
 
 ```js
 display(
@@ -237,9 +233,7 @@ Plot.plot({
 );
 ```
 
-```js
-display(md`In our simulation, if we look at the transfers in the ninth and last year, we can see the average transfer is related to how long a property owner has owned a property (tenure). On average, property owners who just acquired the property are transferring ${average_transfer.find(d => d.tenure === 0).transfer.toLocaleString(undefined, {style: "currency", currency: "USD"})} to other tax payers and property owners that have had the property for 9 years are receiving ${(-1 * (average_transfer.find(d => d.tenure === 9).transfer)).toLocaleString(undefined, {style: "currency", currency: "USD"})} from other tax payers.`);
-```
+In our simulation, if we look at the transfers in the ninth and last year, we can see the average transfer is related to how long a property owner has owned a property (tenure). On average, property owners who just acquired the property are transferring ${average_transfer.find(d => d.tenure === 0).transfer.toLocaleString(undefined, {style: "currency", currency: "USD"})} to other tax payers and property owners that have had the property for 9 years are receiving ${(-1 * (average_transfer.find(d => d.tenure === 9).transfer)).toLocaleString(undefined, {style: "currency", currency: "USD"})} from other tax payers.
 
 ```js
 display(

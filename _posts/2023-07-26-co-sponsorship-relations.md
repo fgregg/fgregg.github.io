@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2023-07-26
 description: A co-sponsorship matrix of the 2019–2023 Chicago City Council, with aldermen ordered by an SVD factor analysis of bill sponsorship.
-reactive: true
+reactive: cellular
 ---
 
 This notebook shows the co-sponsor relation among the Chicago 2019-2023 legislative session alderman.

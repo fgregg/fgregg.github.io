@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-08-16
 description: Cumulative traffic deaths in Chicago by year, live from the city data portal, with each year compared to date.
-reactive: true
+reactive: cellular
 ---
 
 This graph shows the cumulative number of deaths from crashes in Chicago. Each line represents a different year.

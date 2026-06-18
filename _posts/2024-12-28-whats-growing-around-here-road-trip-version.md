@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-12-28
 description: What crop is grown right around you?
-reactive: true
+reactive: cellular
 ---
 
 Here are the crops and land cover at your location in 2023, according to the

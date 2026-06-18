@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-12-19
 description: A trick for finding random Spotify users by searching short prefixes of their user IDs.
-reactive: true
+reactive: cellular
 ---
 
 I like to listen to random playlists as way to get a flavor of strangers' personalities and encounter new music and genre.
@@ -19,11 +19,9 @@ A five character prefix usually returns between one and five users, and then you
 const updateButton = view(Inputs.button("Update"));
 ```
 
-```js
-display(md`App friendly:  <a href="https://play.spotify.com/search/${user_hash_prefix}" target="_blank">https://play.spotify.com/search/${user_hash_prefix}</a>
+App friendly:  <a href="https://play.spotify.com/search/${user_hash_prefix}" target="_blank">https://play.spotify.com/search/${user_hash_prefix}</a>
 
-More specific search for desktop:  <a href="https://play.spotify.com/search/${user_hash_prefix}/users" target="_blank">https://play.spotify.com/search/${user_hash_prefix}/users</a>`);
-```
+More specific search for desktop:  <a href="https://play.spotify.com/search/${user_hash_prefix}/users" target="_blank">https://play.spotify.com/search/${user_hash_prefix}/users</a>
 
 ```js
 const user_hash_prefix = (() => {
