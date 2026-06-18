@@ -2,12 +2,15 @@
 // Post-build step: pre-render static fallbacks for reactive posts.
 //
 // For each built reactive post in _site, load it in headless Chromium, let the
-// reactive cells compute against live data, then snapshot every chart cell:
-//   - an inline SVG fallback injected back into the mount div (and into
-//     feed.xml), so feed readers / no-JS / API-down viewers see the chart
-//     instead of a blank gap. When JS does run, the runtime's clear() wipes the
-//     fallback and mounts the live chart.
-//   - a PNG of the first chart, used as the og:image / twitter:image social card.
+// reactive cells compute against live data, then snapshot:
+//   - every chart cell: an inline SVG fallback injected back into the mount div
+//     (and a PNG into feed.xml + og:image), so feed readers / no-JS / API-down
+//     viewers see the chart instead of a blank gap.
+//   - every hydrating prose value: the resolved content of each <span
+//     data-reactive> baked into the static HTML, so crawlers / no-JS readers see
+//     the actual numbers (not blank gaps), and the live page has no value-fill
+//     layout shift (the span already holds the right content).
+// When JS runs, the runtime overwrites these fallbacks with the live values.
 //
 // Usage: node snapshot.mjs <site-dir>   (defaults to ../_site)
 import {chromium} from "playwright";
@@ -45,12 +48,11 @@ const site = process.argv[2] ? join(process.cwd(), process.argv[2]) : join(repo,
 const SITE_URL = process.env.SITE_URL || "https://labordata.github.io";
 
 // Incremental cache: rendering every post in Chromium is the slow part of a
-// build, so we keep the rendered SVG/PNG snapshots (+ a manifest of content
-// hashes) in .snapshot-cache, persisted across CI runs. A post is re-rendered
-// only when its built HTML changes; otherwise the cached artifacts are reused.
-// (Live-data charts get a slightly stale *fallback*, which is fine — the live
-// page re-renders with fresh data when JS runs.) Bump VERSION to force a rebuild.
-const SNAPSHOT_VERSION = "1";
+// build, so we keep the rendered artifacts (+ a manifest of content hashes) in
+// .snapshot-cache, persisted across CI runs. A post is re-rendered only when its
+// built HTML changes; otherwise the cached artifacts are reused. Bump VERSION to
+// force a rebuild.
+const SNAPSHOT_VERSION = "2";
 const cacheDir = join(repo, ".snapshot-cache");
 const manifestPath = join(cacheDir, "manifest.json");
 const manifest = existsSync(manifestPath)
@@ -65,32 +67,45 @@ function copyDir(from, to) {
   for (const name of readdirSync(from)) copyFileSync(join(from, name), join(to, name));
 }
 
-// Reuse a cached snapshot: copy artifacts back into _site and re-inject the SVG
+// String replacement that does NOT interpret `$` patterns in the replacement
+// (chart tick labels / values can contain "$5B" etc.). First occurrence only —
+// each id/ref is unique.
+function inject(html, find, replacement) {
+  return html.replace(find, () => replacement);
+}
+
+const emptyChart = (id) => `<div id="${id}" class="reactive-cell"></div>`;
+const emptySpan = (ref) => `<span data-reactive="${ref}"></span>`;
+
+// Bake cached/rendered chart SVGs + span values into a post's HTML.
+function bake(html, {charts, spans}, readSvg) {
+  for (const id of charts) html = inject(html, emptyChart(id), `<div id="${id}" class="reactive-cell">${readSvg(id)}</div>`);
+  for (const {ref, html: val} of spans) html = inject(html, emptySpan(ref), `<span data-reactive="${ref}">${val}</span>`);
+  return html;
+}
+
+// Reuse a cached snapshot: copy artifacts back into _site and re-inject the
 // fallbacks + social card into the freshly-built HTML, without launching Chromium.
 function applyCached(file, slug, builtHtml, cached) {
   copyDir(join(cacheDir, slug), snapDir(slug));
-  let html = builtHtml;
-  for (const id of cached.charts) {
-    const svg = readFileSync(join(cacheDir, slug, `${id}.svg`), "utf8");
-    const empty = `<div id="${id}" class="reactive-cell"></div>`;
-    html = html.replace(empty, `<div id="${id}" class="reactive-cell">${svg}</div>`);
-  }
+  const spansFile = join(cacheDir, slug, "spans.json");
+  const spans = existsSync(spansFile) ? JSON.parse(readFileSync(spansFile, "utf8")) : [];
+  let html = bake(builtHtml, {charts: cached.charts, spans},
+    (id) => readFileSync(join(cacheDir, slug, `${id}.svg`), "utf8"));
   if (cached.card && !html.includes('property="og:image"')) {
     const cardUrl = `${SITE_URL}/${cached.card}`;
-    html = html.replace(
-      "</head>",
+    html = inject(html, "</head>",
       `\n  <meta property="og:image" content="${cardUrl}">` +
-        `\n  <meta name="twitter:image" content="${cardUrl}">\n</head>`,
-    );
+      `\n  <meta name="twitter:image" content="${cardUrl}">\n</head>`);
   }
   writeFileSync(file, html);
-  return {file, charts: cached.charts, chartPngs: cached.chartPngs, card: cached.card};
+  return {file, charts: cached.charts, chartPngs: cached.chartPngs, card: cached.card, spans};
 }
 
 // Persist a freshly-rendered post's artifacts into the cache for next time.
 function persistToCache(slug, r, hash) {
   copyDir(snapDir(slug), join(cacheDir, slug));
-  manifest[slug] = {hash, charts: r.charts, chartPngs: r.chartPngs, card: r.card};
+  manifest[slug] = {hash, charts: r.charts, chartPngs: r.chartPngs, card: r.card, spanCount: r.spans.length};
 }
 
 // A built post is "reactive" if it imports the reactive runtime bundle.
@@ -111,59 +126,63 @@ function findReactivePosts(dir, found = []) {
 async function snapshotPost(page, file, baseUrl) {
   const url = baseUrl + "/" + relative(site, file).replace(/[\\]/g, "/");
   await page.goto(url, {waitUntil: "load", timeout: 60000});
-  // Wait for the reactive cells to actually mount charts. Data cells fetch live
-  // (BLS windows + NLRB SQL) and can take several seconds, so poll until the
-  // number of rendered SVGs stops growing rather than guessing a fixed delay.
+
+  // Wait for something to render: a chart SVG, or — for hydrating prose — every
+  // value span to fill. Live data cells (BLS/NLRB) can take several seconds.
   try {
-    await page.waitForFunction(() => document.querySelector(".reactive-cell svg"), {timeout: 30000});
+    await page.waitForFunction(() => {
+      const spans = [...document.querySelectorAll("[data-reactive]")];
+      const spansReady = spans.length > 0 && spans.every((s) => s.textContent.trim() !== "");
+      return document.querySelector(".reactive-cell svg") || spansReady;
+    }, {timeout: 30000});
   } catch {
     return null; // nothing rendered within budget
   }
-  // Charts mount at different times — the NLRB-dependent chart resolves only
-  // after its slow SQL fetch, so the SVG count can sit at a false plateau for
-  // seconds before the last chart appears. Poll for a generous minimum, then
-  // require the count to hold steady across several consecutive checks.
-  let prev = -1, stable = 0;
+  // Charts mount at different times (a slow NLRB SQL chart can lag ~8s); span
+  // values fill as data resolves. Poll until BOTH the SVG count and the filled-
+  // span count hold steady before capturing.
+  let prev = "", stable = 0;
   for (let i = 0; i < 80; i++) {
-    const n = await page.evaluate(() => document.querySelectorAll(".reactive-cell svg").length);
-    stable = n === prev ? stable + 1 : 0;
-    // The NLRB charts depend on the DatasetteClient (extra module load + a slow
-    // CSV query), so they can sit at a false plateau for ~8s before appearing.
-    // Require ~14s elapsed AND 8 stable checks (~4s) before declaring it settled.
+    const sig = await page.evaluate(() => {
+      const svgs = document.querySelectorAll(".reactive-cell svg").length;
+      const filled = [...document.querySelectorAll("[data-reactive]")].filter((s) => s.textContent.trim() !== "").length;
+      return svgs + ":" + filled;
+    });
+    stable = sig === prev ? stable + 1 : 0;
     if (i >= 28 && stable >= 8) break;
-    prev = n;
+    prev = sig;
     await page.waitForTimeout(500);
   }
 
-  // collect, per mount div, the rendered SVG markup (if any)
-  const cells = await page.evaluate(() => {
-    const out = [];
+  // Collect chart SVGs and filled prose value spans.
+  const {cells, spans} = await page.evaluate(() => {
+    const cells = [];
     for (const div of document.querySelectorAll(".reactive-cell")) {
       const svg = div.querySelector("svg");
-      out.push({id: div.id, svg: svg ? svg.outerHTML : null});
+      cells.push({id: div.id, svg: svg ? svg.outerHTML : null});
     }
-    return out;
+    const spans = [];
+    for (const el of document.querySelectorAll("[data-reactive]")) {
+      const html = el.innerHTML;
+      if (html.trim() !== "") spans.push({ref: el.getAttribute("data-reactive"), html});
+    }
+    return {cells, spans};
   });
 
   const withCharts = cells.filter((c) => c.svg);
-  if (!withCharts.length) return null;
+  if (!withCharts.length && !spans.length) return null; // nothing to bake
 
-  // write SVG fallbacks into _site (the deploy artifact), under assets/snapshots/
   const slug = relative(site, file).replace(/\.html$/, "").replace(/[\/\\]/g, "-");
-  const outDir = join(site, "assets", "snapshots", slug);
+  const outDir = snapDir(slug);
   mkdirSync(outDir, {recursive: true});
 
   let html = readFileSync(file, "utf8");
-  const chartPngs = {}; // id -> relative PNG path (for the feed)
+
+  // Chart SVG fallbacks + per-chart PNGs (for the feed / social card).
+  const chartPngs = {};
   for (const {id, svg} of withCharts) {
     writeFileSync(join(outDir, `${id}.svg`), svg);
-    // page fallback: inline the SVG as the mount div's initial content (crisp,
-    // scalable, works with no JS).
-    const empty = `<div id="${id}" class="reactive-cell"></div>`;
-    html = html.replace(empty, `<div id="${id}" class="reactive-cell">${svg}</div>`);
-    // feed fallback: a rasterized PNG. Feeds reference it by URL (so the feed
-    // stays tiny) and feed readers render <img> reliably, unlike inline SVG
-    // which many of them strip. Screenshot the mount div, not the bare SVG.
+    html = inject(html, emptyChart(id), `<div id="${id}" class="reactive-cell">${svg}</div>`);
     const el = await page.$(`#${id}`);
     if (el) {
       const pngRel = `assets/snapshots/${slug}/${id}.png`;
@@ -172,31 +191,34 @@ async function snapshotPost(page, file, baseUrl) {
     }
   }
 
-  // social card = the first chart's PNG (reuse the per-chart raster above).
-  const firstId = withCharts[0].id;
-  const cardRel = chartPngs[firstId] ?? `assets/snapshots/${slug}/card.png`;
-  if (!chartPngs[firstId]) {
-    const el = await page.$(`#${firstId}`);
-    if (el) await el.screenshot({path: join(site, cardRel)});
-  }
-  const cardUrl = `${SITE_URL}/${cardRel}`;
-  // add og:image / twitter:image to <head> if not already present
-  if (!html.includes('property="og:image"')) {
-    const tags =
-      `\n  <meta property="og:image" content="${cardUrl}">` +
-      `\n  <meta name="twitter:image" content="${cardUrl}">`;
-    html = html.replace("</head>", `${tags}\n</head>`);
+  // Prose value spans: bake the resolved content + persist for the cache.
+  for (const {ref, html: val} of spans) html = inject(html, emptySpan(ref), `<span data-reactive="${ref}">${val}</span>`);
+  writeFileSync(join(outDir, "spans.json"), JSON.stringify(spans));
+
+  // Social card = the first chart's PNG (chart posts only).
+  let cardRel = null;
+  if (withCharts.length) {
+    const firstId = withCharts[0].id;
+    cardRel = chartPngs[firstId] ?? `assets/snapshots/${slug}/card.png`;
+    if (!chartPngs[firstId]) {
+      const el = await page.$(`#${firstId}`);
+      if (el) await el.screenshot({path: join(site, cardRel)});
+    }
+    if (!html.includes('property="og:image"')) {
+      const cardUrl = `${SITE_URL}/${cardRel}`;
+      html = inject(html, "</head>",
+        `\n  <meta property="og:image" content="${cardUrl}">` +
+        `\n  <meta name="twitter:image" content="${cardUrl}">`);
+    }
   }
 
   writeFileSync(file, html);
-  return {file, charts: withCharts.map((c) => c.id), chartPngs, card: cardRel};
+  return {file, charts: withCharts.map((c) => c.id), chartPngs, card: cardRel, spans};
 }
 
-// Inject chart fallbacks into feed.xml as hosted-PNG <img> references (not inline
-// SVG): the feed aggregates every post into one file — inlining the SVGs pushed
-// it past Cloudflare Pages' 25 MiB limit (a dot-density map alone is several
-// MiB) — and many feed readers strip inline <svg> anyway. A URL-referenced PNG
-// keeps the feed tiny and renders reliably in readers.
+// Inject fallbacks into feed.xml: chart PNGs as hosted-<img> (inline SVG is too
+// big — past Cloudflare Pages' 25 MiB limit — and feed readers strip it), and
+// baked span values inline (so feed readers see the numbers in the prose).
 function patchFeed(results) {
   const feed = join(site, "feed.xml");
   if (!existsSync(feed)) return;
@@ -205,10 +227,11 @@ function patchFeed(results) {
     for (const id of r.charts) {
       const pngRel = r.chartPngs?.[id];
       if (!pngRel) continue;
-      // feed content is CDATA-wrapped HTML, so a raw string replace works
-      const empty = `<div id="${id}" class="reactive-cell"></div>`;
       const img = `<div id="${id}" class="reactive-cell"><img src="${SITE_URL}/${pngRel}" alt="chart" style="max-width:100%"></div>`;
-      xml = xml.split(empty).join(img);
+      xml = xml.split(emptyChart(id)).join(img);
+    }
+    for (const {ref, html: val} of r.spans ?? []) {
+      xml = xml.split(emptySpan(ref)).join(`<span data-reactive="${ref}">${val}</span>`);
     }
   }
   writeFileSync(feed, xml);
@@ -234,12 +257,13 @@ for (const file of posts) {
   const cacheHit =
     cached &&
     cached.hash === hash &&
-    cached.charts.every((id) => existsSync(join(cacheDir, slug, `${id}.svg`)));
+    cached.charts.every((id) => existsSync(join(cacheDir, slug, `${id}.svg`))) &&
+    (!cached.spanCount || existsSync(join(cacheDir, slug, "spans.json")));
 
   if (cacheHit) {
     results.push(applyCached(file, slug, builtHtml, cached));
     reused++;
-    console.log(`snapshot: ${relative(site, file)} — reused cache (${cached.charts.length} charts)`);
+    console.log(`snapshot: ${relative(site, file)} — reused cache (${cached.charts.length} charts, ${cached.spanCount ?? 0} values)`);
     continue;
   }
 
@@ -248,10 +272,10 @@ for (const file of posts) {
     persistToCache(slug, r, hash);
     results.push(r);
     rendered++;
-    console.log(`snapshot: ${relative(site, r.file)} — rendered ${r.charts.length} charts, card ${r.card}`);
+    console.log(`snapshot: ${relative(site, r.file)} — rendered ${r.charts.length} charts, ${r.spans.length} values`);
   } else {
-    // Don't cache "no charts" — it may be a transient render timeout; retry next build.
-    console.log(`snapshot: ${relative(site, file)} — no charts rendered (skipped)`);
+    // Don't cache "nothing rendered" — it may be a transient timeout; retry next build.
+    console.log(`snapshot: ${relative(site, file)} — nothing rendered (skipped)`);
   }
 }
 await browser.close();
