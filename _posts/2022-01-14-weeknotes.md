@@ -19,7 +19,7 @@ had the distribution of the delays between when workers ask the NLRB
 for an election and the election being held.
 
 I put together a [Observable notebook to answer
-that](https://observablehq.com/@fgregg/distribution-of-days-from-filing-to-first-election).
+that](https://notes.labordata.bunkum.us/2022/01/13/distribution-of-days-to-election).
 
 After I put together the initial histogram, I decided to look at it by
 year. I'm glad I did because there was a pretty big change in 2015 due
