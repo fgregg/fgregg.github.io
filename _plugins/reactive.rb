@@ -127,7 +127,24 @@ module Reactive
     HTML
   end
 
-  def self.render(doc)
+  # Resolve Liquid ({% post_url %}, {{ … }}) in the source BEFORE we render
+  # Markdown. markdown-it can't parse a link destination containing the spaces in
+  # a raw `{% … %}` tag, so it would emit a literal `[text](…)`; and Jekyll's own
+  # Liquid pass runs only AFTER this pre_render hook. (Jekyll re-runs Liquid on
+  # our HTML output afterward — harmless, nothing left to resolve.)
+  def self.resolve_liquid(doc, payload)
+    opts = doc.site.config["liquid"] || {}
+    info = {
+      registers: {site: doc.site, page: payload["page"]},
+      strict_filters: opts["strict_filters"],
+      strict_variables: opts["strict_variables"],
+    }
+    template = doc.site.liquid_renderer.file(doc.relative_path).parse(doc.content)
+    doc.content = template.render!(payload, info)
+  end
+
+  def self.render(doc, payload)
+    resolve_liquid(doc, payload)
     cells = split_cells(doc.content)
     return if cells.empty?
     transpiled = transpile(cells, doc.relative_path)
@@ -136,7 +153,7 @@ module Reactive
   end
 end
 
-Jekyll::Hooks.register [:posts, :documents], :pre_render do |doc|
+Jekyll::Hooks.register [:posts, :documents], :pre_render do |doc, payload|
   next unless doc.data["reactive"]
   # A post triggers this hook under both the :posts and :documents owners, so it
   # fires twice; guard on the already-injected runtime import so we only transform
@@ -144,5 +161,5 @@ Jekyll::Hooks.register [:posts, :documents], :pre_render do |doc|
   # in --watch.)
   next if doc.content.include?(Reactive::RUNTIME)
 
-  Reactive.render(doc)
+  Reactive.render(doc, payload)
 end
