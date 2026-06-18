@@ -52,7 +52,7 @@ const SITE_URL = process.env.SITE_URL || "https://labordata.github.io";
 // .snapshot-cache, persisted across CI runs. A post is re-rendered only when its
 // built HTML changes; otherwise the cached artifacts are reused. Bump VERSION to
 // force a rebuild.
-const SNAPSHOT_VERSION = "2";
+const SNAPSHOT_VERSION = "3";
 const cacheDir = join(repo, ".snapshot-cache");
 const manifestPath = join(cacheDir, "manifest.json");
 const manifest = existsSync(manifestPath)
@@ -78,8 +78,8 @@ const emptyChart = (id) => `<div id="${id}" class="reactive-cell"></div>`;
 const emptySpan = (ref) => `<span data-reactive="${ref}"></span>`;
 
 // Bake cached/rendered chart SVGs + span values into a post's HTML.
-function bake(html, {charts, spans}, readSvg) {
-  for (const id of charts) html = inject(html, emptyChart(id), `<div id="${id}" class="reactive-cell">${readSvg(id)}</div>`);
+function bake(html, {charts, spans}, readChart) {
+  for (const id of charts) html = inject(html, emptyChart(id), `<div id="${id}" class="reactive-cell">${readChart(id)}</div>`);
   for (const {ref, html: val} of spans) html = inject(html, emptySpan(ref), `<span data-reactive="${ref}">${val}</span>`);
   return html;
 }
@@ -91,7 +91,7 @@ function applyCached(file, slug, builtHtml, cached) {
   const spansFile = join(cacheDir, slug, "spans.json");
   const spans = existsSync(spansFile) ? JSON.parse(readFileSync(spansFile, "utf8")) : [];
   let html = bake(builtHtml, {charts: cached.charts, spans},
-    (id) => readFileSync(join(cacheDir, slug, `${id}.svg`), "utf8"));
+    (id) => readFileSync(join(cacheDir, slug, `${id}.html`), "utf8"));
   if (cached.card && !html.includes('property="og:image"')) {
     const cardUrl = `${SITE_URL}/${cached.card}`;
     html = inject(html, "</head>",
@@ -158,8 +158,11 @@ async function snapshotPost(page, file, baseUrl) {
   const {cells, spans} = await page.evaluate(() => {
     const cells = [];
     for (const div of document.querySelectorAll(".reactive-cell")) {
-      const svg = div.querySelector("svg");
-      cells.push({id: div.id, svg: svg ? svg.outerHTML : null});
+      // Bake the whole rendered cell — the Plot <figure> (title + legend + chart
+      // + its scoped <style>) — not just the first <svg>, which for a legended
+      // chart is a tiny 15x15 legend swatch.
+      const chart = div.querySelector("svg") ? div.innerHTML : null;
+      cells.push({id: div.id, chart});
     }
     const spans = [];
     for (const el of document.querySelectorAll("[data-reactive]")) {
@@ -169,7 +172,7 @@ async function snapshotPost(page, file, baseUrl) {
     return {cells, spans};
   });
 
-  const withCharts = cells.filter((c) => c.svg);
+  const withCharts = cells.filter((c) => c.chart);
   if (!withCharts.length && !spans.length) return null; // nothing to bake
 
   const slug = relative(site, file).replace(/\.html$/, "").replace(/[\/\\]/g, "-");
@@ -180,9 +183,9 @@ async function snapshotPost(page, file, baseUrl) {
 
   // Chart SVG fallbacks + per-chart PNGs (for the feed / social card).
   const chartPngs = {};
-  for (const {id, svg} of withCharts) {
-    writeFileSync(join(outDir, `${id}.svg`), svg);
-    html = inject(html, emptyChart(id), `<div id="${id}" class="reactive-cell">${svg}</div>`);
+  for (const {id, chart} of withCharts) {
+    writeFileSync(join(outDir, `${id}.html`), chart);
+    html = inject(html, emptyChart(id), `<div id="${id}" class="reactive-cell">${chart}</div>`);
     const el = await page.$(`#${id}`);
     if (el) {
       const pngRel = `assets/snapshots/${slug}/${id}.png`;
@@ -257,7 +260,7 @@ for (const file of posts) {
   const cacheHit =
     cached &&
     cached.hash === hash &&
-    cached.charts.every((id) => existsSync(join(cacheDir, slug, `${id}.svg`))) &&
+    cached.charts.every((id) => existsSync(join(cacheDir, slug, `${id}.html`))) &&
     (!cached.spanCount || existsSync(join(cacheDir, slug, "spans.json")));
 
   if (cacheHit) {
