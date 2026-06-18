@@ -19,46 +19,47 @@ As a consequence, detailed data on the types of people who have received a CityK
 
 ```js
 display(
-Plot.plot({
-  title: "City Keys printed, cumulative by year",
-  color: { type: "categorical", legend: true },
-  y: { grid: true },
-  x: {
-    transform: (d) => d3.utcDay.offset(d, (2000 - d.getUTCFullYear()) * 365.24),
-    tickFormat: "%b",
-    line: true
-  },
-  marginLeft: 50,
-  marginRight: 30,
-  marks: [
-    Plot.ruleY([0]),
-    Plot.lineY(
-      citykeys,
-      Plot.mapY("cumsum", {
-        x: "date",
-        y: "# of cards printed in year",
-        z: ({ date }) => date.getUTCFullYear(),
-        curve: "step-before",
-        stroke: ({ date }) => date.getUTCFullYear().toString(),
-        tip: true
-      })
-    ),
-    Plot.text(
-      citykeys,
-      Plot.selectLast(
+  Plot.plot({
+    title: "City Keys printed, cumulative by year",
+    color: { type: "categorical", legend: true },
+    y: { grid: true },
+    x: {
+      transform: (d) =>
+        d3.utcDay.offset(d, (2000 - d.getUTCFullYear()) * 365.24),
+      tickFormat: "%b",
+      line: true,
+    },
+    marginLeft: 50,
+    marginRight: 30,
+    marks: [
+      Plot.ruleY([0]),
+      Plot.lineY(
+        citykeys,
         Plot.mapY("cumsum", {
           x: "date",
           y: "# of cards printed in year",
           z: ({ date }) => date.getUTCFullYear(),
-          text: ({ date }) => date.getUTCFullYear().toString(),
-          textAnchor: "start",
-          dx: 3,
-          dy: -2
-        })
-      )
-    )
-  ]
-})
+          curve: "step-before",
+          stroke: ({ date }) => date.getUTCFullYear().toString(),
+          tip: true,
+        }),
+      ),
+      Plot.text(
+        citykeys,
+        Plot.selectLast(
+          Plot.mapY("cumsum", {
+            x: "date",
+            y: "# of cards printed in year",
+            z: ({ date }) => date.getUTCFullYear(),
+            text: ({ date }) => date.getUTCFullYear().toString(),
+            textAnchor: "start",
+            dx: 3,
+            dy: -2,
+          }),
+        ),
+      ),
+    ],
+  }),
 );
 ```
 
@@ -107,9 +108,10 @@ const htmlTable = (rows) => {
       </thead>
       <tbody>
         ${rows.map(
-          (r) => html`<tr>
-            ${cols.map((c) => html`<td>${r[c]}</td>`)}
-          </tr>`,
+          (r) =>
+            html`<tr>
+              ${cols.map((c) => html`<td>${r[c]}</td>`)}
+            </tr>`,
         )}
       </tbody>
     </table>
@@ -119,36 +121,30 @@ const htmlTable = (rows) => {
 
 ```js
 display(
-Plot.plot({
-  y: { grid: true, label: "total cards issued" },
-  x: { grid: true },
-  marginLeft: 50,
-  marginRight: 30,
-  marks: [
-    Plot.ruleY([0]),
-    Plot.lineY(
-      citykeys.sort((a, b) => a.date.getTime() - b.date.getTime()),
-      Plot.mapY("cumsum", {
-        x: "date",
-        y: "# of cards printed in year",
-        curve: "step-before"
-      })
-    )
-  ]
-})
+  Plot.plot({
+    y: { grid: true, label: "total cards issued" },
+    x: { grid: true },
+    marginLeft: 50,
+    marginRight: 30,
+    marks: [
+      Plot.ruleY([0]),
+      Plot.lineY(
+        citykeys.sort((a, b) => a.date.getTime() - b.date.getTime()),
+        Plot.mapY("cumsum", {
+          x: "date",
+          y: "# of cards printed in year",
+          curve: "step-before",
+        }),
+      ),
+    ],
+  }),
 );
 ```
 
 ```js
 const citykeys = d3.csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vRLE--30syJggc-fvgMBthVPj_hu7jRQJAJaFmtEZL83qsPi8AjQ51WEOgrRZd_SDlzWGRea_SIyTJp/pub?gid=435023903&single=true&output=csv",
-  d3.autoType
-);
-```
-
-```js
-display(
-citykeys[citykeys.length - 1]
+  d3.autoType,
 );
 ```
 

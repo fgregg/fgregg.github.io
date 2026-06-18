@@ -9,7 +9,7 @@ reactive: true
 
 I've compiled [data on historic budgets and force sizes](https://docs.google.com/spreadsheets/d/1kC_G7Qa1WyzKIl8JvmfrNMw0mNcNOQOOeP-qKYhq6QA/edit#gid=0) for the Chicago police department, as well as data on the population of Chicago and index crimes.
 
-## Force size
+# Force size
 
 The number of sworn-officers per year, i.e. the number of CPD employees who are licensed law enforcement officers with the power to arrest.
 
@@ -55,7 +55,7 @@ display(
 );
 ```
 
-## Index Crimes by Sworn officers
+# Index Crimes by Sworn officers
 
 Index crimes are a standardized classification of crimes that [police departments voluntarily report to the FBI](https://en.wikipedia.org/wiki/Uniform_Crime_Reports). We use the total number of index crimes here, except rape which was redefined as a category during this period.
 
@@ -80,7 +80,7 @@ display(
 );
 ```
 
-## Appropriated Budget
+# Appropriated Budget
 
 This shows the appropriated budget for the Chicago police department. Another interesting measure would be actual spending.
 
@@ -148,7 +148,11 @@ display(
     title:
       "Chicago Police Department Appropriations per reported index crime, 2023 dollars",
     marginLeft: 50,
-    y: { label: "Appropriations per index crime", tickFormat: "$,r", grid: true },
+    y: {
+      label: "Appropriations per index crime",
+      tickFormat: "$,r",
+      grid: true,
+    },
     x: { label: "year" },
     marks: [
       Plot.ruleY([0]),

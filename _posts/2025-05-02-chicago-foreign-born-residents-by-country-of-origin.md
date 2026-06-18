@@ -15,26 +15,26 @@ The number of Chicago residents born in Mexico has been declining, but they stil
 
 ```js
 display(
-Plot.plot({
-  width: 200,
-  height: 200,
-  y: {
-    grid: true,
-    tickFormat: "2s",
-    nice: true,
-    label: "people"
-  },
-  marks: [
-    Plot.frame(),
-    Plot.line(data, {
-      filter: (d) => d.country === "Mexico",
-      x: (d) => new Date(d.year.toString()),
-      y: "value",
-      stroke: "country",
-      title: "country"
-    })
-  ]
-})
+  Plot.plot({
+    width: 200,
+    height: 200,
+    y: {
+      grid: true,
+      tickFormat: "2s",
+      nice: true,
+      label: "people",
+    },
+    marks: [
+      Plot.frame(),
+      Plot.line(data, {
+        filter: (d) => d.country === "Mexico",
+        x: (d) => new Date(d.year.toString()),
+        y: "value",
+        stroke: "country",
+        title: "country",
+      }),
+    ],
+  }),
 );
 ```
 
@@ -42,46 +42,46 @@ Here are the trends for the other 13 countries.
 
 ```js
 display(
-Plot.plot({
-  y: {
-    grid: true,
-    tickFormat: "2s",
-    nice: true,
-    label: "people"
-  },
-  fx: { axis: null },
-  fy: { axis: null },
-  marks: [
-    Plot.frame(),
-    Plot.line(without_mexico, {
-      x: (d) => new Date(d.year.toString()),
-      y: "value",
-      stroke: "country",
-      title: "country",
-      fx: (d) => fxy(d.country)[0],
-      fy: (d) => fxy(d.country)[1],
-      tip: true
-    }),
-    Plot.text(
-      without_mexico,
-      Plot.selectFirst({
-        text: (d) =>
-          d.country === "China, excluding Hong Kong and Taiwan"
-            ? "China"
-            : d.country === "Korea"
-            ? "South Korea"
-            : d.country,
-        x: new Date(last_year.toString()),
-        y: 55000,
-        dx: -4,
-        textAnchor: "end",
-        fontWeight: "bold",
+  Plot.plot({
+    y: {
+      grid: true,
+      tickFormat: "2s",
+      nice: true,
+      label: "people",
+    },
+    fx: { axis: null },
+    fy: { axis: null },
+    marks: [
+      Plot.frame(),
+      Plot.line(without_mexico, {
+        x: (d) => new Date(d.year.toString()),
+        y: "value",
+        stroke: "country",
+        title: "country",
         fx: (d) => fxy(d.country)[0],
-        fy: (d) => fxy(d.country)[1]
-      })
-    )
-  ]
-})
+        fy: (d) => fxy(d.country)[1],
+        tip: true,
+      }),
+      Plot.text(
+        without_mexico,
+        Plot.selectFirst({
+          text: (d) =>
+            d.country === "China, excluding Hong Kong and Taiwan"
+              ? "China"
+              : d.country === "Korea"
+                ? "South Korea"
+                : d.country,
+          x: new Date(last_year.toString()),
+          y: 55000,
+          dx: -4,
+          textAnchor: "end",
+          fontWeight: "bold",
+          fx: (d) => fxy(d.country)[0],
+          fy: (d) => fxy(d.country)[1],
+        }),
+      ),
+    ],
+  }),
 );
 ```
 
@@ -103,20 +103,33 @@ const fetchCensusGroup = async function (
   const geography = zipped.find((d) => d[0] === "NAME")[1];
   const vars = zipped
     .filter((d) => d[0] !== "NAME")
-    .map(([variable, value]) => ({ year, geography, variable, value: Number(value) }));
+    .map(([variable, value]) => ({
+      year,
+      geography,
+      variable,
+      value: Number(value),
+    }));
   if (expand_var) {
     const var_response = await fetch(
       `https://census-api.bunkum.us/data/${year}/acs/acs1/groups/${base_var}.json`,
     );
     const var_data = await var_response.json();
-    return vars.map((d) => ({ ...d, variable_definition: var_data.variables[d.variable] }));
+    return vars.map((d) => ({
+      ...d,
+      variable_definition: var_data.variables[d.variable],
+    }));
   }
   return vars;
 };
 ```
 
 ```js
-const censusChicagoGroupYears = async (base_var, start = 2005, stop = 2021, expand_var = false) => {
+const censusChicagoGroupYears = async (
+  base_var,
+  start = 2005,
+  stop = 2021,
+  expand_var = false,
+) => {
   const variables_promises = d3
     .range(start, stop + 1)
     .filter((d) => d !== 2020)
@@ -125,11 +138,6 @@ const censusChicagoGroupYears = async (base_var, start = 2005, stop = 2021, expa
 };
 ```
 
-```js
-display(
-data.filter((d) => d.country === "Mexico")
-);
-```
 
 ```js
 const raw_data = censusChicagoGroupYears("B05006", 2005, last_year, true);
@@ -140,8 +148,8 @@ const data = raw_data
   .map((d) => ({
     ...d,
     country: one_percenters.find((e) =>
-      d.variable_definition?.label.endsWith(e)
-    )
+      d.variable_definition?.label.endsWith(e),
+    ),
   }))
   .filter((d) => d.country)
   .filter((d) => d.variable.endsWith("E"));
@@ -157,25 +165,26 @@ const one_percenters = raw_data
     (d) =>
       d.year === last_year &&
       d.value / total >= 0.01 &&
-      d.variable.endsWith("E")
+      d.variable.endsWith("E"),
   )
   .map(
     (d) =>
       d.variable_definition?.label.split("!!")[
         d.variable_definition?.label.split("!!").length - 1
-      ]
+      ],
   )
   .filter((d) => d && !d?.endsWith(":"));
 ```
 
 ```js
 const total = raw_data.find(
-  (d) => d.variable_definition?.label === "Estimate!!Total:" && d.year === last_year
+  (d) =>
+    d.variable_definition?.label === "Estimate!!Total:" && d.year === last_year,
 ).value;
 ```
 
 ```js
-const last_year = 2023;
+const last_year = 2024;
 ```
 
 ```js

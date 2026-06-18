@@ -27,7 +27,7 @@ Proposal A is about property taxes of individual parcels. So we need to talk abo
 
 Assessed value is the half the the price that the local assessor believes that a property could be sold for. The assessor further divides that value into land value and improvement value. Assessment is itself quite a complicated field, which will will not dwell on here.
 
-Before proposal A, the tax for a parcel was the assessed value times the local tax rate. While the Headlee amendment said overall increases in land value couldn't lead to higher tax revenue (in real dollors), if the land value of one parcel increased more than parcels in other parts of the city, then the tax bill would increase relatively, and often absolutely.
+Before proposal A, the tax for a parcel was the assessed value times the local tax rate. While the Headlee amendment said overall increases in land value couldn't lead to higher tax revenue (in real dollars), if the land value of one parcel increased more than parcels in other parts of the city, then the tax bill would increase relatively, and often absolutely.
 
 The 1994 [Proposal A](https://www.legislature.mi.gov/Laws/MCL?objectName=mcl-Article-IX-3) constitutional amendment introduced "taxable value." When the ownership of a property is transferred, the taxable value is set to the assessed value. However, every subsequent year, the taxable value is only allowed to increase by at most the rate of inflation or 5% (whichever is less). The taxable value is also not allowed to be more than the assessed value, so if property value growth is slow or negative, then taxable value will converge to the assessed value.
 
@@ -48,136 +48,148 @@ We also set a ${inflation.toLocaleString(undefined, {style: "percent"})} rate. W
 You can adjust most of these numbers and see how that changes the assessed value, the taxable value, and tax revenue.
 
 ```js
-const transfer_rate = view(Inputs.range([0, 0.1], {
-  label: "Annual Transfer Rate (how many properties are sold in a year)",
-  step: 0.001,
-  value: 0.02
-}));
+const transfer_rate = view(
+  Inputs.range([0, 0.1], {
+    label: "Annual Transfer Rate (how many properties are sold in a year)",
+    step: 0.001,
+    value: 0.02,
+  }),
+);
 ```
 
 ```js
-const inflation = view(Inputs.range([0, 0.1], {
-  label: "Annual Inflation",
-  step: 0.001,
-  value: 0.02
-}));
+const inflation = view(
+  Inputs.range([0, 0.1], {
+    label: "Annual Inflation",
+    step: 0.001,
+    value: 0.02,
+  }),
+);
 ```
 
 ```js
-const property_value_growth_rate = view(Inputs.range([0, 0.2], {
-  label: "Annual Property Value Growth Rate",
-  step: 0.01,
-  value: 0.05
-}));
+const property_value_growth_rate = view(
+  Inputs.range([0, 0.2], {
+    label: "Annual Property Value Growth Rate",
+    step: 0.01,
+    value: 0.05,
+  }),
+);
 ```
 
 ```js
-const improvement_rate = view(Inputs.range([0, 0.2], {
-  label: "Annual proportion of properties improved",
-  step: 0.001,
-  value: 0.01
-}));
+const improvement_rate = view(
+  Inputs.range([0, 0.2], {
+    label: "Annual proportion of properties improved",
+    step: 0.001,
+    value: 0.01,
+  }),
+);
 ```
 
 ```js
-const improvement_increase = view(Inputs.range([0, 1], {
-  label: "Average value of improvement as proportion of property value",
-  step: 0.01,
-  value: 0.1
-}));
+const improvement_increase = view(
+  Inputs.range([0, 1], {
+    label: "Average value of improvement as proportion of property value",
+    step: 0.01,
+    value: 0.1,
+  }),
+);
 ```
 
 ```js
-const real_dollars = view(Inputs.toggle({
-  label: "Inflation Adjusted",
-  value: true
-}));
-```
-
-```js
-display(
-Plot.plot({
-  title: "Simulated Assessed and Taxable Income",
-  subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
-  y: { label: "$ Billions", tickFormat: (d) => d / 1000000000, nice: true },
-  marginRight: 100,
-  marks: [
-    Plot.line(overall_evolution, {
-      x: "year",
-      y: (d) =>
-        d.assessed_value / (real_dollars ? (1 + inflation) ** d.year : 1),
-      stroke: "#4269d0"
-    }),
-    Plot.text(
-      overall_evolution,
-      Plot.selectLast({
-        x: "year",
-        y: (d) =>
-          d.assessed_value / (real_dollars ? (1 + inflation) ** d.year : 1),
-        text: (d) => "Total assessed value",
-        textAnchor: "start",
-        dx: 3
-      })
-    ),
-    Plot.line(overall_evolution, {
-      x: "year",
-      y: (d) =>
-        d.taxable_value / (real_dollars ? (1 + inflation) ** d.year : 1),
-      stroke: "#efb118"
-    }),
-    Plot.text(
-      overall_evolution,
-      Plot.selectLast({
-        x: "year",
-        y: (d) =>
-          d.taxable_value / (real_dollars ? (1 + inflation) ** d.year : 1),
-        text: (d) => "Total taxable value",
-        textAnchor: "start",
-        dx: 3
-      })
-    )
-  ]
-})
+const real_dollars = view(
+  Inputs.toggle({
+    label: "Inflation Adjusted",
+    value: true,
+  }),
 );
 ```
 
 ```js
 display(
-Plot.plot({
-  title: "Simulated Tax Revenue",
-  subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
-  y: {
-    label: "$ Millions",
-    tickFormat: (d) => d / 1000000,
-    domain:
-      real_dollars && improvement_rate * improvement_increase === 0.0
-        ? [5000000, 5010000]
-        : undefined,
-    nice: true
-  },
-  marginRight: 100,
-  marks: [
-    Plot.line(overall_evolution, {
-      x: "year",
-      y: (d, i) =>
-        (d.taxable_value * headlee_rates[i]) /
-        (real_dollars ? (1 + inflation) ** d.year : 1),
-      stroke: "#ff725c"
-    }),
-    Plot.text(
-      overall_evolution,
-      Plot.selectLast({
+  Plot.plot({
+    title: "Simulated Assessed and Taxable Income",
+    subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
+    y: { label: "$ Billions", tickFormat: (d) => d / 1000000000, nice: true },
+    marginRight: 100,
+    marks: [
+      Plot.line(overall_evolution, {
+        x: "year",
+        y: (d) =>
+          d.assessed_value / (real_dollars ? (1 + inflation) ** d.year : 1),
+        stroke: "#4269d0",
+      }),
+      Plot.text(
+        overall_evolution,
+        Plot.selectLast({
+          x: "year",
+          y: (d) =>
+            d.assessed_value / (real_dollars ? (1 + inflation) ** d.year : 1),
+          text: (d) => "Total assessed value",
+          textAnchor: "start",
+          dx: 3,
+        }),
+      ),
+      Plot.line(overall_evolution, {
+        x: "year",
+        y: (d) =>
+          d.taxable_value / (real_dollars ? (1 + inflation) ** d.year : 1),
+        stroke: "#efb118",
+      }),
+      Plot.text(
+        overall_evolution,
+        Plot.selectLast({
+          x: "year",
+          y: (d) =>
+            d.taxable_value / (real_dollars ? (1 + inflation) ** d.year : 1),
+          text: (d) => "Total taxable value",
+          textAnchor: "start",
+          dx: 3,
+        }),
+      ),
+    ],
+  }),
+);
+```
+
+```js
+display(
+  Plot.plot({
+    title: "Simulated Tax Revenue",
+    subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
+    y: {
+      label: "$ Millions",
+      tickFormat: (d) => d / 1000000,
+      domain:
+        real_dollars && improvement_rate * improvement_increase === 0.0
+          ? [5000000, 5010000]
+          : undefined,
+      nice: true,
+    },
+    marginRight: 100,
+    marks: [
+      Plot.line(overall_evolution, {
         x: "year",
         y: (d, i) =>
           (d.taxable_value * headlee_rates[i]) /
           (real_dollars ? (1 + inflation) ** d.year : 1),
-        text: (d) => "Tax revenue",
-        textAnchor: "start",
-        dx: 3
-      })
-    )
-  ]
-})
+        stroke: "#ff725c",
+      }),
+      Plot.text(
+        overall_evolution,
+        Plot.selectLast({
+          x: "year",
+          y: (d, i) =>
+            (d.taxable_value * headlee_rates[i]) /
+            (real_dollars ? (1 + inflation) ** d.year : 1),
+          text: (d) => "Tax revenue",
+          textAnchor: "start",
+          dx: 3,
+        }),
+      ),
+    ],
+  }),
 );
 ```
 
@@ -204,32 +216,32 @@ If the transfer is positive, then the tax payer is subsidizing others tax payers
 
 ```js
 display(
-Plot.plot({
-  title: "Proposal A Wealth Transfer",
-  subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
-  marginRight: 100,
-  y: {
-    label: "$ Thousands",
-    tickFormat: (d) => d / 1000,
-    nice: true
-  },
-  marks: [
-    Plot.line(total_transfer, {
-      x: "year",
-      y: (d) => d.transfer / (real_dollars ? (1 + inflation) ** d.year : 1)
-    }),
-    Plot.text(
-      total_transfer,
-      Plot.selectLast({
+  Plot.plot({
+    title: "Proposal A Wealth Transfer",
+    subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
+    marginRight: 100,
+    y: {
+      label: "$ Thousands",
+      tickFormat: (d) => d / 1000,
+      nice: true,
+    },
+    marks: [
+      Plot.line(total_transfer, {
         x: "year",
         y: (d) => d.transfer / (real_dollars ? (1 + inflation) ** d.year : 1),
-        text: (d) => "Wealth Transfer",
-        textAnchor: "start",
-        dx: 3
-      })
-    )
-  ]
-})
+      }),
+      Plot.text(
+        total_transfer,
+        Plot.selectLast({
+          x: "year",
+          y: (d) => d.transfer / (real_dollars ? (1 + inflation) ** d.year : 1),
+          text: (d) => "Wealth Transfer",
+          textAnchor: "start",
+          dx: 3,
+        }),
+      ),
+    ],
+  }),
 );
 ```
 
@@ -237,16 +249,16 @@ In our simulation, if we look at the transfers in the ninth and last year, we ca
 
 ```js
 display(
-Plot.plot({
-  title: "Year 9 Average Transfers by Tenure",
-  subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
-  marks: [
-    Plot.dot(average_transfer, {
-      x: "tenure",
-      y: (d) => d.transfer / (real_dollars ? (1 + inflation) ** 9 : 1)
-    })
-  ]
-})
+  Plot.plot({
+    title: "Year 9 Average Transfers by Tenure",
+    subtitle: real_dollars ? "Real Dollars" : "Nominal Dollars",
+    marks: [
+      Plot.dot(average_transfer, {
+        x: "tenure",
+        y: (d) => d.transfer / (real_dollars ? (1 + inflation) ** 9 : 1),
+      }),
+    ],
+  }),
 );
 ```
 
@@ -255,7 +267,7 @@ const average_transfer = d3
   .flatRollup(
     transfers.filter((d) => d.year === 9),
     (v) => d3.mean(v, (d) => d.transfer),
-    (d) => d.tenure
+    (d) => d.tenure,
   )
   .map(([tenure, transfer]) => ({ tenure, transfer }))
   .sort((a, b) => a.tenure - b.tenure);
@@ -272,7 +284,7 @@ const properties_initial = Array.from({ length: 100 }, () => ({
   assessed_value: 100_000,
   taxable_value: 100_000,
   reset_taxable_value: 100_000,
-  tenure: 0
+  tenure: 0,
 }));
 ```
 
@@ -300,7 +312,7 @@ const evolution = (() => {
       } else {
         taxable_value = Math.min(
           d.taxable_value * (1 + Math.min(inflation, 0.05)) + improvement / 2,
-          property_value / 2
+          property_value / 2,
         );
         reset = false;
       }
@@ -313,7 +325,7 @@ const evolution = (() => {
         year: year,
         improvement: improvement / 2,
         tenure: reset ? 0 : d.tenure + 1,
-        reset_taxable_value: reset ? property_value / 2 : d.reset_taxable_value
+        reset_taxable_value: reset ? property_value / 2 : d.reset_taxable_value,
       };
     });
     evolution = [...evolution, ...updated_properties];
@@ -323,11 +335,6 @@ const evolution = (() => {
 })();
 ```
 
-```js
-display(
-d3.flatGroup(evolution, (d) => d.year)
-);
-```
 
 ```js
 const overall_evolution = d3
@@ -336,7 +343,7 @@ const overall_evolution = d3
     year,
     assessed_value: d3.sum(parcels.map((d) => d.assessed_value)),
     taxable_value: d3.sum(parcels.map((d) => d.taxable_value)),
-    improvement: d3.sum(parcels.map((d) => d.improvement)) 
+    improvement: d3.sum(parcels.map((d) => d.improvement)),
   }));
 ```
 
@@ -345,7 +352,7 @@ const headlee_adjustments = overall_evolution
   .slice(1)
   .map(
     (d, i) =>
-      (d.taxable_value - d.improvement) / overall_evolution[i].taxable_value
+      (d.taxable_value - d.improvement) / overall_evolution[i].taxable_value,
   )
   .map((d) => (d > inflation + 1 ? (inflation + 1) / d : 1));
 ```
@@ -367,7 +374,7 @@ const non_prop_a_headlee_adjustments = overall_evolution
   .slice(1)
   .map(
     (d, i) =>
-      (d.assessed_value - d.improvement) / overall_evolution[i].assessed_value
+      (d.assessed_value - d.improvement) / overall_evolution[i].assessed_value,
   )
   .map((d) => (d > inflation + 1 ? (inflation + 1) / d : 1));
 ```
@@ -407,7 +414,7 @@ const transfers = evolution.map((d) => {
     taxable_value_of_purchase,
     assessed_value_of_purchase,
     taxable_value_of_improvement,
-    assessed_value_of_improvement
+    assessed_value_of_improvement,
   };
 });
 ```
@@ -417,20 +424,8 @@ const total_transfer = d3
   .flatGroup(transfers, (d) => d.year)
   .map(([year, transfer_year]) => ({
     year,
-    transfer: d3.sum(transfer_year.map((d) => d.transfer))
+    transfer: d3.sum(transfer_year.map((d) => d.transfer)),
   }));
 ```
-
-```js
-display(
-overall_evolution[9].assessed_value * non_prop_a_headlee_rates[9]
-);
-```
-
-```js
-display(
-overall_evolution[9].taxable_value * headlee_rates[9] -
-  overall_evolution[9].assessed_value * non_prop_a_headlee_rates[9]
-);
 ```
 

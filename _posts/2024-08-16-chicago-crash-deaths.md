@@ -17,16 +17,16 @@ const plot = Plot.plot({
   caption: "Annual cumulative traffic deaths by day of years.",
   y: {
     grid: true,
-    label: "Deaths"
+    label: "Deaths",
   },
   x: {
     transform: (d) => d3.utcDay.offset(d, (2000 - d.getUTCFullYear()) * 365.24),
     tickFormat: "%b",
-    line: true
+    line: true,
   },
   color: {
     domain: [false, true],
-    range: ["#ccc", "red"]
+    range: ["#ccc", "red"],
   },
   marks: [
     Plot.line(
@@ -36,8 +36,8 @@ const plot = Plot.plot({
         y: (d) => 1,
         z: (d) => d.crash_date.getFullYear(),
         stroke: (d) => new Date().getFullYear() === d.crash_date.getFullYear(),
-        curve: "step-before"
-      })
+        curve: "step-before",
+      }),
     ),
     Plot.text(
       data,
@@ -49,11 +49,11 @@ const plot = Plot.plot({
           text: (d) => d.crash_date.getFullYear().toString(),
           textAnchor: "start",
           dx: 3,
-          dy: -2
-        })
-      )
-    )
-  ]
+          dy: -2,
+        }),
+      ),
+    ),
+  ],
 });
 ```
 
@@ -101,9 +101,10 @@ const htmlTable = (rows) => {
       </thead>
       <tbody>
         ${rows.map(
-          (r) => html`<tr>
-            ${cols.map((c) => html`<td>${r[c]}</td>`)}
-          </tr>`,
+          (r) =>
+            html`<tr>
+              ${cols.map((c) => html`<td>${r[c]}</td>`)}
+            </tr>`,
         )}
       </tbody>
     </table>
@@ -111,20 +112,12 @@ const htmlTable = (rows) => {
 };
 ```
 
-```js
-// ~5,000 fatal-crash records — too many rows for a plain table, so Tom's.
-const table = (await import("/assets/js/toms-table.js")).default;
-```
-
-```js
-display(table(data));
-```
 
 ```js
 const data = raw_data
   .map((d) => ({
     ...d,
-    crash_date: new Date(d.crash_date)
+    crash_date: new Date(d.crash_date),
   }))
   .filter((d) => d.crash_date.getFullYear() > 2016)
   .sort((a, b) => a.crash_date - b.crash_date);
@@ -132,7 +125,7 @@ const data = raw_data
 
 ```js
 const raw_data = fetch(
-  "https://data.cityofchicago.org/resource/u6pd-qa9d.json?$where=INJURY_CLASSIFICATION='FATAL'&$order=crash_date&$limit=5000"
+  "https://data.cityofchicago.org/resource/u6pd-qa9d.json?$where=INJURY_CLASSIFICATION='FATAL'&$order=crash_date&$limit=5000",
 ).then((response) => response.json());
 ```
 
