@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# Preview the PRODUCTION / no-JS experience locally.
+#
+# `jekyll serve` runs `jekyll build` only — NOT the snapshot step — so with
+# JavaScript disabled it shows the static prose but empty value spans and blank
+# charts. This script runs the full pipeline that CI runs:
+#
+#   1. build the reactive runtime bundle (gitignored; needed by the posts)
+#   2. jekyll build
+#   3. snapshot.mjs — headless-render each post and BAKE the hydrated values +
+#      chart SVGs into the static _site (what crawlers / no-JS readers get)
+#   4. serve the baked, static _site
+#
+# Open the served site with JavaScript DISABLED to see the real no-JS view.
+#
+# The first run is slow (it headless-renders every reactive post); subsequent
+# runs reuse .snapshot-cache and only re-render posts whose HTML changed.
+#
+# Usage: bin/preview [port]   (default port 8000)
+set -euo pipefail
+cd "$(dirname "$0")/.."
+PORT="${1:-8000}"
+
+echo "==> building reactive runtime bundle"
+(cd _reactive && node bundle-runtime.mjs >/dev/null)
+
+echo "==> jekyll build"
+bundle exec jekyll build
+
+echo "==> snapshot: baking values + chart SVGs into _site"
+echo "    (first run renders every reactive post — slow; then cached)"
+(cd _reactive && node snapshot.mjs)
+
+echo
+echo "==> baked _site ready — serving at http://localhost:${PORT}"
+echo "    Disable JavaScript in the browser to see the crawler / no-JS view."
+echo "    (Ctrl-C to stop.)"
+echo
+cd _site && exec python3 -m http.server "${PORT}"
