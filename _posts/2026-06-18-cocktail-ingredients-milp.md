@@ -40,6 +40,39 @@ const num_ingredients = view(
 
 With ${num_ingredients} ingredients, you can make ${solution.covered.length} cocktail(s).
 
+```js
+display(
+  Plot.plot({
+    x: { label: "Ingredients on your tray →", domain: [2, 129] },
+    y: { label: "↑ Cocktails you can make", domain: [0, 104], grid: true },
+    marks: [
+      Plot.line(curve, {
+        x: "ingredients",
+        y: "cocktails",
+        stroke: "#552222",
+      }),
+      // Mark where the slider currently sits on the curve.
+      Plot.ruleX([num_ingredients], { stroke: "#552222", strokeOpacity: 0.4 }),
+      Plot.dot(
+        curve.filter((d) => d.ingredients === num_ingredients),
+        { x: "ingredients", y: "cocktails", fill: "#552222", r: 4 },
+      ),
+      Plot.text(
+        curve.filter((d) => d.ingredients === num_ingredients),
+        {
+          x: "ingredients",
+          y: "cocktails",
+          text: (d) => d.cocktails,
+          dy: -10,
+          fill: "#552222",
+          fontWeight: "bold",
+        },
+      ),
+    ],
+  }),
+);
+```
+
 | Cocktail | Ingredients |
 |----------|-------------|
 ${solution.covered.map((c) => `| ${c.name} | ${c.ingredients.join(", ")} |`).join("\n")}
@@ -94,9 +127,46 @@ const budget = {
 ```
 
 ```js
-// The static half of the model — everything that does NOT depend on the budget.
-// Built once from the recipe data and reused on every solve; only the budget
-// constraint (in `solution`) changes as you move the slider.
+// Sweep the ingredient budget from 2 to 129, solving the integer program at
+// every step to get the most cocktails possible at each size. It's the same
+// `problem` each time — only the budget's right-hand side moves — so we stream
+// the running curve and let the chart draw itself in as the solves land.
+const curve = Generators.observe((notify) => {
+  let cancelled = false;
+  const points = [];
+  notify(points);
+  (async () => {
+    for (let n = 2; n <= 129 && !cancelled; n++) {
+      const res = await glpk.solve(
+        {
+          name: "cocktails",
+          objective: problem.objective,
+          subjectTo: [
+            ...problem.coverage,
+            {
+              name: "budget",
+              vars: problem.ingredients.map((ingredient) => ({
+                name: `buy ${ingredient}`,
+                coef: 1,
+              })),
+              bnds: { type: glpk.GLP_UP, ub: n },
+            },
+          ],
+          binaries: problem.binaries,
+        },
+        { msglev: glpk.GLP_MSG_OFF },
+      );
+      points.push({ ingredients: n, cocktails: Math.round(res.result.z) });
+      notify(points.slice());
+    }
+  })();
+  return () => {
+    cancelled = true;
+  };
+});
+```
+
+```js
 const problem = (() => {
   const recipes = Object.entries(data);
   const ingredients = [...new Set(recipes.flatMap(([, ings]) => ings))];
