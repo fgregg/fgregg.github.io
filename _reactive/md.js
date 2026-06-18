@@ -7,24 +7,12 @@
 // (permalink.linkInsideHeader). The heading text stays plain; the `#` is the
 // deep-link affordance, revealed on hover via CSS (.header-anchor in main.scss).
 // Headings still get an id, so `#slug` links work and match the static posts.
-import slugify from "@sindresorhus/slugify";
-import MarkdownIt from "markdown-it";
-import MarkdownItAnchor from "markdown-it-anchor";
 // Lazy syntax highlighting, reusing notebook-kit's own highlight module. Our
 // file lives outside the package dir, so reference it by its node_modules path.
 import {highlight} from "./node_modules/@observablehq/notebook-kit/dist/src/runtime/stdlib/highlight.js";
+import {createMarkdownIt} from "./markdownit.js";
 
-const mi = MarkdownIt({ html: true, linkify: true, typographer: true });
-mi.use(MarkdownItAnchor, {
-    level: [2, 3],
-    slugify: (s) => slugify(s),
-    permalink: MarkdownItAnchor.permalink.linkInsideHeader({
-        symbol: "#",
-        placement: "after",
-        class: "header-anchor",
-        ariaHidden: true,
-    }),
-});
+const mi = createMarkdownIt();
 export function MarkdownRenderer({ document = window.document } = {}) {
     return function (template, ...values) {
         let source = template[0];
