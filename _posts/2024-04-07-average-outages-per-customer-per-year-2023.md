@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-04-07
 description: Average days of power outage per customer per year (2021-2023) by US county and state, from a national outage dataset.
-reactive: cellular
+reactive: true
 ---
 
 ```js

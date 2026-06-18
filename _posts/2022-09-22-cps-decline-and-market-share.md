@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2022-09-22
 description: Why CPS enrollment is falling — fewer school-age children in Chicago, not a flight to private schools — from ACS, PUMS, and CPS data.
-reactive: cellular
+reactive: true
 ---
 
 

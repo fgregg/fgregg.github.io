@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-01-01
 description: An interactive simulator of how Michigan property-tax proposals would change a homeowner's bill.
-reactive: cellular
+reactive: true
 ---
 
 Michigan property tax regime is mainly determined by two constitutional amendments to the Michigan constitution: the Headlee amendment and Proposal A.

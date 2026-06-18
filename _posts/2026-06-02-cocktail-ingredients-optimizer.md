@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2026-06-02
 description: A branch-and-bound search for the set of N bar ingredients that lets you make the most distinct cocktails.
-reactive: cellular
+reactive: true
 ---
 
 For a fixed number of ingredients, which ingredients will let you make the most different cocktails?

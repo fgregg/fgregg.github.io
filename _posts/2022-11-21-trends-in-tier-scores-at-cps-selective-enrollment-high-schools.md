@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2022-11-21
 description: Trends in admission cut scores at Chicago's selective-enrollment high schools, by tier, shown as small multiples.
-reactive: cellular
+reactive: true
 ---
 
 In 2009, the federal court supervision that required the Chicago Public Schools to work towards racial and ethnic desegregation of the district schools ended. The district then developed a policy to maintain social, economic, and racial and ethnic diversity at some of the magnet and selective enrollment high schools that the district had set up for desegregation. 

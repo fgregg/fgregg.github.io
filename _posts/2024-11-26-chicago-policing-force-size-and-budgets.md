@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-11-26
 description: Sworn-officer counts, per-capita budgets, and index crimes for the Chicago Police Department over time.
-reactive: cellular
+reactive: true
 ---
 
 I've compiled [data on historic budgets and force sizes](https://docs.google.com/spreadsheets/d/1kC_G7Qa1WyzKIl8JvmfrNMw0mNcNOQOOeP-qKYhq6QA/edit#gid=0) for the Chicago police department, as well as data on the population of Chicago and index crimes.

@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2023-08-10
 description: How many movies are set in each U.S. city, compared to its population — from Wikidata.
-reactive: cellular
+reactive: true
 ---
 
 What is the relation between how big a city is and how many movies are set in

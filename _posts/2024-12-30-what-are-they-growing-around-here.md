@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-12-30
 description: A live map of what crop is grown where, from the USDA Cropland Data Layer raster, by county.
-reactive: cellular
+reactive: true
 ---
 
 Data from the [2023 National Cropland Data Layer](https://www.nass.usda.gov/Research_and_Science/Cropland/SARS1a.php) from the United States Department of Agriculture's National Agricultural Statistics Service.

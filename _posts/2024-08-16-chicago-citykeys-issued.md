@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-08-16
 description: Cumulative CityKeys (Chicago municipal ID cards) issued by year, from public-records data — and how this year tracks against prior years to date.
-reactive: cellular
+reactive: true
 ---
 
 This chart shows the cumulative number of CityKeys—Chicago municipal id cards—issued by the City Clerk by year.

@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-10-29
 description: CPS enrollment cohorts traced from kindergarten through 12th grade by race/ethnicity, showing where cohorts shrink (and the grade-retention bumps).
-reactive: cellular
+reactive: true
 ---
 
 Each line represents a cohort of students that started kindergarten in a given year.

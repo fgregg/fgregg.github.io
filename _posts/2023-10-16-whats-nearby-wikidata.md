@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2023-10-16
 description: Lists wikidata entries with wikipedia pages near you.
-reactive: cellular
+reactive: true
 ---
 
 A [Wikidata](https://www.wikidata.org/wiki/Wikidata:Main_Page) sibling of [Wikipedia:Nearby](https://en.wikipedia.org/wiki/Wikipedia:Nearby).

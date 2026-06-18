@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2025-04-01
 description: A live map of current DTE and Consumer Energy power outages across southeast Michigan, scraped hourly, with historical trends.
-reactive: cellular
+reactive: true
 ---
 
 Consumer Energy outages included for comparison.

@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2023-06-04
 description: Age-sex population pyramids for Chicago over time, overall and by race/ethnicity, from live ACS data.
-reactive: cellular
+reactive: true
 ---
 
 This notebook shows the [population pyramids](https://en.wikipedia.org/wiki/Population_pyramid) for different racial and ethnic groups in Chicago. The default year is for 2021, but you can select previous years back to 2005.<sup>*</sup>

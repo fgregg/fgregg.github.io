@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-11-20
 description: Tracking whether Chicago Public Schools has certified enough staff in physical restraint of students, as ISBE requires.
-reactive: cellular
+reactive: true
 ---
 
 According to CPS’s [online database](https://www.cps.edu/about/policies/physical-restraint-time-out-resources/), **${trained_required.toLocaleString()} required staff** have completed their training in legal and safer methods of physically restraining students and have a non-expired certification as of today.*

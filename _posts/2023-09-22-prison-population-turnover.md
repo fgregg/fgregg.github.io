@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2023-09-22
 description: How fast Illinois's prison population turns over, and what that implies for collecting incarcerated people's home addresses ahead of the 2030 redistricting.
-reactive: cellular
+reactive: true
 ---
 
 Due to the No Representation Without Population Act, the 2030 redistricting for

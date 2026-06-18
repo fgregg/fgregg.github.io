@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2023-11-01
 description: Evaluating draft district maps for the elected Chicago Public Schools board against legal requirements and minority-preferred-candidate outcomes.
-reactive: cellular
+reactive: true
 ---
 
 The Illinois legislature has to approve electoral districts for the 2024 and 2026 elections for Chicago Public Schools board members. By 2026, Chicago voters will have chosen 20 board members based on those districts, along with one at-large chair.

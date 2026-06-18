@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-08-14
 description: Chicago Public Schools enrollment by race/ethnicity over time, by grade
-reactive: cellular
+reactive: true
 ---
 
 ```js

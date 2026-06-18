@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2025-05-02
 description: Chicago foreign-born residents by country of origin over time, from live ACS data, faceted by country.
-reactive: cellular
+reactive: true
 ---
 
 We can get a sense of international immigration flows by looking at the people living in Chicago who were born in other countries between 2005 and ${last_year}. Increases in these populations are due to immigration, declines are due to emigration and deaths.

@@ -4,7 +4,7 @@ author: Forest Gregg
 layout: post
 date: 2024-12-19
 description: A trick for finding random Spotify users by searching short prefixes of their user IDs.
-reactive: cellular
+reactive: true
 ---
 
 I like to listen to random playlists as way to get a flavor of strangers' personalities and encounter new music and genre.
