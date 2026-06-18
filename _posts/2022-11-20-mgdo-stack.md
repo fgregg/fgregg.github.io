@@ -75,9 +75,9 @@ Being able to do arbitrarily complicated SQL queries across multiple tables and 
 
 Here are some examples:
 
-* [Distribution of days from filing to election](https://observablehq.com/@fgregg/distribution-of-days-from-filing-to-first-election)
+* [Distribution of days from filing to election](https://notes.labordata.bunkum.us/2022/01/13/distribution-of-days-to-election)
 * [CPS and Illinois report different graduation rates for Chicago high schools](https://observablehq.com/d/1f3c5386c65501bf)
-* [New contracts reported by anti-labor consultants in LM-20 Filings](https://observablehq.com/@fgregg/new-contracts-reported-by-anti-labor-consultants-in-lm-20-fi)
+* [New contracts reported by anti-labor consultants in LM-20 Filings](https://notes.labordata.bunkum.us/2021/11/13/new-contracts-lm-20)
 
 I'm a bit worried about the free lunch ending with Observable some
 day, but for now it's a pleasure.
