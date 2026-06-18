@@ -250,6 +250,11 @@ const {server, port} = await serve(site);
 const baseUrl = `http://localhost:${port}`;
 const browser = await chromium.launch();
 const page = await browser.newPage({viewport: {width: 900, height: 1400}, deviceScaleFactor: 2});
+// SNAPSHOT_NO_CACHE forces a fresh headless render of every post, ignoring the
+// content-hash cache. The nightly CI run sets this so dynamic notebooks (live
+// data) get refreshed values baked in even when their source HTML is unchanged.
+const noCache = !!process.env.SNAPSHOT_NO_CACHE;
+
 const results = [];
 let rendered = 0, reused = 0;
 for (const file of posts) {
@@ -258,6 +263,7 @@ for (const file of posts) {
   const hash = hashHtml(builtHtml);
   const cached = manifest[slug];
   const cacheHit =
+    !noCache &&
     cached &&
     cached.hash === hash &&
     cached.charts.every((id) => existsSync(join(cacheDir, slug, `${id}.html`))) &&
