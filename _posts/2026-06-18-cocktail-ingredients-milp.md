@@ -75,7 +75,7 @@ display(
 
 | Cocktail | Ingredients |
 |----------|-------------|
-${solution.covered.map((c) => `| ${c.name} | ${c.ingredients.join(", ")} |`).join("\n")}
+${orderedCovered.map((c) => `| ${c.name} | ${c.ingredients.join(", ")} |`).join("\n")}
 
 Here's the shopping list:
 
@@ -84,13 +84,20 @@ Here's the shopping list:
 ${shoppingList.map((row) => `| ${row.join(" | ")} |`).join("\n")}
 
 ```js
-const shoppingList = d3
-  .rollups(
+const shoppingList = (() => {
+  const counts = d3.rollups(
     solution.covered.flatMap((cocktail) => cocktail.ingredients),
     (uses) => uses.length, // how many chosen cocktails use this ingredient
     (ingredient) => ingredient,
-  )
-  .sort((a, b) => b[1] - a[1]);
+  );
+  // Order by each ingredient's current run (consecutive budgets it's been bought,
+  // counting down from the slider); ties broken by how many cocktails use it.
+  return counts.sort(
+    (a, b) =>
+      currentRun(presence.ingredientPresence, b[0], num_ingredients) -
+        currentRun(presence.ingredientPresence, a[0], num_ingredients) || b[1] - a[1],
+  );
+})();
 ```
 
 
@@ -116,6 +123,32 @@ const solution = await (async () => {
 ```
 
 ```js
+// Cocktails ordered by their current run — how many budgets in a row (counting
+// down from the slider) they've stayed in the solution — longest first. A
+// cocktail on the list across many budgets sits at the top; one that just
+// (re)appeared drops to the bottom. (Alphabetical until the sweep lands.)
+const orderedCovered = [...solution.covered].sort(
+  (a, b) =>
+    currentRun(presence.cocktailPresence, b.name, num_ingredients) -
+      currentRun(presence.cocktailPresence, a.name, num_ingredients) ||
+    a.name.localeCompare(b.name),
+);
+```
+
+```js
+// How many budgets in a row — counting DOWN from K — this key has stayed in the
+// solution: its current run length. A single gap resets it to 0, so something
+// that dropped off and came back starts its run over.
+function currentRun(presence, key, K) {
+  const seen = presence.get(key);
+  if (!seen) return 0;
+  let run = 0;
+  for (let k = K; k >= 2 && seen.has(k); k--) run++;
+  return run;
+}
+```
+
+```js
 const budget = {
   name: "budget",
   vars: problem.ingredients.map((ingredient) => ({
@@ -127,10 +160,32 @@ const budget = {
 ```
 
 ```js
-// Sweep the ingredient budget from 2 to 129, solving the integer program at
-// every step to get the most cocktails possible at each size. It's the same
-// `problem` each time — only the budget's right-hand side moves — so we stream
-// the running curve and let the chart draw itself in as the solves land.
+// Solve the integer program for every budget from 2 to 129 once, up front. This
+// gives the chart's curve and, as a byproduct, a record of which budgets each
+// cocktail / ingredient is chosen at (its "presence"). The tables use that to
+// measure each item's current run — how long it's been continuously on the list.
+// We notify twice — empty, then the finished result — so the page renders
+// immediately and fills in once the (few-second) sweep lands.
+// Shared store the sweep fills, created once: the presence maps (which budgets
+// each cocktail / ingredient is chosen at) plus a promise that resolves when the
+// sweep finishes — so the chart can stream while the tables wait for the
+// completed maps.
+const sweepState = (() => {
+  let finish;
+  const done = new Promise((resolve) => (finish = resolve));
+  return {
+    cocktailPresence: new Map(), // name -> Set of budgets K where it's chosen
+    ingredientPresence: new Map(),
+    done,
+    finish,
+  };
+})();
+```
+
+```js
+// Solve the integer program for every budget 2..129 once. Streams the running
+// curve so the chart draws itself in, recording presence into `sweepState` as it
+// goes; when the sweep finishes it resolves `sweepState.done`.
 const curve = Generators.observe((notify) => {
   let cancelled = false;
   const points = [];
@@ -156,13 +211,44 @@ const curve = Generators.observe((notify) => {
         },
         { msglev: glpk.GLP_MSG_OFF },
       );
-      points.push({ ingredients: n, cocktails: Math.round(res.result.z) });
+      const covered = problem.recipes.filter(
+        ([name]) => res.result.vars[`make ${name}`] > 0.5,
+      );
+      points.push({ ingredients: n, cocktails: covered.length });
+      for (const [name, ingredients] of covered) {
+        if (!sweepState.cocktailPresence.has(name)) {
+          sweepState.cocktailPresence.set(name, new Set());
+        }
+        sweepState.cocktailPresence.get(name).add(n);
+        for (const ingredient of ingredients) {
+          if (!sweepState.ingredientPresence.has(ingredient)) {
+            sweepState.ingredientPresence.set(ingredient, new Set());
+          }
+          sweepState.ingredientPresence.get(ingredient).add(n);
+        }
+      }
       notify(points.slice());
     }
+    if (!cancelled) sweepState.finish();
   })();
   return () => {
     cancelled = true;
   };
+});
+```
+
+```js
+// Hand the tables the presence maps exactly twice: empty up front (so they
+// render immediately), then the finished maps once the sweep lands — so they
+// snap into run order without re-sorting on every streamed step.
+const presence = Generators.observe((notify) => {
+  notify({ cocktailPresence: new Map(), ingredientPresence: new Map() });
+  sweepState.done.then(() =>
+    notify({
+      cocktailPresence: sweepState.cocktailPresence,
+      ingredientPresence: sweepState.ingredientPresence,
+    }),
+  );
 });
 ```
 
