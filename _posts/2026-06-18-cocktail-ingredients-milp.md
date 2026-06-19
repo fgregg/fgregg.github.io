@@ -91,11 +91,12 @@ const shoppingList = (() => {
     (ingredient) => ingredient,
   );
   // Order by each ingredient's current run (consecutive budgets it's been bought,
-  // counting down from the slider); ties broken by how many cocktails use it.
+  // counting down from the slider); ties broken alphabetically.
   return counts.sort(
     (a, b) =>
       currentRun(presence.ingredientPresence, b[0], num_ingredients) -
-        currentRun(presence.ingredientPresence, a[0], num_ingredients) || b[1] - a[1],
+        currentRun(presence.ingredientPresence, a[0], num_ingredients) ||
+      a[0].localeCompare(b[0]),
   );
 })();
 ```
