@@ -31,7 +31,10 @@
   <meta property="og:description" content="{{ page.description }}">
   {% endif %}
   {% if page.url %}
-  <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+  {% comment %} Absolute, extensionless URL that matches the page Cloudflare actually
+  serves: `.html` URLs 308-redirect to the bare path, and a redirecting og:url breaks
+  link-preview cards (e.g. Mastodon shows a card then drops it). {% endcomment %}
+  <meta property="og:url" content="{{ page.url | remove: '.html' | absolute_url }}">
   {% endif %}
 
 </head>

@@ -1,3 +1,7 @@
+# Canonical site origin. Used for absolute URLs in og: tags and the Atom feed;
+# without it `{{ site.url }}` is empty, so og:url renders as a relative path.
+url: https://bunkum.us
+
 plugins:
   - jekyll-feed
 
