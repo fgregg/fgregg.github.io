@@ -74,6 +74,16 @@ function inject(html, find, replacement) {
   return html.replace(find, () => replacement);
 }
 
+// Inject the social-card <meta> tags just before </head>. Idempotent (skips if a
+// card is already present) and always restores the </head> it matches on — the
+// single source of truth for both the cached and freshly-rendered paths.
+function injectSocialCard(html, cardUrl) {
+  if (html.includes('property="og:image"')) return html;
+  return inject(html, "</head>",
+    `\n  <meta property="og:image" content="${cardUrl}">` +
+    `\n  <meta name="twitter:image" content="${cardUrl}">\n</head>`);
+}
+
 const emptyChart = (id) => `<div id="${id}" class="reactive-cell"></div>`;
 const emptySpan = (ref) => `<span data-reactive="${ref}"></span>`;
 
@@ -92,12 +102,7 @@ function applyCached(file, slug, builtHtml, cached) {
   const spans = existsSync(spansFile) ? JSON.parse(readFileSync(spansFile, "utf8")) : [];
   let html = bake(builtHtml, {charts: cached.charts, spans},
     (id) => readFileSync(join(cacheDir, slug, `${id}.html`), "utf8"));
-  if (cached.card && !html.includes('property="og:image"')) {
-    const cardUrl = `${SITE_URL}/${cached.card}`;
-    html = inject(html, "</head>",
-      `\n  <meta property="og:image" content="${cardUrl}">` +
-      `\n  <meta name="twitter:image" content="${cardUrl}">\n</head>`);
-  }
+  if (cached.card) html = injectSocialCard(html, `${SITE_URL}/${cached.card}`);
   writeFileSync(file, html);
   return {file, charts: cached.charts, chartPngs: cached.chartPngs, card: cached.card, spans};
 }
@@ -207,12 +212,7 @@ async function snapshotPost(page, file, baseUrl) {
       const el = await page.$(`#${firstId}`);
       if (el) await el.screenshot({path: join(site, cardRel)});
     }
-    if (!html.includes('property="og:image"')) {
-      const cardUrl = `${SITE_URL}/${cardRel}`;
-      html = inject(html, "</head>",
-        `\n  <meta property="og:image" content="${cardUrl}">` +
-        `\n  <meta name="twitter:image" content="${cardUrl}">`);
-    }
+    html = injectSocialCard(html, `${SITE_URL}/${cardRel}`);
   }
 
   writeFileSync(file, html);
