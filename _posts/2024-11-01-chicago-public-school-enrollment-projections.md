@@ -154,9 +154,9 @@ them. It tends to be the case that last year's rate is a good prediction
 of this year's rate. So, for each grade-to-grade transition rate, we say that next year's 
 rate will be the same as this year's rate plus or minus some random difference, and then
 repeat that for the following year, and so on. The size of the random differences are based 
-on the observed historical variations.  
+on the observed historical variations.
 
-To make projection, we start with the observed number of students by grade and race and Ethnicity
+To make projections, we start with the observed number of students by grade and race and ethnicity
 and Chicago births, and use a projected transition rate to step those cohorts to next year and 
 then we repeat that with the projected student population the following year, and then a 
 third year. That gives us one possible trajectory of the student population. We then repeat
