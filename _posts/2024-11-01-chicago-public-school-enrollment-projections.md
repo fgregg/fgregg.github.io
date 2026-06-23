@@ -136,46 +136,31 @@ display(
 
 ## Methodology
 
-Our projections are based on combining two separate projections.
+Our projections are based on the transitions of students going from one
+grade to the next and the transition of children being born in Chicago too
+becoming kindergarteners five years later.
 
-First, we predict the number of students enrolled in 1st grade through 12th
-grade based on the number of students enrolled in kindergarten through 11th
-grade in the prior year. In the literature on school enrollment projections,
-this is called the
+First, we predict enrollment in grades 1 through 12 from enrollment in the
+previous grade the year before. In the literature on school enrollment
+projections, this is called the
 [grade progression rate method](https://nces.ed.gov/programs/projections/projections2021/app_a1.asp).
 
-Second, we predict the number of students that will enroll in kindergarten based
-on the number of babies born to Chicago residents five-years prior. This is the
-called the
+Second, we predict kindergarten enrollment from the number of babies born to
+Chicago residents five years earlier. This is called the
 [enrollment rate method](https://nces.ed.gov/programs/projections/projections2021/app_a1.asp).
 
-For example, for the ${latest_enrollment_year + 1}-${latest_enrollment_year + 2}
-school year, we predict the number of 5th graders based on the number of 4th
-graders who were actually enrolled in the
-${latest_enrollment_year}-${latest_enrollment_year + 1} school year. In order to
-make that prediction we need to choose a rate at which 4th graders will turn
-into 5th graders. For every demographic group, we calculate the historical
-transitions rates for every year-pair we can, and then we choose one of the
-historical rates at random. We do this for every grade from 1st through 12th.
+Thes future transitions rates are not known, so we need a plausible way of predicting 
+them. It tends to be the case that last year's rate is a good prediction
+of this year's rate. So, for each grade-to-grade transition rate, we say that next year's 
+rate will be the same as this year's rate plus or minus some random difference, and then
+repeat that for the following year, and so on. The size of the random differences are based 
+on the observed historical variations.  
 
-Then, for kindergarten, we predict the number of kindergartners who will enroll
-by taking the number of babies born in ${latest_enrollment_year + 1 - 5}, five
-years prior to the projected year; and then multiplying that count by an
-enrollment rate. We similarly choose a historical enrollment rate at random.
-
-That gives us a projection for all the grades K-12 for the
-${latest_enrollment_year + 1}-${latest_enrollment_year + 2} school year. In
-order to make a projection for the ${latest_enrollment_year +
-2}-${latest_enrollment_year + 3} school year, we apply the grade progression
-rate method to our ${latest_enrollment_year + 1}-${latest_enrollment_year + 2}
-projection and the enrollment rate method for the ${latest_enrollment_year +
-2}-${latest_enrollment_year + 3} kindergarten class.
-
-We keep stepping forward like this through until our final projection year.
-
-This gives us **one** projection trajectory. We then repeat the process
-${replicates.toLocaleString()} times to get many projection trajectories. This
-provides us a range of possible outcomes.
+To make projection, we start with the observed number of students by grade and race and Ethnicity
+and Chicago births, and use a projected transition rate to step those cohorts to next year and 
+then we repeat that with the projected student population the following year, and then a 
+third year. That gives us one possible trajectory of the student population. We then repeat
+that ${replicates.toLocaleString()} times to get a range of possible trajectories.
 
 ### October 2022 Updates
 
@@ -196,10 +181,19 @@ provides us a range of possible outcomes.
   ${tex`2.5^{(\text{year}_i - \text{year}_0)}`} to increase effect of recent
   years.
 
+### June 2026 Update
+
+Previously, projected transition rates per grade and race and ethnic group were
+drawn from the historically observed transition rates. This led to credible intervals
+that were too narrow. For this update, we switched to a random walk model for 
+transitions.
+
+The model also contained a per group random shock model to account for events like 
+the asylum seekers in. 
+
 ## Forecast Accuracy
 
-For each year that we make forecasts, we will record the actual total enrollment
-.
+For each year that we make forecasts, we will record the actual total enrollment.
 
 ### July 2022 Forecast
 
@@ -231,7 +225,15 @@ asylum seekers starting.
 | 2026-2027   | 264,000—283,000                              |                   |
 | 2027-2028   | 253,000—274,000                              |                   |
 
-## Bootstrap
+
+### June 2026 Forecast
+
+| school year | projected enrollment (95% credible interval) | actual enrollment |
+| - | - | - |
+| 2026-2027 | 281,000—297,000 | |
+| 2027-2028 | 264,000—293,000 | |
+| 2028-2029 | 250,000—289,000 | |
+
 
 ```js
 const school_age_years_race = school_age_years.filter(
@@ -264,191 +266,254 @@ const school_age_years = (() => {
     ...race_totals
       .filter((d) => d.year === latest_enrollment_year)
       .map((d) => ({ ...d, type: "projection", stdev: 0 })),
-    ...total_bootstrap,
+    ...forecast,
   ];
 })();
 ```
 
+
 ```js
-const total_bootstrap = (() => {
-  const all_student_bootstrap = d3
-    .flatRollup(
-      grade_bootstrap,
-      (v) => d3.sum(v, (d) => d.count),
-      (d) => d.year,
-      (d) => d.iteration,
-    )
-    .map(([year, iteration, count]) => ({
-      year,
-      race: "Total",
-      iteration,
-      count,
-    }));
+const race_groups = ["African American", "Hispanic", "white", "other"];
+```
 
-  const race_bootstrap = d3
-    .flatRollup(
-      grade_bootstrap,
-      (v) => d3.sum(v, (d) => d.count),
-      (d) => d.year,
-      (d) => d.race,
-      (d) => d.iteration,
-    )
-    .map(([year, race, iteration, count]) => ({
-      year,
-      race,
-      iteration,
-      count,
-    }));
 
-  return d3
-    .flatGroup(
-      [...race_bootstrap, ...all_student_bootstrap],
-      (d) => d.year,
-      (d) => d.race,
-    )
-    .map(([year, race, draws]) => ({
-      year,
-      race,
-      count: d3.mean(draws.map((d) => d.count)),
-      stdev: d3.deviation(draws.map((d) => d.count)),
-      type: "projection",
-    }));
+```js
+const S2 = 2e-4;
+```
+
+
+```js
+const grade_lookup = (() => {
+  const m = new Map();
+  for (const d of grade_data) {
+    const key = `${d.year}::${d.race}::${d.grade}`;
+    m.set(key, (m.get(key) ?? 0) + d.count);
+  }
+  return m;
 })();
 ```
 
 ```js
-const grade_bootstrap = (() => {
-  let bootstrap = [];
-  for (const i of d3.range(replicates)) {
-    // use the last year of cps enrollment data as the base year for
-    // forecasts
-    let previous_year = grade_data.filter(
-      (d) => d.year === latest_enrollment_year && d.race !== "Total",
-    );
-    for (const projected_year of d3.range(
-      latest_enrollment_year + 1,
-      latest_birth_year + 5 + 1,
-    )) {
-      const grade_bootstrap = previous_year
-        .map((d) => ({
-          iteration: i,
-          year: projected_year,
-          race: d.race,
-          grade: d.grade + 1,
-          count: d.count * draw_grade_transition(d.grade, d.race),
-        }))
-        .flat()
-        .filter((d) => d.count);
-      const kindergarten_bootstrap = birth_data
-        .filter((birth) => birth.year === projected_year - 5)
-        .map((birth) => ({
-          iteration: i,
-          year: projected_year,
-          race: birth.race,
-          grade: 0,
-          count: birth.count * draw_kindergarten_transition(birth.race),
-        }));
-      if (kindergarten_bootstrap.length < 4) {
-        throw `Don't have enough data on births for ${projected_year - 5}`;
+const birth_lookup = new Map(
+  birth_data.map((d) => [`${d.year}::${d.race}`, d.count]),
+);
+```
+
+```js
+const observations = (() => {
+  const first_year = d3.min(grade_data, (d) => d.year);
+  const out = new Map();
+  for (const race of race_groups) {
+    const obs = new Map();
+    const add = (year, entry) => {
+      if (!obs.has(year)) obs.set(year, []);
+      obs.get(year).push(entry);
+    };
+    for (let y = first_year + 1; y <= latest_enrollment_year; y++) {
+      for (let g = 0; g < 12; g++) {
+        const origin = grade_lookup.get(`${y - 1}::${race}::${g}`);
+        const dest = grade_lookup.get(`${y}::${race}::${g + 1}`);
+        if (origin > 0 && dest > 0)
+          add(y, [g, Math.log(dest / origin), 1 / dest + S2]);
       }
-      const projection = [...grade_bootstrap, ...kindergarten_bootstrap];
-      bootstrap = [...bootstrap, ...projection];
-      previous_year = projection;
+      const kindergarten = grade_lookup.get(`${y}::${race}::0`);
+      const births = birth_lookup.get(`${y - 5}::${race}`);
+      if (kindergarten > 0 && births > 0)
+        add(y, [12, Math.log(kindergarten / births), 1 / kindergarten + S2]);
+    }
+    out.set(race, obs);
+  }
+  return out;
+})();
+```
+
+
+```js
+function gaussian(sd) {
+  if (!(sd > 0)) return 0;
+  let u = 0,
+    v = 0;
+  while (u === 0) u = Math.random();
+  while (v === 0) v = Math.random();
+  return sd * Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+}
+```
+
+```js
+function kalman_filter(obs, q, phi, w) {
+  const D = 14;
+  const SHOCK = 13;
+  const x = new Array(D).fill(0);
+  const P = Array.from({ length: D }, () => new Array(D).fill(0));
+  for (let i = 0; i < 13; i++) P[i][i] = 10; // diffuse prior on the levels
+  P[SHOCK][SHOCK] = w / Math.max(1e-6, 1 - phi * phi); // stationary shock prior
+
+  let logLik = 0;
+  let prev = null;
+  for (const year of [...obs.keys()].sort((a, b) => a - b)) {
+    if (prev !== null) {
+      const dt = year - prev;
+      const decay = Math.pow(phi, dt);
+      for (let i = 0; i < D; i++) {
+        P[i][SHOCK] *= decay;
+        P[SHOCK][i] *= decay;
+      }
+      x[SHOCK] *= decay;
+      for (let i = 0; i < 13; i++) P[i][i] += q * dt; // random-walk innovation
+      P[SHOCK][SHOCK] += w * dt; // shock innovation
+    }
+    for (const [s, log_rate, r_var] of obs.get(year)) {
+      const Ph = new Array(D);
+      for (let i = 0; i < D; i++) Ph[i] = P[i][s] + P[i][SHOCK];
+      const F = Ph[s] + Ph[SHOCK] + r_var;
+      const innov = log_rate - (x[s] + x[SHOCK]);
+      logLik +=
+        -0.5 * (Math.log(2 * Math.PI) + Math.log(F) + (innov * innov) / F);
+      const K = Ph.map((p) => p / F);
+      for (let i = 0; i < D; i++) x[i] += K[i] * innov;
+      for (let i = 0; i < D; i++)
+        for (let j = 0; j < D; j++) P[i][j] -= K[i] * Ph[j];
+    }
+    prev = year;
+  }
+  return { logLik, x, P };
+}
+```
+
+```js
+function nelder_mead(f, x0, steps, iters = 140) {
+  const n = x0.length;
+  let simplex = [x0.slice()];
+  for (let i = 0; i < n; i++) {
+    const p = x0.slice();
+    p[i] += steps[i];
+    simplex.push(p);
+  }
+  let fv = simplex.map(f);
+  for (let it = 0; it < iters; it++) {
+    const order = d3.range(n + 1).sort((a, b) => fv[a] - fv[b]);
+    simplex = order.map((i) => simplex[i]);
+    fv = order.map((i) => fv[i]);
+    const centroid = new Array(n).fill(0);
+    for (let i = 0; i < n; i++)
+      for (let j = 0; j < n; j++) centroid[j] += simplex[i][j] / n;
+    const worst = simplex[n];
+    const reflect = centroid.map((c, j) => c + (c - worst[j]));
+    const fr = f(reflect);
+    if (fr < fv[0]) {
+      const expand = centroid.map((c, j) => c + 2 * (c - worst[j]));
+      const fe = f(expand);
+      [simplex[n], fv[n]] = fe < fr ? [expand, fe] : [reflect, fr];
+    } else if (fr < fv[n - 1]) {
+      simplex[n] = reflect;
+      fv[n] = fr;
+    } else {
+      const contract = centroid.map((c, j) => c + 0.5 * (worst[j] - c));
+      const fc = f(contract);
+      if (fc < fv[n]) {
+        simplex[n] = contract;
+        fv[n] = fc;
+      } else {
+        for (let i = 1; i <= n; i++) {
+          simplex[i] = simplex[i].map(
+            (v, j) => simplex[0][j] + 0.5 * (v - simplex[0][j]),
+          );
+          fv[i] = f(simplex[i]);
+        }
+      }
     }
   }
-  return bootstrap;
+  let best = 0;
+  for (let i = 1; i <= n; i++) if (fv[i] < fv[best]) best = i;
+  return simplex[best];
+}
+```
+
+
+```js
+function fit_state_space(obs) {
+  const logistic = (z) => 1 / (1 + Math.exp(-z));
+  const negLogLik = ([log_q, log_w, z_phi]) => {
+    const value = -kalman_filter(obs, 10 ** log_q, logistic(z_phi), 10 ** log_w)
+      .logLik;
+    return Number.isFinite(value) ? value : 1e9;
+  };
+  const best = nelder_mead(negLogLik, [-3, -3.5, 0], [0.6, 0.6, 0.8]);
+  return { q: 10 ** best[0], w: 10 ** best[1], phi: logistic(best[2]) };
+}
+```
+
+
+```js
+const fitted = (() => {
+  const m = new Map();
+  for (const race of race_groups) {
+    const obs = observations.get(race);
+    const params = fit_state_space(obs);
+    const { x, P } = kalman_filter(obs, params.q, params.phi, params.w);
+    m.set(race, { ...params, x, P });
+  }
+  return m;
 })();
 ```
 
-```js
-const draw_grade_transition = (grade, race) => {
-  const transitions = grade_transitions.get(grade)?.get(race);
-  if (transitions) {
-    const weights = sampling_weights(transitions.length);
-    return weighted_sample(weights, transitions);
-  }
-};
-```
 
 ```js
-const grade_transitions = (() => {
-  const transitions = d3.group(
-    grade_lag,
-    (d) => d.grade,
-    (d) => d.race,
-  );
-  for (const [grade, map] of transitions) {
-    for (const [race, lags] of map) {
-      map.set(
-        race,
-        lags.map((d) => d.y / d.x),
-      );
+const forecast = (() => {
+  const base_year = latest_enrollment_year;
+  const final_year = latest_birth_year + 5;
+  const years = d3.range(base_year + 1, final_year + 1);
+
+  const draws = new Map();
+  const key = (year, race) => `${year}::${race}`;
+  for (const year of years)
+    for (const race of [...race_groups, "Total"])
+      draws.set(key(year, race), []);
+
+  for (let rep = 0; rep < replicates; rep++) {
+    const total_by_year = new Map(years.map((year) => [year, 0]));
+    for (const race of race_groups) {
+      const { q, phi, w, x, P } = fitted.get(race);
+      const level = d3
+        .range(13)
+        .map((s) => x[s] + gaussian(Math.sqrt(Math.max(P[s][s], 0))));
+      let shock = x[13] + gaussian(Math.sqrt(Math.max(P[13][13], 0)));
+      let count = d3
+        .range(13)
+        .map((g) => grade_lookup.get(`${base_year}::${race}::${g}`) ?? 0);
+
+      for (const year of years) {
+        for (let s = 0; s < 13; s++) level[s] += gaussian(Math.sqrt(q));
+        shock = phi * shock + gaussian(Math.sqrt(w));
+        const next = new Array(13);
+        const births = birth_lookup.get(`${year - 5}::${race}`) ?? 0;
+        next[0] =
+          births * Math.exp(level[12] + shock + gaussian(Math.sqrt(S2)));
+        for (let g = 1; g < 13; g++)
+          next[g] =
+            count[g - 1] *
+            Math.exp(level[g - 1] + shock + gaussian(Math.sqrt(S2)));
+        count = next;
+        const total = d3.sum(count);
+        draws.get(key(year, race)).push(total);
+        total_by_year.set(year, total_by_year.get(year) + total);
+      }
     }
+    for (const year of years)
+      draws.get(key(year, "Total")).push(total_by_year.get(year));
   }
-  return transitions;
+
+  return Array.from(draws, ([k, values]) => {
+    const [year, race] = k.split("::");
+    return {
+      year: +year,
+      race,
+      count: d3.mean(values),
+      stdev: d3.deviation(values),
+      type: "projection",
+    };
+  });
 })();
-```
-
-```js
-const grade_lag = grade_data
-  .map((d) => ({
-    grade: d.grade,
-    race: d.race,
-    year: d.year,
-    x: d.count,
-    y: grade_data.find(
-      (e) =>
-        e.year === d.year + 1 && e.grade === d.grade + 1 && e.race === d.race,
-    )?.count,
-  }))
-  .filter((f) => f.y)
-  .sort((a, b) => d3.ascending(a.year, b.year));
-```
-
-```js
-const draw_kindergarten_transition = (race) => {
-  const transitions = birth_kindergarten_transitions.get(race);
-  if (transitions) {
-    const weights = sampling_weights(transitions.length);
-    return weighted_sample(weights, transitions);
-  }
-};
-```
-
-```js
-const birth_kindergarten_transitions = (() => {
-  const transitions = d3.group(birth_lag, (d) => d.race);
-  for (const [key, value] of transitions) {
-    transitions.set(
-      key,
-      value.map((d) => d.y / d.x),
-    );
-  }
-  return transitions;
-})();
-```
-
-```js
-const birth_lag = birth_data
-  .map((birth) => ({
-    year: birth.year,
-    race: birth.race,
-    x: birth.count,
-    y: grade_data.find(
-      (e) =>
-        e.year === birth.year + 5 && e.race === birth.race && e.grade === 0,
-    )?.count,
-  }))
-  .filter((d) => d.y)
-  .sort((a, b) => d3.ascending(a.year, b.year));
-```
-
-```js
-const sampling_weights = (N) => {
-  const weights = d3.range(1, N + 1).map((i) => 2.5 ** i);
-  const C = d3.sum(weights);
-  return weights.map((i) => i / C);
-};
 ```
 
 ```js
@@ -573,18 +638,4 @@ const credible_interval = (year, race) => {
     },
   )}`;
 };
-```
-
-```js
-// Inlined from @nstrayer/javascript-statistics-snippets.
-function weighted_sample(weights, values) {
-  const random_val = Math.random();
-  let cumulative_prob = 0,
-    i;
-  for (i = 0; i < weights.length; i++) {
-    cumulative_prob += weights[i];
-    if (cumulative_prob > random_val) break;
-  }
-  return values ? values[i] : i;
-}
 ```

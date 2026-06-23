@@ -7,7 +7,7 @@ description: Stocking your bar is an instance of the Densest k-Subhypergraph pro
 reactive: true
 ---
 I've been interested in [integer programming](https://en.wikipedia.org/wiki/Integer_programming)
-problems for a long time (they the most interesting problems in [dedupe](https://github.com/dedupeio/dedupe/)). 
+problems for a long time (they are the most interesting problems in [dedupe](https://github.com/dedupeio/dedupe/)). 
 In the past, I approached them by writing custom [branch-and-bound algorithms](https://en.wikipedia.org/wiki/Branch_and_bound).
 
 I have been using [Google's OR Tools](https://developers.google.com/optimization) for
@@ -270,7 +270,7 @@ const problem = (() => {
     },
 
     // we want to express that a cocktail can only be made if and only if
-    // we hav bought each of its ingredients. one way to exprss this would
+    // we have bought each of its ingredients. one way to express this would
     // to have a constraint that of make {cocktail} <= buy {ingredient}
     // for each necessary ingredient. some solvers allow this formulation
     // but glpk doesn't. so we use the equivalent
