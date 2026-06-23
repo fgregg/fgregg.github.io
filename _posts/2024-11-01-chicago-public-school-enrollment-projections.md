@@ -189,7 +189,7 @@ that were too narrow. For this update, we switched to a random walk model for
 transitions.
 
 The model also contained a per group random shock model to account for events like 
-the asylum seekers in. 
+the asylum seekers in 2022-2023. 
 
 ## Forecast Accuracy
 
