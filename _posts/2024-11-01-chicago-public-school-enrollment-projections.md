@@ -28,9 +28,9 @@ d.race === 'Total').count).toLocaleString( undefined, { maximumFractionDigits:
 
 | school year | projected enrollment (95% credible interval) |
 | ----------- | -------------------------------------------: |
-| 2025-2026   |          ${credible_interval(2025, 'Total')} |
 | 2026-2027   |          ${credible_interval(2026, 'Total')} |
 | 2027-2028   |          ${credible_interval(2027, 'Total')} |
+| 2028-2029   |          ${credible_interval(2028, 'Total')} |
 
 ```js
 display(
@@ -86,9 +86,9 @@ falling since.
 
 | school year |                               African American |                                 Latino |                               white |                               other |
 | ----------- | ---------------------------------------------: | -------------------------------------: | ----------------------------------: | ----------------------------------: |
-| 2025-2026   | ${credible_interval(2025, "African American")} | ${credible_interval(2025, "Hispanic")} | ${credible_interval(2025, "white")} | ${credible_interval(2025, "other")} |
 | 2026-2027   | ${credible_interval(2026, "African American")} | ${credible_interval(2026, "Hispanic")} | ${credible_interval(2026, "white")} | ${credible_interval(2026, "other")} |
 | 2027-2028   | ${credible_interval(2027, "African American")} | ${credible_interval(2027, "Hispanic")} | ${credible_interval(2027, "white")} | ${credible_interval(2027, "other")} |
+| 2028-2029   | ${credible_interval(2028, "African American")} | ${credible_interval(2028, "Hispanic")} | ${credible_interval(2028, "white")} | ${credible_interval(2028, "other")} |
 
 ```js
 display(
@@ -208,7 +208,7 @@ For each year that we make forecasts, we will record the actual total enrollment
 | 2022-2023   | 296,000—307,000                              | 305,703           |
 | 2023-2024   | 283,000—297,000                              | 305,662           |
 | 2024-2025   | 272,000—288,000                              | 307,412           |
-| 2025-2026   | 262,000—279,000                              |                   |
+| 2025-2026   | 262,000—279,000                              | 299,308           |
 
 ### July 2023 Forecast
 
@@ -216,7 +216,7 @@ For each year that we make forecasts, we will record the actual total enrollment
 | ----------- | -------------------------------------------- | ----------------- |
 | 2023-2024   | 291,000—299,000                              | 305,662           |
 | 2024-2025   | 279,000—290,000                              | 307,412           |
-| 2025-2026   | 268,000—280,000                              |                   |
+| 2025-2026   | 268,000—280,000                              | 299,308           |
 | 2026-2027   | 257,000—269,000                              |                   |
 
 In 2022 and 2023, there was a significant immigration of Venezuelans and other
@@ -227,7 +227,7 @@ asylum seekers starting.
 | school year | projected enrollment (95% credible interval) | actual enrollment |
 | ----------- | -------------------------------------------- | ----------------- |
 | 2024-2025   | 289,000—302,000                              | 307,412           |
-| 2025-2026   | 276,000—293,000                              |                   |
+| 2025-2026   | 276,000—293,000                              | 299,308           |
 | 2026-2027   | 264,000—283,000                              |                   |
 | 2027-2028   | 253,000—274,000                              |                   |
 
