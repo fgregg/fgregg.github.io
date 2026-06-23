@@ -587,7 +587,7 @@ const cps_demo_data = d3.csv(
 
 I have compiled the
 [data for Chicago births](https://docs.google.com/spreadsheets/d/11puU8gupkp0gjzN_LXMQaSYbhYoJLr5aylaclxhawDw/edit#gid=0)
-from a number source. See
+from a number of sources. See
 [this post for details on sources]({% post_url 2024-10-18-chicago-births-2009-2020 %}).
 
 ```js
