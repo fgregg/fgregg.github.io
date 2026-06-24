@@ -23,7 +23,7 @@ const POSTS_DIR = path.join(__dirname, "..", "_posts");
 
 const HANDLE = "bunkum.us";
 const PDS_URL = "https://bsky.social";
-const SITE_URL = "https://bunkum.us/";
+const SITE_URL = "https://slownews.bunkum.us/";
 const PUBLICATION_RKEY = "slow-news"; // stable, readable publication key
 
 const PUB_COLLECTION = "site.standard.publication";

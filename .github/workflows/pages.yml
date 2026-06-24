@@ -80,7 +80,7 @@ jobs:
         # static SVG fallbacks (for feeds / no-JS) and a PNG og:image card.
         run: node snapshot.mjs
         env:
-          SITE_URL: https://bunkum.us
+          SITE_URL: https://slownews.bunkum.us
           # Nightly schedule: ignore the cache and re-render every post so
           # dynamic (live-data) notebooks get fresh baked values.
           SNAPSHOT_NO_CACHE: ${{ github.event_name == 'schedule' && '1' || '' }}

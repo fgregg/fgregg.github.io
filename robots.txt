@@ -1,4 +1,4 @@
 User-agent: *
 Disallow:
 
-Sitemap: https://bunkum.us/feed.xml
+Sitemap: https://slownews.bunkum.us/feed.xml
