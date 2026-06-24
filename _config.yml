@@ -7,6 +7,22 @@ plugins:
 
 include: [ _headers, .well-known ]
 
+# Jekyll's default excludes (re-listed, because setting `exclude` REPLACES the
+# defaults rather than extending them), plus bin/ — a dev-only build helper
+# script that shouldn't be published into _site.
+exclude:
+  - .sass-cache
+  - .jekyll-cache
+  - gemfiles
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+  - bin
+
 feed:
   tags: true
 
