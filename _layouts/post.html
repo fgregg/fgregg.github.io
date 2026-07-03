@@ -36,6 +36,30 @@
   link-preview cards (e.g. Mastodon shows a card then drops it). {% endcomment %}
   <meta property="og:url" content="{{ page.url | remove: '.html' | absolute_url }}">
   {% endif %}
+  <meta property="article:author" content="https://bunkum.us/">
+
+  <meta name="author" content="Forest Gregg">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ page.title | jsonify }},
+    "url": "{{ page.url | remove: '.html' | absolute_url }}",
+    {% if page.date %}"datePublished": "{{ page.date | date_to_xmlschema }}",{% endif %}
+    {% if page.description %}"description": {{ page.description | jsonify }},{% endif %}
+    "author": {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0001-8330-9219",
+      "name": "Forest Gregg",
+      "url": "https://bunkum.us/"
+    },
+    "publisher": {
+      "@type": "Person",
+      "@id": "https://orcid.org/0009-0001-8330-9219",
+      "name": "Forest Gregg"
+    }
+  }
+  </script>
 
 </head>
 <body>

@@ -2,6 +2,10 @@
 # without it `{{ site.url }}` is empty, so og:url renders as a relative path.
 url: https://slownews.bunkum.us
 
+author:
+  name: Forest Gregg
+  uri: https://bunkum.us/
+
 plugins:
   - jekyll-feed
 
