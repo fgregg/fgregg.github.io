@@ -18,7 +18,7 @@ layout: default
      {% for post in site.tags[tag_name] %}
      <li>
        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-         <a href="{{ post.url | relative_url }}">
+         <a href="{{ post.url | remove: '.html' | relative_url }}">
            {{ post.title | escape }}
          </a>
         - <i>{{ post.date | date: date_format }}</i>
@@ -36,7 +36,7 @@ layout: default
      {% for post in untagged %}
      <li>
        {%- assign date_format = site.minima.date_format | default: "%b %-d, %Y" -%}
-         <a href="{{ post.url | relative_url }}">
+         <a href="{{ post.url | remove: '.html' | relative_url }}">
            {{ post.title | escape }}
          </a>
         - <i>{{ post.date | date: date_format }}</i>

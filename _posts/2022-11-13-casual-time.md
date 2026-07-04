@@ -6,7 +6,7 @@ tags: civics
 ---
 
 [I've been thinking about the type of time I have these
-days](https://bunkum.us/2022/11/06/asynch-civics.html): time that is
+days]({% post_url 2022-11-06-asynch-civics %}): time that is
 interrupted; interruptible; passing at places not fully under my
 control; and during which I usually need to give low-grade attention
 to something else.
