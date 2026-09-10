@@ -123,3 +123,57 @@ h3:hover > .header-anchor,
 .header-anchor:focus {
     opacity: 1;
 }
+
+/* Code — Rouge-highlighted fenced blocks in non-reactive posts, plus inline
+   `code`. Same palette as the tables: cream paper, #333 ink, maroon accent,
+   hairline border. Bootstrap otherwise paints inline code hot pink. */
+pre,
+code {
+    font-family: ui-monospace, var(--monospace);
+}
+
+code {
+    color: #552222;
+    font-size: 0.9em;
+}
+
+pre {
+    background: #f7f4ee;
+    border: 1px solid #ded7ca;
+    padding: 0.75rem 1rem;
+    margin: 1.25rem 0 1.75rem;
+    overflow-x: auto;
+    line-height: 1.45;
+}
+
+pre code {
+    color: inherit;
+    font-size: 0.85em;
+}
+
+/* Rouge token colours: warm, low-saturation, a few hues only. */
+.highlight,
+.highlight .w   { color: #333333; }
+.highlight .c, .highlight .c1, .highlight .cm,
+.highlight .cp, .highlight .cs { color: #8a7f70; font-style: italic; }   /* comments */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp,
+.highlight .kr, .highlight .kt, .highlight .kv,
+.highlight .ow { color: #552222; font-weight: 700; }                       /* keywords */
+.highlight .kc, .highlight .bp, .highlight .no { color: #8a4b00; }         /* true/false/null, constants */
+.highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc,
+.highlight .sd, .highlight .sh, .highlight .sx, .highlight .dl,
+.highlight .sr { color: #2f6b3a; }                                         /* strings */
+.highlight .se, .highlight .si, .highlight .ss { color: #8a4b00; }         /* escapes, interpolation, symbols */
+.highlight .m, .highlight .mi, .highlight .mf, .highlight .mh,
+.highlight .mo, .highlight .il { color: #8a4b00; }                         /* numbers */
+.highlight .nf, .highlight .fm { color: #1f3f8a; }                         /* function names */
+.highlight .nc, .highlight .nn, .highlight .nt { color: #1f3f8a; font-weight: 700; } /* classes, modules, tags */
+.highlight .na, .highlight .nd { color: #6b3c80; }                         /* attributes, decorators */
+.highlight .nb { color: #8a4b00; }                                         /* builtins */
+.highlight .n, .highlight .nx, .highlight .nv, .highlight .vi,
+.highlight .vg, .highlight .vc { color: #333333; }                         /* plain names */
+.highlight .o, .highlight .p { color: #6a6157; }                           /* operators, punctuation */
+.highlight .gi { color: #2f6b3a; background: #e8f1e9; }                    /* diff + */
+.highlight .gd { color: #a12626; background: #f6e5e5; }                    /* diff - */
+.highlight .gh, .highlight .gu { color: #552222; font-weight: 700; }
+.highlight .err { color: #a12626; }
