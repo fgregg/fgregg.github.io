@@ -12,8 +12,8 @@ fine-grained permissions, and so the key that you have to use for integrating
 services often can do things with your data well beyond the narrow syncing you
 need.
 
-If you can't can't reduce the power of the key directly, you can sometimes
-effectively reduce the power by using a proxy. The proxy service holds the real,
+If you can't reduce the power of the key directly, you can sometimes effectively
+reduce the power by using a proxy. The proxy service holds the real,
 over-powered key, not the client, and the service allows requests to API routes
 that you choose.
 
