@@ -62,7 +62,7 @@ function credentials(request) {
   return { user, key, suffix: mode.length ? "|" + mode.join("|") : "" };
 }
 
-// Constant-time comparison. Hash both sides first so lengths always match.
+// Constant-time comparison.
 async function keyMatches(presented, expected) {
   const enc = new TextEncoder();
   const [a, b] = await Promise.all([
