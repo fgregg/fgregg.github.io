@@ -2,14 +2,16 @@
 //
 // Publishes directly via @atproto/api (not ATapult): ATapult hardcodes the record
 // key to a TID derived from each post's publishedAt, which collides for posts that
-// share a date. We instead key each document by its unique filename stem
-// (e.g. "2022-11-24-lm30") — collision-proof, readable, and trivially reproduced in
-// the Jekyll plugin for the page <link> tags. Record SHAPES match ATapult's
-// site.standard.publication / site.standard.document lexicons.
+// share a date. Record keys are instead derived from each post's unique filename
+// stem (e.g. "2022-11-24-lm30") — see documentRkey() — so they're collision-proof
+// and trivially reproduced in the Jekyll plugin for the page <link> tags. Record
+// SHAPES match ATapult's site.standard.publication / site.standard.document
+// lexicons.
 //
 // Idempotent: each record is created, updated (only when changed), or skipped.
 // Needs ATPROTO_PASSWORD in the env (local: _atproto/.env; CI: GitHub secret).
 
+import { createHash } from "node:crypto";
 import { existsSync, readFileSync } from "node:fs";
 import { readdir } from "node:fs/promises";
 import path from "node:path";
@@ -24,7 +26,9 @@ const POSTS_DIR = path.join(__dirname, "..", "_posts");
 const HANDLE = "bunkum.us";
 const PDS_URL = "https://bsky.social";
 const SITE_URL = "https://slownews.bunkum.us/";
-const PUBLICATION_RKEY = "slow-news"; // stable, readable publication key
+// Legacy (pre-lexicon-enforcement) key, see documentRkey(): the record exists
+// and reads fine, but can no longer be updated in place.
+const PUBLICATION_RKEY = "slow-news";
 
 const PUB_COLLECTION = "site.standard.publication";
 const DOC_COLLECTION = "site.standard.document";
@@ -35,6 +39,43 @@ const DOC_COLLECTION = "site.standard.document";
 // 2 digits in a filename (e.g. 2022-02-4-weeknotes.md); Jekyll zero-pads them in
 // the URL, so we do too.
 const POST_FILE_RE = /^(\d{4})-(\d{1,2})-(\d{1,2})-(.+)\.md$/;
+
+// ---- record keys ---------------------------------------------------------------
+//
+// The site.standard.* lexicons declare `key: tid`, and since ~Sept 2026
+// bsky.social validates writes against them, so a bare filename stem is rejected
+// ("Invalid TID string"). Records created before enforcement keep working (the
+// PDS only validates create/put), so posts dated before TID_CUTOFF keep their
+// legacy stem rkey and are never rewritten — they're frozen: an edit to one of
+// them logs a warning and is skipped. Later posts get a deterministic TID:
+// the post's midnight-UTC timestamp plus a SHA-256(stem)-derived offset within
+// that day (53-bit µs timestamp) and a hash-derived 10-bit clock id. Stable
+// across runs, time-sortable, and collision-proof for practical purposes.
+//
+// MUST stay byte-for-byte identical to _plugins/standard_site.rb.
+const TID_CUTOFF = "2026-09-10";
+const TID_ALPHABET = "234567abcdefghijklmnopqrstuvwxyz"; // base32-sortable
+
+const encodeTid = (n) => {
+  let out = "";
+  for (let i = 0; i < 13; i++) {
+    out = TID_ALPHABET[Number(n & 31n)] + out;
+    n >>= 5n;
+  }
+  return out;
+};
+
+const documentRkey = (stem, publishedAt) => {
+  if (stem.slice(0, 10) < TID_CUTOFF) return stem; // legacy: created before enforcement
+  const digest = createHash("sha256").update(stem).digest();
+  const h = digest.readBigUInt64BE(0);
+  const dayMicros = 86_400_000_000n;
+  const micros = BigInt(publishedAt.getTime()) * 1000n + (h % dayMicros);
+  const clockId = (h >> 40n) & 1023n;
+  return encodeTid((micros << 10n) | clockId);
+};
+
+const isLegacyRkey = (rkey) => rkey.length !== 13 || rkey.includes("-");
 
 // ---- gather posts -> document records -----------------------------------------
 
@@ -50,11 +91,13 @@ const parsePosts = async () => {
 
     const mm = month.padStart(2, "0");
     const dd = day.padStart(2, "0");
+    const stem = file.replace(/\.md$/, "");
+    const publishedAt = new Date(Date.UTC(+year, +month - 1, +day));
     docs.push({
-      rkey: file.replace(/\.md$/, ""), // filename stem == the page's rkey
+      rkey: documentRkey(stem, publishedAt), // == the page's <link> rkey
       title: attributes.title,
       description: attributes.description,
-      publishedAt: new Date(Date.UTC(+year, +month - 1, +day)).toISOString(),
+      publishedAt: publishedAt.toISOString(),
       path: `/${year}/${mm}/${dd}/${slug}`,
     });
   }
@@ -163,6 +206,13 @@ const syncPublication = async (agent, publicationUri) => {
     return;
   }
 
+  if (existing && isLegacyRkey(PUBLICATION_RKEY)) {
+    console.warn(
+      `publication ${PUBLICATION_RKEY}: changed, but legacy rkey can't be rewritten — skipped.`,
+    );
+    return;
+  }
+
   const icon = iconChanged ? (await uploadIcon(agent)).icon : existing.icon;
   const record = { ...base, icon };
   await agent.com.atproto.repo.putRecord({
@@ -175,6 +225,7 @@ const syncPublication = async (agent, publicationUri) => {
 };
 
 const syncDocuments = async (agent, publicationUri, docs) => {
+  let failed = 0;
   for (const doc of docs) {
     // A Standard.Site document needs both a title and a description. Many older
     // Slow News posts predate the `description:` front matter, so skip (don't
@@ -184,36 +235,56 @@ const syncDocuments = async (agent, publicationUri, docs) => {
       console.warn(`document ${doc.rkey}: missing title/description — skipped.`);
       continue;
     }
-    const existing = await getRecord(agent, DOC_COLLECTION, doc.rkey);
-    const coverImage = await resolveCover(agent, doc, existing);
-    const record = docRecord(publicationUri, doc, coverImage);
-
-    if (!existing) {
-      await agent.com.atproto.repo.createRecord({
-        repo: agent.did,
-        collection: DOC_COLLECTION,
-        rkey: doc.rkey,
-        record,
-      });
-      console.log(`document ${doc.rkey} ${doc.path} created${coverImage ? " (with card)" : ""}.`);
-    } else if (
-      existing.title !== record.title ||
-      existing.description !== record.description ||
-      existing.path !== record.path ||
-      existing.site !== record.site ||
-      existing.publishedAt !== record.publishedAt ||
-      existing.coverImage?.size !== record.coverImage?.size
-    ) {
-      await agent.com.atproto.repo.putRecord({
-        repo: agent.did,
-        collection: DOC_COLLECTION,
-        rkey: doc.rkey,
-        record,
-      });
-      console.log(`document ${doc.rkey} ${doc.path} updated.`);
-    } else {
-      console.log(`document ${doc.rkey} ${doc.path} unchanged.`);
+    // One bad record mustn't abort the rest of the sync.
+    try {
+      await syncDocument(agent, publicationUri, doc);
+    } catch (e) {
+      failed++;
+      console.error(`document ${doc.rkey} ${doc.path} FAILED: ${e.status ?? ""} ${e.message ?? e}`);
     }
+  }
+  if (failed) throw new Error(`${failed} document(s) failed to sync`);
+};
+
+const syncDocument = async (agent, publicationUri, doc) => {
+  const existing = await getRecord(agent, DOC_COLLECTION, doc.rkey);
+  const coverImage = await resolveCover(agent, doc, existing);
+  const record = docRecord(publicationUri, doc, coverImage);
+
+  if (!existing && isLegacyRkey(doc.rkey)) {
+    // Pre-cutoff post that was never synced (e.g. a description added later).
+    // Its stem rkey would be rejected now; it needs a TID, i.e. a later date or
+    // a lowered TID_CUTOFF.
+    console.warn(`document ${doc.rkey}: legacy rkey can't be created anymore — skipped.`);
+  } else if (!existing) {
+    await agent.com.atproto.repo.createRecord({
+      repo: agent.did,
+      collection: DOC_COLLECTION,
+      rkey: doc.rkey,
+      record,
+    });
+    console.log(`document ${doc.rkey} ${doc.path} created${coverImage ? " (with card)" : ""}.`);
+  } else if (
+    existing.title !== record.title ||
+    existing.description !== record.description ||
+    existing.path !== record.path ||
+    existing.site !== record.site ||
+    existing.publishedAt !== record.publishedAt ||
+    existing.coverImage?.size !== record.coverImage?.size
+  ) {
+    if (isLegacyRkey(doc.rkey)) {
+      console.warn(`document ${doc.rkey}: changed, but legacy rkey can't be rewritten — skipped.`);
+      return;
+    }
+    await agent.com.atproto.repo.putRecord({
+      repo: agent.did,
+      collection: DOC_COLLECTION,
+      rkey: doc.rkey,
+      record,
+    });
+    console.log(`document ${doc.rkey} ${doc.path} updated.`);
+  } else {
+    console.log(`document ${doc.rkey} ${doc.path} unchanged.`);
   }
 };
 
