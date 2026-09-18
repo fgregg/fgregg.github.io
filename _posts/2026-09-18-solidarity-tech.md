@@ -7,10 +7,10 @@ description: A couple of gems.
 reactive: false
 ---
 
-Ivan Pardo's [Solidarity Tech](https://www.solidarity.tech/platform) has an
-important idea for organizing tools: communication between organizers and
-workers should route through the tool. Organizers don't need to log that they
-had a call, since making the call creates the record of the call.
+Ivan Pardo's [Solidarity Tech](https://www.solidarity.tech/) has an important
+idea for organizing tools: communication between organizers and workers should
+route through the tool. Organizers don't need to log that they had a call, since
+making the call creates the record of the call.
 
 The purpose of organizing tools is mainly to facilitate the management of an
 organizing campaign in two senses. First, as a tool to gather information about
