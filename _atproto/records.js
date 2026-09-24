@@ -104,7 +104,6 @@ const parsePosts = async () => {
       description: attributes.description,
       publishedAt: publishedAt.toISOString(),
       path: `/${year}/${mm}/${dd}/${slug}`,
-      snapshotSlug: `${year}-${mm}-${dd}-${slug}`,
     });
   }
   return docs;
@@ -130,17 +129,26 @@ const docRecord = (publicationUri, doc, coverImage) => ({
   ...(coverImage ? { coverImage } : {}),
 });
 
-// snapshot.mjs renders a social-card PNG of each reactive post's first chart
-// into the built site at _site/assets/snapshots/<slug>/card.png, where the slug
-// is the dashed URL path (for TID-keyed posts it is not the rkey). Use it as the
-// Standard.Site coverImage. Runs after snapshot.mjs in CI, so the file is
-// present; locally (no prior build) it's simply absent and we skip it.
+// snapshot.mjs renders a social-card PNG for each chart post and injects it into
+// the built page as og:image (usually the first chart's own PNG, e.g.
+// assets/snapshots/<slug>/cell-0.png; card.png only when that chart has none).
+// Use that image as the Standard.Site coverImage. Runs after snapshot.mjs in CI,
+// so the built page is present; locally (no prior build) it's absent and we skip.
 const SITE_DIR = path.join(__dirname, "..", "_site");
 const CARD_MAX_BYTES = 1_000_000; // lexicon caps coverImage at < 1MB
+const OG_IMAGE_RE = /<meta property="og:image" content="([^"]+)">/;
+
+const cardPathFor = (doc) => {
+  const pagePath = path.join(SITE_DIR, `${doc.path}.html`);
+  if (!existsSync(pagePath)) return undefined;
+  const m = OG_IMAGE_RE.exec(readFileSync(pagePath, "utf8"));
+  if (!m || !m[1].startsWith(SITE_URL)) return undefined;
+  return path.join(SITE_DIR, m[1].slice(SITE_URL.length));
+};
 
 const resolveCover = async (agent, doc, existing) => {
-  const cardPath = path.join(SITE_DIR, "assets", "snapshots", doc.snapshotSlug, "card.png");
-  if (!existsSync(cardPath)) return existing?.coverImage; // keep any prior image
+  const cardPath = cardPathFor(doc);
+  if (!cardPath || !existsSync(cardPath)) return existing?.coverImage; // keep any prior image
   const bytes = readFileSync(cardPath);
   if (bytes.length > CARD_MAX_BYTES) {
     console.warn(
