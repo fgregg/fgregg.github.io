@@ -54,6 +54,11 @@ const POST_FILE_RE = /^(\d{4})-(\d{1,2})-(\d{1,2})-(.+)\.md$/;
 //
 // MUST stay byte-for-byte identical to _plugins/standard_site.rb.
 const TID_CUTOFF = "2026-09-10";
+// Pre-cutoff posts moved onto a TID rkey. A legacy record can't be edited, so to
+// re-syndicate an edited old post: delete its legacy record
+// (delete-legacy-record.mjs) and add its stem here and to MIGRATED_STEMS in
+// _plugins/standard_site.rb.
+const MIGRATED_STEMS = new Set(["2024-10-18-chicago-births-2009-2020"]);
 const TID_ALPHABET = "234567abcdefghijklmnopqrstuvwxyz"; // base32-sortable
 
 const encodeTid = (n) => {
@@ -66,7 +71,7 @@ const encodeTid = (n) => {
 };
 
 const documentRkey = (stem, publishedAt) => {
-  if (stem.slice(0, 10) < TID_CUTOFF) return stem; // legacy: created before enforcement
+  if (stem.slice(0, 10) < TID_CUTOFF && !MIGRATED_STEMS.has(stem)) return stem; // legacy: created before enforcement
   const digest = createHash("sha256").update(stem).digest();
   const h = digest.readBigUInt64BE(0);
   const dayMicros = 86_400_000_000n;
@@ -99,6 +104,7 @@ const parsePosts = async () => {
       description: attributes.description,
       publishedAt: publishedAt.toISOString(),
       path: `/${year}/${mm}/${dd}/${slug}`,
+      snapshotSlug: `${year}-${mm}-${dd}-${slug}`,
     });
   }
   return docs;
@@ -125,15 +131,15 @@ const docRecord = (publicationUri, doc, coverImage) => ({
 });
 
 // snapshot.mjs renders a social-card PNG of each reactive post's first chart
-// into the built site at _site/assets/snapshots/<rkey>/card.png (the snapshot
-// slug — the dashed URL path — equals the document rkey). Use it as the
+// into the built site at _site/assets/snapshots/<slug>/card.png, where the slug
+// is the dashed URL path (for TID-keyed posts it is not the rkey). Use it as the
 // Standard.Site coverImage. Runs after snapshot.mjs in CI, so the file is
 // present; locally (no prior build) it's simply absent and we skip it.
 const SITE_DIR = path.join(__dirname, "..", "_site");
 const CARD_MAX_BYTES = 1_000_000; // lexicon caps coverImage at < 1MB
 
 const resolveCover = async (agent, doc, existing) => {
-  const cardPath = path.join(SITE_DIR, "assets", "snapshots", doc.rkey, "card.png");
+  const cardPath = path.join(SITE_DIR, "assets", "snapshots", doc.snapshotSlug, "card.png");
   if (!existsSync(cardPath)) return existing?.coverImage; // keep any prior image
   const bytes = readFileSync(cardPath);
   if (bytes.length > CARD_MAX_BYTES) {

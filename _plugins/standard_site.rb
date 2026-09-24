@@ -17,6 +17,9 @@ require "digest"
 
 module StandardSite
   TID_CUTOFF = "2026-09-10".freeze
+  # Pre-cutoff posts moved onto a TID rkey; keep in step with MIGRATED_STEMS in
+  # _atproto/records.js.
+  MIGRATED_STEMS = ["2024-10-18-chicago-births-2009-2020"].freeze
   TID_ALPHABET = "234567abcdefghijklmnopqrstuvwxyz".freeze # base32-sortable
   DAY_MICROS = 86_400_000_000
 
@@ -30,7 +33,7 @@ module StandardSite
   end
 
   def self.document_rkey(stem)
-    return stem if stem[0, 10] < TID_CUTOFF
+    return stem if stem[0, 10] < TID_CUTOFF && !MIGRATED_STEMS.include?(stem)
 
     year, month, day = stem.match(/\A(\d{4})-(\d{1,2})-(\d{1,2})-/).captures.map(&:to_i)
     midnight_micros = Time.utc(year, month, day).to_i * 1_000_000
