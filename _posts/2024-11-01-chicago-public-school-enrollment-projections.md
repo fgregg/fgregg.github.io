@@ -20,10 +20,9 @@ in ${latest_enrollment_year}.
 
 Based on ${latest_enrollment_year} enrollment and counts of Chicago births
 through ${latest_birth_year}, we project that K-12 enrollment will lose another
-${(school_age_years.find(d => d.year === latest_enrollment_year && d.race ===
-'Total').count - school_age_years.find(d => d.year === latest_birth_year + 5 &&
-d.race === 'Total').count).toLocaleString( undefined, { maximumFractionDigits:
-0, maximumSignificantDigits: 2 })} students by the ${latest_birth_year +
+${round_thousand(school_age_years.find(d => d.year === latest_enrollment_year &&
+d.race === 'Total').count - school_age_years.find(d => d.year ===
+latest_birth_year + 5 && d.race === 'Total').count).toLocaleString()} students by the ${latest_birth_year +
 5}-${latest_birth_year + 6} school year.
 
 | school year | projected enrollment (95% credible interval) |
@@ -74,7 +73,7 @@ display(
         school_age_years.filter((d) => d.race === "Total" && !d.anchor),
         Plot.pointerX({
           x: school_year_date,
-          y: "count",
+          y: displayed_count,
           channels: { type: "type" },
           format: { x: school_year_label },
         }),
@@ -136,7 +135,7 @@ display(
         Plot.pointerX({
           fx: "race",
           x: school_year_date,
-          y: "count",
+          y: displayed_count,
           channels: { type: "type" },
           format: { x: school_year_label },
         }),
@@ -249,6 +248,16 @@ asylum seekers starting.
 
 ```js
 const school_year_date = (d) => new Date(`${d.year}-09-15`);
+```
+
+```js
+// projections are rounded to the nearest thousand; observed counts are exact
+const displayed_count = (d) =>
+  d.type === "projection" ? round_thousand(d.count) : d.count;
+```
+
+```js
+const round_thousand = (n) => Math.round(n / 1000) * 1000;
 ```
 
 ```js
@@ -647,18 +656,10 @@ const credible_interval = (year, race) => {
   const target_year = school_age_years.find(
     (d) => d.year === year && d.race === race,
   );
-  return `${(target_year.count - target_year.stdev * 1.96).toLocaleString(
-    undefined,
-    {
-      maximumFractionDigits: 0,
-      maximumSignificantDigits: 3,
-    },
-  )}—${(target_year.count + target_year.stdev * 1.96).toLocaleString(
-    undefined,
-    {
-      maximumFractionDigits: 0,
-      maximumSignificantDigits: 3,
-    },
-  )}`;
+  return `${round_thousand(
+    target_year.count - target_year.stdev * 1.96,
+  ).toLocaleString()}—${round_thousand(
+    target_year.count + target_year.stdev * 1.96,
+  ).toLocaleString()}`;
 };
 ```
