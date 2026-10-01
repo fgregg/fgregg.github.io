@@ -92,6 +92,7 @@ falling since.
 
 | school year |                               African American |                                 Latino |                               white |                               other |
 | ----------- | ---------------------------------------------: | -------------------------------------: | ----------------------------------: | ----------------------------------: |
+| ${latest_enrollment_year}-${latest_enrollment_year + 1} (actual) | ${observed_count("African American")} | ${observed_count("Hispanic")} | ${observed_count("white")} | ${observed_count("other")} |
 | 2027-2028   | ${credible_interval(2027, "African American")} | ${credible_interval(2027, "Hispanic")} | ${credible_interval(2027, "white")} | ${credible_interval(2027, "other")} |
 | 2028-2029   | ${credible_interval(2028, "African American")} | ${credible_interval(2028, "Hispanic")} | ${credible_interval(2028, "white")} | ${credible_interval(2028, "other")} |
 
@@ -165,7 +166,15 @@ them. It tends to be the case that last year's rate is a good prediction
 of this year's rate. So, for each grade-to-grade transition rate, we say that next year's 
 rate will be the same as this year's rate plus or minus some random difference, and then
 repeat that for the following year, and so on. The size of the random differences are based 
-on the observed historical variations.
+on the observed historical variations. The birth to kindergarten rate moves much more from
+year to year than the grade-to-grade rates, as families decide between CPS, private
+schools, and moving away, so it gets its own, larger, random differences.
+
+Some years also bring a temporary shock that moves many transition rates at once,
+like the asylum seekers who arrived in 2022 and 2023. The model includes a
+shock for each racial and ethnic group, and a citywide shock shared by all
+groups, like the pandemic drop in kindergarten enrollment in fall 2020. These
+shocks fade over time instead of persisting.
 
 To make projections, we start with the observed number of students by grade and race and ethnicity
 and Chicago births, and use a projected transition rate to step those cohorts to next year and 
@@ -201,6 +210,22 @@ transitions.
 
 The model also contained a per group random shock model to account for events like 
 the asylum seekers in 2022-2023. 
+
+### October 2026 Update
+
+- Added a citywide shock, shared by all racial and ethnic groups, alongside
+  each group's own shock. Previously, the groups were projected independently,
+  which made the interval for total enrollment too narrow.
+- Simulations now draw the starting transition rates and shocks together,
+  respecting how their estimates are correlated. Drawing them independently
+  sometimes made intervals much too wide.
+- The birth to kindergarten rate now has its own random walk variance instead
+  of sharing one with the grade-to-grade rates. Kindergarten entry varies much
+  more, especially for white and other students.
+
+In a backtest of one to three year forecasts made from 2010 through 2025,
+these changes reduced forecast error and gave intervals whose width better
+matched the actual errors.
 
 ## Forecast Accuracy
 
@@ -372,7 +397,7 @@ function gaussian(sd) {
 ```
 
 ```js
-function kalman_filter(obs, q, phi, w) {
+function kalman_filter(obs, q, qK, phi, w) {
   const D = 14;
   const SHOCK = 13;
   const x = new Array(D).fill(0);
@@ -391,7 +416,7 @@ function kalman_filter(obs, q, phi, w) {
         P[SHOCK][i] *= decay;
       }
       x[SHOCK] *= decay;
-      for (let i = 0; i < 13; i++) P[i][i] += q * dt; // random-walk innovation
+      for (let i = 0; i < 13; i++) P[i][i] += (i === 12 ? qK : q) * dt; // random-walk innovation
       P[SHOCK][SHOCK] += w * dt; // shock innovation
     }
     for (const [s, log_rate, r_var] of obs.get(year)) {
@@ -463,32 +488,146 @@ function nelder_mead(f, x0, steps, iters = 140) {
 
 
 ```js
+// The birth-to-kindergarten rate gets its own random-walk variance, qK, since
+// it moves much more than the grade-to-grade rates.
 function fit_state_space(obs) {
-  const logistic = (z) => 1 / (1 + Math.exp(-z));
-  const negLogLik = ([log_q, log_w, z_phi]) => {
-    const value = -kalman_filter(obs, 10 ** log_q, logistic(z_phi), 10 ** log_w)
-      .logLik;
+  const negLogLik = ([log_q, log_w, z_phi, log_qK]) => {
+    const value = -kalman_filter(
+      obs,
+      10 ** log_q,
+      10 ** log_qK,
+      logistic(z_phi),
+      10 ** log_w,
+    ).logLik;
     return Number.isFinite(value) ? value : 1e9;
   };
-  const best = nelder_mead(negLogLik, [-3, -3.5, 0], [0.6, 0.6, 0.8]);
-  return { q: 10 ** best[0], w: 10 ** best[1], phi: logistic(best[2]) };
+  let best = null;
+  let best_value = Infinity;
+  for (const start of [
+    [-3, -3.5, 0, -3],
+    [-3.5, -3, 0.5, -2.5],
+  ]) {
+    const fit = nelder_mead(negLogLik, start, [0.6, 0.6, 0.8, 0.6], 200);
+    const value = negLogLik(fit);
+    if (value < best_value) {
+      best_value = value;
+      best = fit;
+    }
+  }
+  return {
+    q: 10 ** best[0],
+    w: 10 ** best[1],
+    phi: logistic(best[2]),
+    qK: 10 ** best[3],
+  };
 }
 ```
 
 
 ```js
-const fitted = (() => {
-  const m = new Map();
-  for (const race of race_groups) {
-    const obs = observations.get(race);
-    const params = fit_state_space(obs);
-    const { x, P } = kalman_filter(obs, params.q, params.phi, params.w);
-    m.set(race, { ...params, x, P });
-  }
-  return m;
-})();
+const logistic = (z) => 1 / (1 + Math.exp(-z));
 ```
 
+```js
+// One filter over all groups. Group r's 13 log-rate levels are at 14r..14r+12
+// and its own shock is at 14r+13; the citywide shock is the last element.
+function joint_kalman_filter(group_params, city_w, city_phi) {
+  const CITY = 14 * race_groups.length;
+  const D = CITY + 1;
+  const x = new Array(D).fill(0);
+  const P = Array.from({ length: D }, () => new Array(D).fill(0));
+  const q = new Array(D).fill(0);
+  const w = new Array(D).fill(0);
+  const phi = new Array(D).fill(1);
+  group_params.forEach((p, r) => {
+    for (let i = 0; i < 13; i++) {
+      P[14 * r + i][14 * r + i] = 10; // diffuse prior on the levels
+      q[14 * r + i] = i === 12 ? p.qK : p.q;
+    }
+    phi[14 * r + 13] = p.phi;
+    w[14 * r + 13] = p.w;
+    P[14 * r + 13][14 * r + 13] = p.w / Math.max(1e-6, 1 - p.phi * p.phi);
+  });
+  phi[CITY] = city_phi;
+  w[CITY] = city_w;
+  P[CITY][CITY] = city_w / Math.max(1e-6, 1 - city_phi * city_phi);
+
+  const by_year = new Map();
+  race_groups.forEach((race, r) => {
+    for (const [year, entries] of observations.get(race)) {
+      if (!by_year.has(year)) by_year.set(year, []);
+      for (const [s, log_rate, r_var] of entries)
+        by_year.get(year).push([14 * r + s, 14 * r + 13, log_rate, r_var]);
+    }
+  });
+
+  let logLik = 0;
+  let prev = null;
+  const decay = new Array(D);
+  for (const year of [...by_year.keys()].sort((a, b) => a - b)) {
+    if (prev !== null) {
+      const dt = year - prev;
+      for (let i = 0; i < D; i++) decay[i] = Math.pow(phi[i], dt);
+      for (let i = 0; i < D; i++) {
+        x[i] *= decay[i];
+        for (let j = 0; j < D; j++) P[i][j] *= decay[i] * decay[j];
+        P[i][i] += (q[i] + w[i]) * dt; // random-walk and shock innovations
+      }
+    }
+    for (const [s, shock, log_rate, r_var] of by_year.get(year)) {
+      const Ph = new Array(D);
+      for (let i = 0; i < D; i++) Ph[i] = P[i][s] + P[i][shock] + P[i][CITY];
+      const F = Ph[s] + Ph[shock] + Ph[CITY] + r_var;
+      const innov = log_rate - (x[s] + x[shock] + x[CITY]);
+      logLik +=
+        -0.5 * (Math.log(2 * Math.PI) + Math.log(F) + (innov * innov) / F);
+      for (let i = 0; i < D; i++) x[i] += (Ph[i] / F) * innov;
+      for (let i = 0; i < D; i++) {
+        const k = Ph[i] / F;
+        for (let j = 0; j < D; j++) P[i][j] -= k * Ph[j];
+      }
+    }
+    prev = year;
+  }
+  return { logLik, x, P };
+}
+```
+
+```js
+function cholesky(A) {
+  const n = A.length;
+  const L = Array.from({ length: n }, () => new Array(n).fill(0));
+  for (let i = 0; i < n; i++)
+    for (let j = 0; j <= i; j++) {
+      let s = A[i][j];
+      for (let k = 0; k < j; k++) s -= L[i][k] * L[j][k];
+      L[i][j] = i === j ? Math.sqrt(Math.max(s, 1e-12)) : s / L[j][j];
+    }
+  return L;
+}
+```
+
+```js
+// First fit each group's random walk and shock on its own, then fit the
+// citywide shock jointly, letting the group shocks shrink by a common factor
+// since part of what looked like a group shock may be citywide.
+const fitted = (() => {
+  const groups = race_groups.map((race) =>
+    fit_state_space(observations.get(race)),
+  );
+  const negLogLik = ([log_w, z_phi, log_m]) => {
+    const group_params = groups.map((p) => ({ ...p, w: p.w * 10 ** log_m }));
+    const value = -joint_kalman_filter(group_params, 10 ** log_w, logistic(z_phi))
+      .logLik;
+    return Number.isFinite(value) ? value : 1e9;
+  };
+  const best = nelder_mead(negLogLik, [-3.5, 0, 0], [0.6, 0.8, 0.3], 80);
+  const group_params = groups.map((p) => ({ ...p, w: p.w * 10 ** best[2] }));
+  const city = { w: 10 ** best[0], phi: logistic(best[1]) };
+  const { x, P } = joint_kalman_filter(group_params, city.w, city.phi);
+  return { groups: group_params, city, x, L: cholesky(P) };
+})();
+```
 
 ```js
 const forecast = (() => {
@@ -502,37 +641,50 @@ const forecast = (() => {
     for (const race of [...race_groups, "Total"])
       draws.set(key(year, race), []);
 
+  const { groups, city, x, L } = fitted;
+  const CITY = x.length - 1;
   for (let rep = 0; rep < replicates; rep++) {
-    const total_by_year = new Map(years.map((year) => [year, 0]));
-    for (const race of race_groups) {
-      const { q, phi, w, x, P } = fitted.get(race);
-      const level = d3
+    // draw the current levels and shocks jointly from the filter's estimate
+    const z = x.map(() => gaussian(1));
+    const state = x.map((xi, i) => {
+      let s = xi;
+      for (let k = 0; k <= i; k++) s += L[i][k] * z[k];
+      return s;
+    });
+    const level = race_groups.map((_, r) => state.slice(14 * r, 14 * r + 13));
+    const shock = race_groups.map((_, r) => state[14 * r + 13]);
+    let city_shock = state[CITY];
+    const count = race_groups.map((race) =>
+      d3
         .range(13)
-        .map((s) => x[s] + gaussian(Math.sqrt(Math.max(P[s][s], 0))));
-      let shock = x[13] + gaussian(Math.sqrt(Math.max(P[13][13], 0)));
-      let count = d3
-        .range(13)
-        .map((g) => grade_lookup.get(`${base_year}::${race}::${g}`) ?? 0);
+        .map((g) => grade_lookup.get(`${base_year}::${race}::${g}`) ?? 0),
+    );
 
-      for (const year of years) {
-        for (let s = 0; s < 13; s++) level[s] += gaussian(Math.sqrt(q));
-        shock = phi * shock + gaussian(Math.sqrt(w));
+    for (const year of years) {
+      city_shock = city.phi * city_shock + gaussian(Math.sqrt(city.w));
+      let total_this_year = 0;
+      race_groups.forEach((race, r) => {
+        const { q, qK, phi, w } = groups[r];
+        for (let s = 0; s < 13; s++)
+          level[r][s] += gaussian(Math.sqrt(s === 12 ? qK : q));
+        shock[r] = phi * shock[r] + gaussian(Math.sqrt(w));
+        const total_shock = shock[r] + city_shock;
         const next = new Array(13);
         const births = birth_lookup.get(`${year - 5}::${race}`) ?? 0;
         next[0] =
-          births * Math.exp(level[12] + shock + gaussian(Math.sqrt(S2)));
+          births *
+          Math.exp(level[r][12] + total_shock + gaussian(Math.sqrt(S2)));
         for (let g = 1; g < 13; g++)
           next[g] =
-            count[g - 1] *
-            Math.exp(level[g - 1] + shock + gaussian(Math.sqrt(S2)));
-        count = next;
-        const total = d3.sum(count);
+            count[r][g - 1] *
+            Math.exp(level[r][g - 1] + total_shock + gaussian(Math.sqrt(S2)));
+        count[r] = next;
+        const total = d3.sum(next);
         draws.get(key(year, race)).push(total);
-        total_by_year.set(year, total_by_year.get(year) + total);
-      }
+        total_this_year += total;
+      });
+      draws.get(key(year, "Total")).push(total_this_year);
     }
-    for (const year of years)
-      draws.get(key(year, "Total")).push(total_by_year.get(year));
   }
 
   return Array.from(draws, ([k, values]) => {
@@ -649,6 +801,18 @@ const birth_data_raw = d3.csv(
   "https://docs.google.com/spreadsheets/d/e/2PACX-1vQIqfBxFiIipgTjASaQObMUzZ8CkMuDDJA40GSr3Ajfc9ObkJRXqIElJHYFfSjuPqv-nvhrfJCWz7bO/pub?gid=0&single=true&output=csv",
   d3.autoType,
 );
+```
+
+```js
+const observed_count = (race) =>
+  school_age_years
+    .find(
+      (d) =>
+        d.year === latest_enrollment_year &&
+        d.race === race &&
+        d.type === "historical",
+    )
+    .count.toLocaleString();
 ```
 
 ```js
