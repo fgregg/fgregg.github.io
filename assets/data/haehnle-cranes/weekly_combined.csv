@@ -1,0 +1,243 @@
+season,date,date_exact,roosting,source
+2007,2007-09-03,false,81,weekly table
+2007,2007-09-10,false,171,weekly table
+2007,2007-09-17,false,259,weekly table
+2007,2007-09-24,false,235,weekly table
+2007,2007-10-01,false,431,weekly table
+2007,2007-10-08,false,1162,weekly table
+2007,2007-10-15,false,2071,weekly table
+2007,2007-10-22,false,2478,weekly table
+2007,2007-10-29,false,2219,weekly table
+2007,2007-11-05,false,2131,weekly table
+2007,2007-11-12,false,2065,weekly table
+2007,2007-11-19,false,3885,weekly table
+2007,2007-11-26,false,3,weekly table
+2007,2007-12-03,false,0,weekly table
+2007,2007-12-10,false,0,weekly table
+2007,2007-12-17,false,0,weekly table
+2008,2008-09-01,false,0,weekly table
+2008,2008-09-08,false,280,weekly table
+2008,2008-09-15,false,0,weekly table
+2008,2008-09-22,false,43,weekly table
+2008,2008-09-29,false,22,weekly table
+2008,2008-10-06,false,6,weekly table
+2008,2008-10-13,false,103,weekly table
+2008,2008-10-20,false,20,weekly table
+2008,2008-10-27,false,114,weekly table
+2008,2008-11-03,false,0,weekly table
+2008,2008-11-10,false,0,weekly table
+2008,2008-11-17,false,0,weekly table
+2008,2008-11-24,false,0,weekly table
+2008,2008-12-01,false,0,weekly table
+2008,2008-12-08,false,0,weekly table
+2008,2008-12-15,false,0,weekly table
+2009,2009-08-31,false,0,weekly table
+2009,2009-09-07,false,0,weekly table
+2009,2009-09-14,false,19,weekly table
+2009,2009-09-21,false,100,weekly table
+2009,2009-09-28,false,126,weekly table
+2009,2009-10-05,false,42,weekly table
+2009,2009-10-12,false,18,weekly table
+2009,2009-10-19,false,230,weekly table
+2009,2009-10-26,false,63,weekly table
+2009,2009-11-02,false,95,weekly table
+2009,2009-11-09,false,79,weekly table
+2009,2009-11-16,false,466,weekly table
+2009,2009-11-23,false,202,weekly table
+2009,2009-11-30,false,27,weekly table
+2009,2009-12-07,false,0,weekly table
+2009,2009-12-14,false,0,weekly table
+2010,2010-08-30,false,0,weekly table
+2010,2010-09-06,false,0,weekly table
+2010,2010-09-13,false,146,weekly table
+2010,2010-09-20,false,237,weekly table
+2010,2010-09-27,false,318,weekly table
+2010,2010-10-04,false,448,weekly table
+2010,2010-10-11,false,1762,weekly table
+2010,2010-10-18,false,2108,weekly table
+2010,2010-10-25,false,2639,weekly table
+2010,2010-11-01,false,4094,weekly table
+2010,2010-11-08,false,4792,weekly table
+2010,2010-11-15,false,5523,weekly table
+2010,2010-11-22,false,4473,weekly table
+2010,2010-11-29,false,0,weekly table
+2010,2010-12-06,false,0,weekly table
+2010,2010-12-13,false,0,weekly table
+2011,2011-08-29,false,0,weekly table
+2011,2011-09-05,false,0,weekly table
+2011,2011-09-12,false,5,weekly table
+2011,2011-09-19,false,5,weekly table
+2011,2011-09-26,false,0,weekly table
+2011,2011-10-03,false,5,weekly table
+2011,2011-10-10,false,18,weekly table
+2011,2011-10-17,false,362,weekly table
+2011,2011-10-24,false,18,weekly table
+2011,2011-10-31,false,32,weekly table
+2011,2011-11-07,false,32,weekly table
+2011,2011-11-14,false,13,weekly table
+2011,2011-11-21,false,17,weekly table
+2011,2011-11-28,false,5,weekly table
+2011,2011-12-05,false,0,weekly table
+2011,2011-12-12,false,0,weekly table
+2012,2012-09-03,false,295,weekly table
+2012,2012-09-10,false,304,weekly table
+2012,2012-09-17,false,297,weekly table
+2012,2012-09-24,false,349,weekly table
+2012,2012-10-01,false,811,weekly table
+2012,2012-10-08,false,1875,weekly table
+2012,2012-10-15,false,2586,weekly table
+2012,2012-10-22,false,3670,weekly table
+2012,2012-10-29,false,5012,weekly table
+2012,2012-11-05,false,7483,weekly table
+2012,2012-11-12,false,6490,weekly table
+2012,2012-11-19,false,8177,weekly table
+2012,2012-11-26,false,6927,weekly table
+2012,2012-12-03,false,5540,weekly table
+2012,2012-12-10,false,2802,weekly table
+2012,2012-12-17,false,2216,weekly table
+2013,2013-09-02,false,0,weekly table
+2013,2013-09-09,false,2,weekly table
+2013,2013-09-16,false,66,weekly table
+2013,2013-09-23,false,36,weekly table
+2013,2013-09-30,false,21,weekly table
+2013,2013-10-07,false,239,weekly table
+2013,2013-10-14,false,385,weekly table
+2013,2013-10-21,false,176,weekly table
+2013,2013-10-28,false,714,weekly table
+2013,2013-11-04,false,62,weekly table
+2013,2013-11-11,false,4,weekly table
+2013,2013-11-18,false,29,weekly table
+2013,2013-11-25,false,0,weekly table
+2013,2013-12-02,false,0,weekly table
+2013,2013-12-09,false,0,weekly table
+2013,2013-12-16,false,0,weekly table
+2014,2014-09-08,false,6,weekly table
+2014,2014-09-15,false,2,weekly table
+2014,2014-09-22,false,45,weekly table
+2014,2014-09-29,false,43,weekly table
+2014,2014-10-06,false,104,weekly table
+2014,2014-10-13,false,43,weekly table
+2014,2014-10-20,false,44,weekly table
+2014,2014-10-27,false,72,weekly table
+2014,2014-11-03,false,39,weekly table
+2015,2015-09-13,true,45,blog
+2015,2015-09-20,true,68,blog
+2015,2015-09-27,true,88,blog
+2015,2015-10-05,true,162,blog
+2015,2015-10-12,true,555,blog
+2015,2015-10-19,false,1700,weekly table
+2015,2015-10-25,true,2516,blog
+2015,2015-11-02,true,1615,blog
+2015,2015-11-09,true,1450,blog
+2015,2015-11-16,true,1839,blog
+2015,2015-11-30,true,95,blog
+2015,2015-12-07,true,96,blog
+2015,2015-12-14,true,243,blog
+2016,2016-09-04,true,6,blog
+2016,2016-09-11,true,0,blog
+2016,2016-09-18,true,0,blog
+2016,2016-09-26,true,151,blog
+2016,2016-10-03,true,0,blog
+2016,2016-10-10,true,20,blog
+2016,2016-10-17,true,7,blog
+2016,2016-10-24,true,4,blog
+2016,2016-10-31,true,8,blog
+2016,2016-11-07,true,0,blog
+2016,2016-11-14,true,0,blog
+2016,2016-11-21,true,2,blog
+2017,2017-09-10,true,147,blog
+2017,2017-09-17,true,374,blog
+2017,2017-09-24,true,385,blog
+2017,2017-10-02,true,495,blog
+2017,2017-10-09,true,296,blog
+2017,2017-10-16,true,155,blog
+2017,2017-10-23,true,340,blog
+2017,2017-10-30,false,4,weekly table
+2017,2017-11-06,true,0,blog
+2017,2017-11-13,true,0,blog
+2017,2017-11-20,true,4,blog
+2018,2018-09-10,true,0,blog
+2018,2018-09-24,true,104,blog
+2018,2018-10-01,true,145,blog
+2018,2018-10-08,true,38,blog
+2018,2018-10-15,true,345,blog
+2018,2018-10-22,true,903,blog
+2018,2018-10-29,true,617,blog
+2018,2018-11-05,true,312,blog
+2018,2018-11-12,true,74,blog
+2019,2019-09-09,true,5,blog
+2019,2019-09-16,true,10,blog
+2019,2019-09-23,true,83,blog
+2019,2019-09-30,true,18,blog
+2019,2019-10-07,true,2,blog
+2019,2019-10-14,true,14,blog
+2019,2019-10-28,true,20,blog
+2019,2019-11-04,true,2,blog
+2020,2020-09-14,false,4,weekly table
+2020,2020-09-21,true,0,blog
+2020,2020-10-05,true,2,blog
+2020,2020-10-12,true,7,blog
+2020,2020-10-19,true,324,blog
+2020,2020-10-26,true,58,blog
+2020,2020-11-02,true,377,blog
+2020,2020-11-16,true,699,blog
+2020,2020-11-23,true,1681,blog
+2020,2020-11-30,true,156,blog
+2020,2020-12-07,true,41,blog
+2021,2021-09-27,true,2,blog
+2021,2021-10-04,true,2,blog
+2021,2021-10-11,true,0,blog
+2021,2021-10-18,true,10,blog
+2021,2021-10-25,true,0,blog
+2021,2021-11-01,true,0,blog
+2021,2021-11-08,true,0,blog
+2021,2021-11-16,true,0,blog
+2021,2021-11-22,true,18,blog
+2021,2021-11-29,true,0,blog
+2022,2022-09-26,false,3,weekly table
+2022,2022-10-03,true,19,blog
+2022,2022-10-17,true,147,blog
+2022,2022-10-24,true,294,blog
+2022,2022-10-31,true,779,blog
+2022,2022-11-07,true,2283,blog
+2022,2022-11-14,true,3331,blog
+2022,2022-11-21,true,1600,blog
+2022,2022-11-28,true,241,blog
+2022,2022-12-05,true,59,blog
+2023,2023-09-18,true,8,blog
+2023,2023-09-25,true,4,blog
+2023,2023-10-02,true,7,blog
+2023,2023-10-09,true,10,blog
+2023,2023-10-16,true,122,blog
+2023,2023-10-23,true,77,blog
+2023,2023-10-30,true,97,blog
+2023,2023-11-06,true,130,blog
+2023,2023-11-13,true,68,blog
+2023,2023-11-20,true,531,blog
+2023,2023-11-27,true,182,blog
+2024,2024-09-16,true,13,blog
+2024,2024-09-23,true,11,blog
+2024,2024-09-30,true,6,blog
+2024,2024-10-07,true,6,blog
+2024,2024-10-14,true,91,blog
+2024,2024-10-21,true,504,blog
+2024,2024-10-28,true,1046,blog
+2024,2024-11-04,true,1528,blog
+2024,2024-11-11,true,541,blog
+2024,2024-11-18,true,1292,blog
+2024,2024-11-25,true,1866,blog
+2024,2024-12-02,true,75,blog
+2025,2025-09-15,true,19,blog
+2025,2025-09-22,true,12,blog
+2025,2025-09-29,true,31,blog
+2025,2025-10-06,true,46,blog
+2025,2025-10-13,true,104,blog
+2025,2025-10-20,true,191,blog
+2025,2025-10-27,true,289,blog
+2025,2025-11-03,true,1363,blog
+2025,2025-11-10,true,1482,blog
+2025,2025-11-17,true,1875,blog
+2025,2025-11-24,true,3455,blog
+2026,2026-09-14,true,3,blog
+2026,2026-09-21,true,5,blog
+2026,2026-09-28,true,3,blog
