@@ -84,6 +84,16 @@ const isLegacyRkey = (rkey) => rkey.length !== 13 || rkey.includes("-");
 
 // ---- gather posts -> document records -----------------------------------------
 
+// A front-matter `date:` as the UTC calendar day Jekyll files the post under.
+// js-yaml parses a bare YYYY-MM-DD to a Date at UTC midnight; a quoted string is
+// parsed the same way. (_config.yml sets no timezone, and posts carry no times.)
+const jekyllDate = (value) => {
+  if (value === undefined || value === null) return null;
+  const d = value instanceof Date ? value : new Date(String(value));
+  if (Number.isNaN(d.getTime())) return null;
+  return new Date(Date.UTC(d.getUTCFullYear(), d.getUTCMonth(), d.getUTCDate()));
+};
+
 const parsePosts = async () => {
   const files = await readdir(POSTS_DIR);
   const docs = [];
@@ -94,16 +104,22 @@ const parsePosts = async () => {
     const { attributes } = frontmatter(readFileSync(path.join(POSTS_DIR, file), "utf8"));
     if (attributes.draft === true || attributes.external !== undefined) continue;
 
-    const mm = month.padStart(2, "0");
-    const dd = day.padStart(2, "0");
     const stem = file.replace(/\.md$/, "");
-    const publishedAt = new Date(Date.UTC(+year, +month - 1, +day));
+    // The rkey is keyed to the FILENAME date (as _plugins/standard_site.rb is),
+    // but Jekyll builds the URL from a front-matter `date:` when there is one, so
+    // path + publishedAt follow that — otherwise a post re-dated in front matter
+    // gets a record pointing at a 404 and no card.
+    const fileDate = new Date(Date.UTC(+year, +month - 1, +day));
+    const publishedAt = jekyllDate(attributes.date) ?? fileDate;
+    const yyyy = publishedAt.getUTCFullYear();
+    const mm = String(publishedAt.getUTCMonth() + 1).padStart(2, "0");
+    const dd = String(publishedAt.getUTCDate()).padStart(2, "0");
     docs.push({
-      rkey: documentRkey(stem, publishedAt), // == the page's <link> rkey
+      rkey: documentRkey(stem, fileDate), // == the page's <link> rkey
       title: attributes.title,
       description: attributes.description,
       publishedAt: publishedAt.toISOString(),
-      path: `/${year}/${mm}/${dd}/${slug}`,
+      path: `/${yyyy}/${mm}/${dd}/${slug}`,
     });
   }
   return docs;
