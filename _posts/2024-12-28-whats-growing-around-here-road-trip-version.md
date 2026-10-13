@@ -135,7 +135,9 @@ const bbox = (await crops_raster.getImage()).getBoundingBox();
 ```
 
 ```js
-const crops_raster = geotiff.fromUrl("https://storage.bunkum.us/2023_clds.tif");
+const crops_raster = geotiff.fromUrl("https://storage.bunkum.us/2023_clds.tif", {
+  blockSize: 65536, // geotiff 3.x only coalesces range requests when set
+});
 ```
 
 ```js
@@ -145,7 +147,7 @@ const crop_mappings = await fetch(
 ```
 
 ```js
-const geotiff = await import("https://esm.sh/geotiff@2.1.3");
+const geotiff = await import("https://esm.sh/geotiff@3.0.5");
 ```
 
 ```js
